@@ -12,6 +12,8 @@ using System.Reflection.Emit;
 using System.Security;
 using System.Security.Permissions;
 using System.IO;
+using Gobiner.ConsoleCapture;
+using System.Security.Policy;
 
 namespace Gobiner.CSharpPad
 {
@@ -45,34 +47,39 @@ Console.WriteLine(i+j);
 
 			if (errors.Count() == 0)
 			{
-				var perms = new PermissionSet(null);
+				var perms = new PermissionSet(PermissionState.None);
 				perms.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
 				perms.AddPermission(new SecurityPermission(SecurityPermissionFlag.SerializationFormatter));
 				perms.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
-				perms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, @"C:\Users\Aaron\Documents\Visual Studio 2008\Projects\Eval\Eval\bin\Debug\test.exe"));
+				perms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, @"C:\Users\arice\Desktop\CSharpPad\CSharpPad\bin\Debug\" + filename));
 				perms.AddPermission(new UIPermission(PermissionState.Unrestricted));
 
+
 				var securePolicy = System.Security.Policy.PolicyLevel.CreateAppDomainLevel();
+				securePolicy.Reset();
 				securePolicy.NamedPermissionSets.Add(new NamedPermissionSet("safe",perms));
-				var unsecurePolicy = System.Security.Policy.PolicyLevel.CreateAppDomainLevel();
-				
 
 				var safeDomain = AppDomain.CreateDomain(
 					"Gobiner.CSharpPad.UnsafeProgram+"+filename,
 					AppDomain.CurrentDomain.Evidence,
 					new AppDomainSetup() { ApplicationBase = AppDomain.CurrentDomain.BaseDirectory },
 					perms,
-					null
+					new StrongName[] { 
+						new StrongName(
+							new StrongNamePublicKeyBlob(File.ReadAllBytes(@"C:\Users\arice\Desktop\CSharpPad\Gobiner.ConsoleCapture\bin\Release\output.txt")), 
+							"Gobiner.ConsoleCapture, Version=1.0.0.0, Culture=neutral, PublicKeyToken=765b1619f6c014ac", 
+							new Version("1.0.0.0")
+							)}
 					);
-				var consoleCapture = (ConsoleCapture)safeDomain.CreateInstanceAndUnwrap(Assembly.GetEntryAssembly().FullName, "Gobiner.ConsoleCapture.ConsoleCapture", false, BindingFlags.Default, null, null, null, null, null);
+				
+				var consoleCapture = (ConsoleCapturer)safeDomain.CreateInstanceAndUnwrap(
+					"Gobiner.ConsoleCapture, Version=1.0.0.0, Culture=neutral, PublicKeyToken=765b1619f6c014ac", 
+					"Gobiner.ConsoleCapture.ConsoleCapturer", false, BindingFlags.Default, null, null, null, null, null);
 				consoleCapture.StartCapture();
-				safeDomain.SetAppDomainPolicy(securePolicy);
 				safeDomain.ExecuteAssembly(filename);
-				safeDomain.SetAppDomainPolicy(unsecurePolicy);
 				consoleCapture.StopCapture();
-				AppDomain.Unload(safeDomain);
-
 				var outputLines = consoleCapture.GetCapturedLines();
+				AppDomain.Unload(safeDomain);
 
 				foreach (var line in outputLines)
 				{

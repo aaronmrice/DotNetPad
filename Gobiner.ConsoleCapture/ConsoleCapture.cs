@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace Gobiner.CSharpPad
+namespace Gobiner.ConsoleCapture
 {
-	public class ConsoleCapture : MarshalByRefObject
+	public class ConsoleCapturer : MarshalByRefObject
 	{
 		private TextWriter OldConsole;
 		private StringBuilder CapturedText = new StringBuilder();
 
-		public ConsoleCapture()
+		public ConsoleCapturer()
 		{
 			OldConsole = Console.Out;
 		}
