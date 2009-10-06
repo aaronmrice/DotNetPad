@@ -56,16 +56,15 @@ Console.WriteLine(i+j);
 				securePolicy.NamedPermissionSets.Add(new NamedPermissionSet("safe",perms));
 				var unsecurePolicy = System.Security.Policy.PolicyLevel.CreateAppDomainLevel();
 				
-				//unsecurePolicy.FromXml(AppDomain.CurrentDomain.ApplicationTrust.ToXml());
 
 				var safeDomain = AppDomain.CreateDomain(
-					"Gobiner.CSharpPad.UnsafeProgram+"+filename
+					"Gobiner.CSharpPad.UnsafeProgram+"+filename,
 					AppDomain.CurrentDomain.Evidence,
 					new AppDomainSetup() { ApplicationBase = AppDomain.CurrentDomain.BaseDirectory },
 					perms,
 					null
 					);
-				var consoleCapture = (ConsoleCapture)safeDomain.CreateInstanceAndUnwrap(Assembly.GetEntryAssembly().FullName, "Gobiner.CSharpPad.ConsoleCapture", false, BindingFlags.Default, null, null, null, null, null);
+				var consoleCapture = (ConsoleCapture)safeDomain.CreateInstanceAndUnwrap(Assembly.GetEntryAssembly().FullName, "Gobiner.ConsoleCapture.ConsoleCapture", false, BindingFlags.Default, null, null, null, null, null);
 				consoleCapture.StartCapture();
 				safeDomain.SetAppDomainPolicy(securePolicy);
 				safeDomain.ExecuteAssembly(filename);
