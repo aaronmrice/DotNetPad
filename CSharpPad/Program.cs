@@ -51,7 +51,7 @@ Console.WriteLine(i+j);
 				perms.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
 				perms.AddPermission(new SecurityPermission(SecurityPermissionFlag.SerializationFormatter));
 				perms.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
-				perms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, @"C:\Users\arice\Desktop\CSharpPad\CSharpPad\bin\Debug\" + filename));
+				perms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, @"C:\Users\Aaron\Documents\Visual Studio 2008\Projects\CSharpPad\CSharpPad\bin\Debug\" + filename));
 				perms.AddPermission(new UIPermission(PermissionState.Unrestricted));
 
 
@@ -66,7 +66,7 @@ Console.WriteLine(i+j);
 					perms,
 					new StrongName[] { 
 						new StrongName(
-							new StrongNamePublicKeyBlob(File.ReadAllBytes(@"C:\Users\arice\Desktop\CSharpPad\Gobiner.ConsoleCapture\bin\Release\output.txt")), 
+							new StrongNamePublicKeyBlob(File.ReadAllBytes(@"C:\Users\Aaron\Documents\Visual Studio 2008\Projects\CSharpPad\Gobiner.ConsoleCapture\output.txt")), 
 							"Gobiner.ConsoleCapture, Version=1.0.0.0, Culture=neutral, PublicKeyToken=765b1619f6c014ac", 
 							new Version("1.0.0.0")
 							)}
