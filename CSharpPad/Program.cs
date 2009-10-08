@@ -38,6 +38,7 @@ Console.WriteLine(i+j);
 
 			var compilerDomain = AppDomain.CreateDomain("Gobiner.CSharpPad" + new Random().Next());
 			var filename = "test.exe";
+			var fullpath = Environment.CurrentDirectory + "\\" + filename;
 
 			var compiler = (Compiler)compilerDomain.CreateInstanceAndUnwrap(Assembly.GetEntryAssembly().FullName, "Gobiner.CSharpPad.Compiler", false, BindingFlags.Default, null, null, null, null, null);
 			compiler.Code = shitToCompile;
@@ -51,14 +52,10 @@ Console.WriteLine(i+j);
 				perms.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
 				perms.AddPermission(new SecurityPermission(SecurityPermissionFlag.SerializationFormatter));
 				perms.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
-				perms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, @"C:\Users\Aaron\Documents\Visual Studio 2008\Projects\CSharpPad\CSharpPad\bin\Debug\" + filename));
+				perms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, fullpath));
 				perms.AddPermission(new UIPermission(PermissionState.Unrestricted));
 
-
-				var securePolicy = System.Security.Policy.PolicyLevel.CreateAppDomainLevel();
-				securePolicy.Reset();
-				securePolicy.NamedPermissionSets.Add(new NamedPermissionSet("safe",perms));
-				var consoleCaptureLibrary = Assembly.Load("Gobiner.ConsoleCapture, Version=1.0.0.0, Culture=neutral, PublicKeyToken=765b1619f6c014ac");
+				var consoleCaptureLibrary = Assembly.Load("Gobiner.ConsoleCapture");
 
 				var safeDomain = AppDomain.CreateDomain(
 					"Gobiner.CSharpPad.UnsafeProgram+"+filename,
@@ -88,8 +85,6 @@ Console.WriteLine(i+j);
 					Console.WriteLine(error.ErrorText);
 				}
 			}
-
-			
 		}
 
 		/// <summary>

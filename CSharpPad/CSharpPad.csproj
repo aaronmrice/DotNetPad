@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5C19FEAA-AA5D-4AE3-9DEE-E4D3CA3C9B7B}</ProjectGuid>
     <OutputType>Exe</OutputType>
@@ -43,13 +43,17 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-	<Reference Include="Gobiner.ConsoleCapture, Version=1.0.0.0, Culture=neutral, PublicKeyToken=765b1619f6c014ac, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Compiler.cs" />
-    <Compile Include="Eval.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gobiner.ConsoleCapture\Gobiner.ConsoleCapture.csproj">
+      <Project>{68332DA5-4AD4-481D-B4E0-6BB47E61B295}</Project>
+      <Name>Gobiner.ConsoleCapture</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
