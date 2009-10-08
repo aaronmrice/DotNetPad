@@ -58,22 +58,17 @@ Console.WriteLine(i+j);
 				var securePolicy = System.Security.Policy.PolicyLevel.CreateAppDomainLevel();
 				securePolicy.Reset();
 				securePolicy.NamedPermissionSets.Add(new NamedPermissionSet("safe",perms));
+				var consoleCaptureLibrary = Assembly.Load("Gobiner.ConsoleCapture, Version=1.0.0.0, Culture=neutral, PublicKeyToken=765b1619f6c014ac");
 
 				var safeDomain = AppDomain.CreateDomain(
 					"Gobiner.CSharpPad.UnsafeProgram+"+filename,
 					AppDomain.CurrentDomain.Evidence,
 					new AppDomainSetup() { ApplicationBase = AppDomain.CurrentDomain.BaseDirectory },
 					perms,
-					new StrongName[] { 
-						new StrongName(
-							new StrongNamePublicKeyBlob(File.ReadAllBytes(@"C:\Users\Aaron\Documents\Visual Studio 2008\Projects\CSharpPad\Gobiner.ConsoleCapture\output.txt")), 
-							"Gobiner.ConsoleCapture, Version=1.0.0.0, Culture=neutral, PublicKeyToken=765b1619f6c014ac", 
-							new Version("1.0.0.0")
-							)}
-					);
+					GetStrongName(consoleCaptureLibrary));
 				
 				var consoleCapture = (ConsoleCapturer)safeDomain.CreateInstanceAndUnwrap(
-					"Gobiner.ConsoleCapture, Version=1.0.0.0, Culture=neutral, PublicKeyToken=765b1619f6c014ac", 
+					consoleCaptureLibrary.FullName, 
 					"Gobiner.ConsoleCapture.ConsoleCapturer", false, BindingFlags.Default, null, null, null, null, null);
 				consoleCapture.StartCapture();
 				safeDomain.ExecuteAssembly(filename);
@@ -95,6 +90,36 @@ Console.WriteLine(i+j);
 			}
 
 			
+		}
+
+		/// <summary>
+		/// Create a StrongName that matches a specific assembly
+		/// </summary>
+		/// <exception cref="ArgumentNullException">
+		/// if <paramref name="assembly"/> is null
+		/// </exception>
+		/// <exception cref="InvalidOperationException">
+		/// if <paramref name="assembly"/> does not represent a strongly named assembly
+		/// </exception>
+		/// <param name="assembly">Assembly to create a StrongName for</param>
+		/// <returns>A StrongName that matches the given assembly</returns>
+		private static StrongName GetStrongName(Assembly assembly)
+		{
+			if (assembly == null)
+				throw new ArgumentNullException("assembly");
+
+			AssemblyName assemblyName = assembly.GetName();
+			Debug.Assert(assemblyName != null, "Could not get assembly name");
+
+			// get the public key blob
+			byte[] publicKey = assemblyName.GetPublicKey();
+			if (publicKey == null || publicKey.Length == 0)
+				throw new InvalidOperationException("Assembly is not strongly named");
+
+			StrongNamePublicKeyBlob keyBlob = new StrongNamePublicKeyBlob(publicKey);
+
+			// and create the StrongName
+			return new StrongName(keyBlob, assemblyName.Name, assemblyName.Version);
 		}
 	}
 }
