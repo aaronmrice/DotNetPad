@@ -23,8 +23,10 @@ namespace Gobiner.CSharpPad
 		{
 			var shitToCompile = @"
 using System;
-using System.Text;
 using System.Collections.Generic;
+using System.Text;
+using System.IO;
+using System.Reflection;
 
 namespace Dynasdasdasamic{
 class asfasdasd{
@@ -39,8 +41,11 @@ Console.WriteLine(i+j);
 			var compilerDomain = AppDomain.CreateDomain("Gobiner.CSharpPad" + new Random().Next());
 			var filename = "test.exe";
 			var fullpath = Environment.CurrentDirectory + "\\" + filename;
-
-			var compiler = (Compiler)compilerDomain.CreateInstanceAndUnwrap(Assembly.GetEntryAssembly().FullName, "Gobiner.CSharpPad.Compiler", false, BindingFlags.Default, null, null, null, null, null);
+			
+			var compiler = (Compiler)compilerDomain.CreateInstanceAndUnwrap(
+				Assembly.GetEntryAssembly().FullName, 
+				"Gobiner.CSharpPad.Compiler", 
+				false, BindingFlags.Default, null, null, null, null, null);
 			compiler.Code = shitToCompile;
 			compiler.Compile(filename);
 			var errors = compiler.Errors;
@@ -48,12 +53,12 @@ Console.WriteLine(i+j);
 
 			if (errors.Count() == 0)
 			{
-				var perms = new PermissionSet(PermissionState.None);
-				perms.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
-				perms.AddPermission(new SecurityPermission(SecurityPermissionFlag.SerializationFormatter));
-				perms.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
-				perms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, fullpath));
-				perms.AddPermission(new UIPermission(PermissionState.Unrestricted));
+				var safePerms = new PermissionSet(PermissionState.None);
+				safePerms.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
+				safePerms.AddPermission(new SecurityPermission(SecurityPermissionFlag.SerializationFormatter));
+				safePerms.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
+				safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, fullpath));
+				safePerms.AddPermission(new UIPermission(PermissionState.Unrestricted));
 
 				var consoleCaptureLibrary = Assembly.Load("Gobiner.ConsoleCapture");
 
@@ -61,12 +66,14 @@ Console.WriteLine(i+j);
 					"Gobiner.CSharpPad.UnsafeProgram+"+filename,
 					AppDomain.CurrentDomain.Evidence,
 					new AppDomainSetup() { ApplicationBase = AppDomain.CurrentDomain.BaseDirectory },
-					perms,
+					safePerms,
 					GetStrongName(consoleCaptureLibrary));
-				
+
 				var consoleCapture = (ConsoleCapturer)safeDomain.CreateInstanceAndUnwrap(
 					consoleCaptureLibrary.FullName, 
-					"Gobiner.ConsoleCapture.ConsoleCapturer", false, BindingFlags.Default, null, null, null, null, null);
+					"Gobiner.ConsoleCapture.ConsoleCapturer", 
+					false, BindingFlags.Default, null, null, null, null, null);
+				 
 				consoleCapture.StartCapture();
 				safeDomain.ExecuteAssembly(filename);
 				consoleCapture.StopCapture();
