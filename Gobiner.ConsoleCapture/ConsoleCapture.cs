@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using System.Reflection;
 using System.Security.Permissions;
+using System.Security;
 
 namespace Gobiner.ConsoleCapture
 {
@@ -15,17 +16,23 @@ namespace Gobiner.ConsoleCapture
 
 		public ConsoleCapturer()
 		{
+			new PermissionSet(PermissionState.Unrestricted).Assert();
 			OldConsole = Console.Out;
+			CodeAccessPermission.RevertAssert();
 		}
 
 		public void StartCapture()
 		{
+			new PermissionSet(PermissionState.Unrestricted).Assert();
 			Console.SetOut(new StringWriter(CapturedText));
+			CodeAccessPermission.RevertAssert();
 		}
 
 		public void StopCapture()
 		{
+			new PermissionSet(PermissionState.Unrestricted).Assert();
 			Console.SetOut(OldConsole);
+			CodeAccessPermission.RevertAssert();
 		}
 
 		public string[] GetCapturedLines()
