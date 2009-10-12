@@ -38,90 +38,22 @@ Console.WriteLine(i+j);
 }}}";
 			
 
-			var compilerDomain = AppDomain.CreateDomain("Gobiner.CSharpPad" + new Random().Next());
-			var filename = "test.exe";
-			var fullpath = Environment.CurrentDirectory + "\\" + filename;
-			
-			var compiler = (Compiler)compilerDomain.CreateInstanceAndUnwrap(
-				Assembly.GetEntryAssembly().FullName, 
-				"Gobiner.CSharpPad.Compiler", 
-				false, BindingFlags.Default, null, null, null, null, null);
-			compiler.Code = shitToCompile;
-			compiler.Compile(filename);
-			var errors = compiler.Errors;
-			AppDomain.Unload(compilerDomain);
-
-			if (errors.Count() == 0)
+			var evaller = new Eval();
+			evaller.CompileAndEval(shitToCompile);
+			if (evaller.Errors.Count() == 0)
 			{
-				var safePerms = new PermissionSet(PermissionState.None);
-				safePerms.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
-				safePerms.AddPermission(new SecurityPermission(SecurityPermissionFlag.SerializationFormatter));
-				safePerms.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
-				safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, fullpath));
-				safePerms.AddPermission(new UIPermission(PermissionState.Unrestricted));
-
-				var consoleCaptureLibrary = Assembly.Load("Gobiner.ConsoleCapture");
-
-				var safeDomain = AppDomain.CreateDomain(
-					"Gobiner.CSharpPad.UnsafeProgram+"+filename,
-					AppDomain.CurrentDomain.Evidence,
-					new AppDomainSetup() { ApplicationBase = AppDomain.CurrentDomain.BaseDirectory },
-					safePerms,
-					GetStrongName(consoleCaptureLibrary));
-
-				var consoleCapture = (ConsoleCapturer)safeDomain.CreateInstanceAndUnwrap(
-					consoleCaptureLibrary.FullName, 
-					"Gobiner.ConsoleCapture.ConsoleCapturer", 
-					false, BindingFlags.Default, null, null, null, null, null);
-				 
-				consoleCapture.StartCapture();
-				safeDomain.ExecuteAssembly(filename);
-				consoleCapture.StopCapture();
-				var outputLines = consoleCapture.GetCapturedLines();
-				AppDomain.Unload(safeDomain);
-
-				foreach (var line in outputLines)
+				foreach (var line in evaller.Output)
 				{
 					Console.WriteLine(line);
 				}
 			}
 			else
 			{
-				foreach (var error in errors)
+				foreach (var line in evaller.Errors.Select(x => "Error " + x.ErrorNumber + " on line " + x.Line + " : " + x.ErrorText))
 				{
-					Console.WriteLine(error.ErrorText);
+					Console.WriteLine(line);
 				}
 			}
-		}
-
-		/// <summary>
-		/// Create a StrongName that matches a specific assembly
-		/// </summary>
-		/// <exception cref="ArgumentNullException">
-		/// if <paramref name="assembly"/> is null
-		/// </exception>
-		/// <exception cref="InvalidOperationException">
-		/// if <paramref name="assembly"/> does not represent a strongly named assembly
-		/// </exception>
-		/// <param name="assembly">Assembly to create a StrongName for</param>
-		/// <returns>A StrongName that matches the given assembly</returns>
-		private static StrongName GetStrongName(Assembly assembly)
-		{
-			if (assembly == null)
-				throw new ArgumentNullException("assembly");
-
-			AssemblyName assemblyName = assembly.GetName();
-			Debug.Assert(assemblyName != null, "Could not get assembly name");
-
-			// get the public key blob
-			byte[] publicKey = assemblyName.GetPublicKey();
-			if (publicKey == null || publicKey.Length == 0)
-				throw new InvalidOperationException("Assembly is not strongly named");
-
-			StrongNamePublicKeyBlob keyBlob = new StrongNamePublicKeyBlob(publicKey);
-
-			// and create the StrongName
-			return new StrongName(keyBlob, assemblyName.Name, assemblyName.Version);
 		}
 	}
 }
