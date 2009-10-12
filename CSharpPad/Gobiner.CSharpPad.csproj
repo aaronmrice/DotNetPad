@@ -6,7 +6,7 @@
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5C19FEAA-AA5D-4AE3-9DEE-E4D3CA3C9B7B}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Gobiner.CSharpPad</RootNamespace>
     <AssemblyName>Gobiner.CSharpPad</AssemblyName>
@@ -14,6 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Gobiner.snk</AssemblyOriginatorKeyFile>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,12 +54,6 @@
     <Compile Include="Eval.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Gobiner.ConsoleCapture\Gobiner.ConsoleCapture.csproj">
-      <Project>{68332DA5-4AD4-481D-B4E0-6BB47E61B295}</Project>
-      <Name>Gobiner.ConsoleCapture</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Gobiner.snk" />

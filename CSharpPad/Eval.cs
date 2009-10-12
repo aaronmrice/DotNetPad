@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using System.Security.Policy;
-using Gobiner.ConsoleCapture;
+using Gobiner.CSharpPad;
 using System.Diagnostics;
 
 namespace Gobiner.CSharpPad
@@ -17,19 +17,26 @@ namespace Gobiner.CSharpPad
 
 		public System.CodeDom.Compiler.CompilerError[] Errors { get; private set; }
 		public string[] Output { get; private set; }
+		private string fullPath { get; set; }
+
+		public Eval(string folder)
+		{
+			fullPath = folder;
+		}
 
 		public void CompileAndEval(string code)
 		{
 			var compilerDomain = AppDomain.CreateDomain("Gobiner.CSharpPad" + new Random().Next());
 			var filename = "Gobiner.CSharpPad.Eval.Evil"+rand.Next()+".exe";
-			var fullpath = Environment.CurrentDirectory + "\\" + filename;
+			var fullpath = fullPath + filename;
 
-			var compiler = (Compiler)compilerDomain.CreateInstanceAndUnwrap(
-				Assembly.GetEntryAssembly().FullName,
-				"Gobiner.CSharpPad.Compiler",
-				false, BindingFlags.Default, null, null, null, null, null);
+			var currentAssembly = Assembly.GetAssembly(typeof(global::Gobiner.CSharpPad.Compiler)).Location;
+			
+			var compiler = (Compiler)compilerDomain.CreateInstanceFromAndUnwrap(
+				Assembly.GetAssembly(typeof(global::Gobiner.CSharpPad.Compiler)).Location,
+				typeof(global::Gobiner.CSharpPad.Compiler).FullName);
 			compiler.Code = code;
-			compiler.Compile(filename);
+			compiler.Compile(fullpath);
 			Errors = compiler.Errors;
 			AppDomain.Unload(compilerDomain);
 
@@ -40,6 +47,7 @@ namespace Gobiner.CSharpPad
 				safePerms.AddPermission(new SecurityPermission(SecurityPermissionFlag.SerializationFormatter));
 				safePerms.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
 				safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, fullpath));
+				safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, Assembly.GetAssembly(typeof(global::Gobiner.CSharpPad.ConsoleCapturer)).Location));
 				safePerms.AddPermission(new UIPermission(PermissionState.Unrestricted));
 
 				var consoleCaptureLibrary = Assembly.GetExecutingAssembly();
@@ -51,13 +59,12 @@ namespace Gobiner.CSharpPad
 					safePerms,
 					GetStrongName(consoleCaptureLibrary));
 
-				var consoleCapture = (ConsoleCapturer)safeDomain.CreateInstanceAndUnwrap(
-					consoleCaptureLibrary.FullName,
-					"Gobiner.ConsoleCapture.ConsoleCapturer",
-					false, BindingFlags.Default, null, null, null, null, null);
+				var consoleCapture = (ConsoleCapturer)safeDomain.CreateInstanceFromAndUnwrap(
+					Assembly.GetAssembly(typeof(global::Gobiner.CSharpPad.ConsoleCapturer)).Location,
+					typeof(global::Gobiner.CSharpPad.ConsoleCapturer).FullName);
 
 				consoleCapture.StartCapture();
-				safeDomain.ExecuteAssembly(filename);
+				safeDomain.ExecuteAssembly(fullpath);
 				consoleCapture.StopCapture();
 				Output = consoleCapture.GetCapturedLines();
 				AppDomain.Unload(safeDomain);

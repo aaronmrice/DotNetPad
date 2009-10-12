@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Security.Permissions;
 using System.Security;
 
-namespace Gobiner.ConsoleCapture
+namespace Gobiner.CSharpPad
 {
 	public class ConsoleCapturer : MarshalByRefObject
 	{

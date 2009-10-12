@@ -36,7 +36,6 @@ namespace Gobiner.CSharpPad
 				return;
 			}
 
-
 			var providerOptions = new Dictionary<string, string>();
 			providerOptions.Add("CompilerVersion", "v3.5");
 			var provider = new CSharpCodeProvider(providerOptions);

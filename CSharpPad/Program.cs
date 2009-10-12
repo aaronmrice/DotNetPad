@@ -12,7 +12,7 @@ using System.Reflection.Emit;
 using System.Security;
 using System.Security.Permissions;
 using System.IO;
-using Gobiner.ConsoleCapture;
+using Gobiner.CSharpPad;
 using System.Security.Policy;
 
 namespace Gobiner.CSharpPad
@@ -38,7 +38,7 @@ Console.WriteLine(i+j);
 }}}";
 			
 
-			var evaller = new Eval();
+			var evaller = new Eval(Environment.CurrentDirectory);
 			evaller.CompileAndEval(shitToCompile);
 			if (evaller.Errors.Count() == 0)
 			{

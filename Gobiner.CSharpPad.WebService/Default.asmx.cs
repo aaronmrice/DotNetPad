@@ -24,7 +24,7 @@ namespace Gobiner.CSharpPad.WebService
 		[WebMethod]
 		public string[] CompileAndRun(string code)
 		{
-			var evaller = new Eval();
+			var evaller = new Eval(Server.MapPath("~/App_Data/"));
 			evaller.CompileAndEval(code);
 			if (evaller.Errors.Count() == 0)
 			{
