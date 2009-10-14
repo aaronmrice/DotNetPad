@@ -17,16 +17,30 @@ namespace Gobiner.CSharpPad.Web
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 			routes.MapRoute(
-				"Default",                                              // Route name
+				"ViewPaste",                                              // Route name
 				"{action}/{id}",                           // URL with parameters
-				new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
+				new { controller = "Home", action = "Index"}  // Parameter defaults
+			);
+
+			routes.MapRoute(
+				"RandomAction",
+				"{id}",
+				new { controller = "Home", action = "Show" }
+			);
+
+			routes.MapRoute(
+				"Home",
+				"",
+				new { controller = "Home", action = "Index" }
 			);
 
 		}
 
 		protected void Application_Start()
 		{
+			AppDomain.CurrentDomain.SetData("DataDirectory", Server.MapPath("~/App_Data"));
 			RegisterRoutes(RouteTable.Routes);
+			//RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
 		}
 	}
 }

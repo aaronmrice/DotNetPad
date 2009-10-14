@@ -5,7 +5,19 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-    <h2>Home</h2>
+    
+    <% using (Html.BeginForm(new { Controller = "Home", Action = "Submit" }))
+	   { %>
+		<%= Html.TextArea("Code", "", 15, 50, null)%>
+		
+		<br />
+		
+		<button type="submit" value="Submit">
+			<span>Submit</span>
+		</button>
+    
+    
+    
+    <% } %>
 
 </asp:Content>

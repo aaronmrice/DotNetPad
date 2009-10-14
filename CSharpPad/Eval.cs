@@ -8,6 +8,7 @@ using System.Security.Permissions;
 using System.Security.Policy;
 using Gobiner.CSharpPad;
 using System.Diagnostics;
+using System.IO;
 
 namespace Gobiner.CSharpPad
 {
@@ -22,6 +23,11 @@ namespace Gobiner.CSharpPad
 		public Eval(string folder)
 		{
 			fullPath = folder;
+		}
+
+		public void CompileAndEval(string[] code)
+		{
+			CompileAndEval(code.Aggregate((x, y) => x + Environment.NewLine + y));
 		}
 
 		public void CompileAndEval(string code)
@@ -69,6 +75,7 @@ namespace Gobiner.CSharpPad
 				Output = consoleCapture.GetCapturedLines();
 				AppDomain.Unload(safeDomain);
 			}
+			File.Delete(fullpath);
 		}
 
 		/// <summary>
