@@ -17,5 +17,9 @@ namespace Gobiner.CSharpPad.Web.Controllers
             return View();
         }
 
+		public ActionResult Show(int id)
+		{
+			return View();
+		}
     }
 }

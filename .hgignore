@@ -1,0 +1,7 @@
+glob:*/obj/*
+glob:*.suo
+glob:*.user
+glob:Gobiner.CSharpPad.WebService/bin/
+glob:CSharpPad/bin/*
+glob:Gobiner.ConsoleCapture/bin/*
+glob:Gobiner.CSharpPad.WebService/App_Data/*.exe
