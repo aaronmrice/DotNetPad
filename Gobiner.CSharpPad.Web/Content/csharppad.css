@@ -54,12 +54,13 @@ body
 
 #header
 {
-	height: 1.5em;
+	height: 1.6em;
 }
 
 #brand
 {
 	float:left;
+	font-size: 1.5em;
 }
 
 #wrapper

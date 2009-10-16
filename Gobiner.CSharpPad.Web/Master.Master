@@ -12,7 +12,7 @@
 	<div id="wrapper">
 		<div id="header">
 			<p id="brand"><a href="/">C# Pad</a></p>
-			<p style="float:right"><a href="http://bitbucket.org/gobiner/csharppad/issues/">Send me your issues!</a></p>
+			<p style="float:right"><a href="http://bitbucket.org/gobiner/csharppad/issues/">Send me your bugs &amp; suggestions!</a></p>
 		</div>
 		<div id="primary">
 			<asp:ContentPlaceHolder ID="MainContent" runat="server">
