@@ -23,6 +23,7 @@ namespace Gobiner.CSharpPad.Web.Models
 		public string Slug { get; set; }
 		public CompilationError[] Errors { get; set; }
 		public string Output { get; set; }
+		public DateTime Created { get; set; }
 
 		public Paste()
 		{
@@ -31,6 +32,7 @@ namespace Gobiner.CSharpPad.Web.Models
 			Code = string.Empty;
 			Password = string.Empty;
 			Output = string.Empty;
+			Created = DateTime.Now;
 		}
 
 		public void AddCompilerErrors(CompilerError[] errors)

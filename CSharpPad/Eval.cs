@@ -74,6 +74,7 @@ namespace Gobiner.CSharpPad
 				consoleCapture.StopCapture();
 				Output = consoleCapture.GetCapturedLines();
 				AppDomain.Unload(safeDomain);
+				
 			}
 			File.Delete(fullpath);
 		}

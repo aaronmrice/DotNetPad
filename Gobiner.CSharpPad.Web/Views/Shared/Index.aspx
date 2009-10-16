@@ -8,7 +8,19 @@
     
     <% using (Html.BeginForm(new { Controller = "Home", Action = "Submit" }))
 	   { %>
-		<%= Html.TextArea("Code", "", 15, 50, null)%>
+		<%= Html.TextArea("Code", @"using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+public class Default
+{
+	public static void Main(string[] args)
+	{
+		
+	}	
+}
+", new { @class="code" } )%>
 		
 		<br />
 		

@@ -24,6 +24,7 @@ namespace Gobiner.CSharpPad.Web.Controllers
             return View();
         }
 
+		[ValidateInput(false)]
 		[AcceptVerbs(HttpVerbs.Post)]
 		public ActionResult Index([Bind] Paste paste)
 		{
