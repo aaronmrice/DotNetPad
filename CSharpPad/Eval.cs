@@ -13,9 +13,11 @@ using System.Threading;
 
 namespace Gobiner.CSharpPad
 {
-	public class Eval
+	public class Eval : MarshalByRefObject
 	{
 		private static Random rand = new Random();
+		private Exception uncaughtException = null;
+		private Thread threadForGuest = null;
 
 		public System.CodeDom.Compiler.CompilerError[] Errors { get; private set; }
 		public string[] Output { get; private set; }
@@ -55,6 +57,7 @@ namespace Gobiner.CSharpPad
 				safePerms.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
 				safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, fullpath));
 				safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, Assembly.GetAssembly(typeof(global::Gobiner.CSharpPad.ConsoleCapturer)).Location));
+				safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, Assembly.GetExecutingAssembly().Location));
 				safePerms.AddPermission(new UIPermission(PermissionState.Unrestricted));
 
 				var consoleCaptureLibrary = Assembly.GetExecutingAssembly();
@@ -64,23 +67,41 @@ namespace Gobiner.CSharpPad
 					AppDomain.CurrentDomain.Evidence,
 					new AppDomainSetup() { ApplicationBase = AppDomain.CurrentDomain.BaseDirectory },
 					safePerms,
-					GetStrongName(consoleCaptureLibrary));
+					GetStrongName(consoleCaptureLibrary),
+					GetStrongName(Assembly.GetExecutingAssembly()));
+
 
 				var consoleCapture = (ConsoleCapturer)safeDomain.CreateInstanceFromAndUnwrap(
 					Assembly.GetAssembly(typeof(global::Gobiner.CSharpPad.ConsoleCapturer)).Location,
 					typeof(global::Gobiner.CSharpPad.ConsoleCapturer).FullName);
 
 				consoleCapture.StartCapture();
-				var thread = new Thread(new ThreadStart(delegate() {safeDomain.ExecuteAssembly(fullpath); }),1024*1024*8);
-				thread.Start();
-				var finished = thread.Join(3000);
+				threadForGuest = new Thread(new ThreadStart(
+					delegate() 
+					{
+						try
+						{
+							safeDomain.ExecuteAssembly(fullpath);
+						}
+						catch (Exception e)
+						{
+							uncaughtException = e;
+						}
+					}), 1024 * 1024 * 8);
+				threadForGuest.Start();
+				var finished = threadForGuest.Join(3000);
 				if (!finished)
 				{
-					thread.Abort();
+					threadForGuest.Abort();
 				}
-
+				
 				consoleCapture.StopCapture();
 				Output = consoleCapture.GetCapturedLines().Take(1000).ToArray();
+				if (uncaughtException != null)
+				{
+					Output = Output.Concat(uncaughtException.ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None)).ToArray();
+				}
+
 				AppDomain.Unload(safeDomain);
 				
 			}
