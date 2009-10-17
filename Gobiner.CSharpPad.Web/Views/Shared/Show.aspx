@@ -6,29 +6,32 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
+<div class="code">
 <pre id="code">
 <% foreach(var line in Server.HtmlEncode(((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Code).Split(new string[] { Environment.NewLine}, StringSplitOptions.None)) { %>
 <%= line %>
 <% } %>
-</pre>
+</pre></div>
 <hr />
 
 <% if (((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Output.Length > 0)
    { %>
-<pre id="output">
+<div class="output">
+<pre class="output">
 <% foreach (var line in Server.HtmlEncode(((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Output).Split(new string[] { Environment.NewLine }, StringSplitOptions.None)) { %>
 <%= line%>
-<% } %></pre>
+<% } %></pre></div>
 <% } %>
 
 
 <% if (((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Errors.Count() > 0)
    { %>
-<pre id="errors">
+<div class="errors">
+<pre class="errors">
 <% foreach (var line in ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Errors)
    { %>
 <%= line.ErrorText%>
-<% } %></pre>
+<% } %></pre></div>
 <% } %>
 <hr />
 

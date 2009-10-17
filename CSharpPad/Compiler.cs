@@ -35,6 +35,12 @@ namespace Gobiner.CSharpPad
 			{
 				return;
 			}
+			if (mainClass == null)
+			{
+				Errors = new CompilerError[] { new CompilerError(filename, 0, 0, "", "Could not find a public static void Main(string[]) method") };
+				return;
+			}
+
 
 			var providerOptions = new Dictionary<string, string>();
 			providerOptions.Add("CompilerVersion", "v3.5");
@@ -79,10 +85,6 @@ namespace Gobiner.CSharpPad
 						break;
 					}
 				}
-			}
-			if (mainClass == null)
-			{
-				throw new Exception("Could not find Main(string[])");
 			}
 			return mainClass;
 		}
