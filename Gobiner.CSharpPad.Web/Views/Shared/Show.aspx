@@ -5,13 +5,40 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-<div class="code">
-<pre class="code">
-<% foreach(var line in Server.HtmlEncode(((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Code).Split(new string[] { Environment.NewLine}, StringSplitOptions.None)) { %>
-<%= line %>
-<% } %>
-</pre></div>
+    <div class="code">
+        <table>
+            <tr><td>
+                <% string[] Lines = Server.HtmlEncode(((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Code).Split(new string[] { Environment.NewLine}, StringSplitOptions.None); %>
+                    <table class="linenumbers">
+                        <tr><td>&nbsp;</td></tr>
+                        <%
+                            for (int i = 1; i <= Lines.Length; i++)
+                            {
+                        %>
+                        <tr><td><%= i%></td></tr>
+                        <%    
+                            }
+                        %>
+                    </table>
+            </td>
+            <td style="background:black;">
+            </td>
+            <td>
+                <pre>
+                    <table>
+                        <%
+                            for (int i = 0; i < Lines.Length; i++)
+                            {
+                        %>
+                        <tr><td><%= Lines[i]%></td></tr>
+                        <%
+                            }
+                        %>
+                    </table>
+                </pre>
+           </td></tr>
+       </table>
+    </div>
 <hr />
 
 <% if (((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Output.Length > 0)
