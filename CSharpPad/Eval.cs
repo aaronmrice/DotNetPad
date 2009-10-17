@@ -9,6 +9,7 @@ using System.Security.Policy;
 using Gobiner.CSharpPad;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 
 namespace Gobiner.CSharpPad
 {
@@ -70,9 +71,16 @@ namespace Gobiner.CSharpPad
 					typeof(global::Gobiner.CSharpPad.ConsoleCapturer).FullName);
 
 				consoleCapture.StartCapture();
-				safeDomain.ExecuteAssembly(fullpath);
+				var thread = new Thread(new ThreadStart(delegate() {safeDomain.ExecuteAssembly(fullpath); }),1024*1024*8);
+				thread.Start();
+				var finished = thread.Join(3000);
+				if (!finished)
+				{
+					thread.Abort();
+				}
+
 				consoleCapture.StopCapture();
-				Output = consoleCapture.GetCapturedLines();
+				Output = consoleCapture.GetCapturedLines().Take(1000).ToArray();
 				AppDomain.Unload(safeDomain);
 				
 			}
