@@ -7,7 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
 <div class="code">
-<pre id="code">
+<pre class="code">
 <% foreach(var line in Server.HtmlEncode(((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Code).Split(new string[] { Environment.NewLine}, StringSplitOptions.None)) { %>
 <%= line %>
 <% } %>

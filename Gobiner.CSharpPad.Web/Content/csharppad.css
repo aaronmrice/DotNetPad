@@ -52,16 +52,9 @@ body
 	background-color: #888;
 }
 
-#header
-{
-	height: 1.6em;
-}
+#header { height: 1.6em; }
 
-#brand
-{
-	float:left;
-	font-size: 1.5em;
-}
+#brand { float:left; font-size: 1.5em; }
 
 #wrapper
 { 
@@ -75,26 +68,17 @@ pre
 {
 	padding: 5px; 
 	font-family: Monospace;
+	display: block;
 }
-pre#code, 
-pre#output
-{
-	background-color: #FFF;
-}
-pre.errors
-{
-	background-color: #EFF;
-}
+pre.code, pre.output { background-color: #FFF; }
+pre.errors { background-color: #EFF; }
 
-form
-{
-	padding: 5px;
-}
+div.output { max-height: 30em; }
+div.code, div.output, div.errors { overflow: auto; padding: 5px; }
 
-hr
-{
-	width: 98%;
-}
+form { padding: 5px; }
+
+hr { width: 98%; margin: 4px 0 4px 0; }
 
 textarea.code
 {
