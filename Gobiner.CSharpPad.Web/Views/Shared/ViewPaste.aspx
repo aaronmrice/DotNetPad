@@ -72,11 +72,6 @@
        </table></div>
 <% } %>
 
-<a href="../EditPaste/
-<%= ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Slug %>
-">Edit this code</a>
-<hr />
-
 <% if (((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Errors.Count() > 0)
    { %>
 <div class="errors">
@@ -86,5 +81,10 @@
 <%= line.ErrorText%>
 <% } %></pre></div>
 <% } %>
+<hr />
+
+<a href="/EditPaste/
+<%= ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Slug %>
+">Fork this code</a>
 <hr />
 </asp:Content>
