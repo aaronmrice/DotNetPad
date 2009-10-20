@@ -72,6 +72,10 @@
        </table></div>
 <% } %>
 
+<a href="../EditPaste/
+<%= ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Slug %>
+">Edit this code</a>
+<hr />
 
 <% if (((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Errors.Count() > 0)
    { %>
@@ -83,17 +87,4 @@
 <% } %></pre></div>
 <% } %>
 <hr />
-
-
-<% using (Html.BeginForm(new { Controller = "Home", Action = "Index" })) { %>
-		
-		<%= Html.TextArea("Code", ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Code, new { Rows = 15, @class = "code" })%>
-		
-		<br />
-		
-		<button type="submit" value="Submit">
-			<span>Submit</span>
-		</button>
-    
-<% } %>
 </asp:Content>

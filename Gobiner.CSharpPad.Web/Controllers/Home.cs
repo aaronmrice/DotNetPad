@@ -41,10 +41,15 @@ namespace Gobiner.CSharpPad.Web.Controllers
 			dataSource.Add(paste);
 			dataSource.AddMany(paste.Errors);
 
-			return Redirect("/Paste/" + paste.Slug);
+			return Redirect("/ViewPaste/" + paste.Slug);
 		}
 
-		public ActionResult Paste(string id)
+        public ActionResult EditPaste(string id)
+        {
+            return ViewPaste(id);
+        }
+
+		public ActionResult ViewPaste(string id)
 		{
 			var paste = dataSource.Single<Paste>(x => x.Slug == id);
 			if (paste == null)

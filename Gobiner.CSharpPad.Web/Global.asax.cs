@@ -17,10 +17,16 @@ namespace Gobiner.CSharpPad.Web
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 			routes.MapRoute(
-				"ViewPaste",                                              // Route name
-				"{action}/{id}",                           // URL with parameters
-				new { controller = "Home", action = "Paste"}  // Parameter defaults
+				"ViewPaste",                                          // Route name
+				"{action}/{id}",                                      // URL with parameters
+				new { controller = "Home", action = "Paste"}      // Parameter defaults
 			);
+
+            routes.MapRoute(
+                "EditPaste",
+                "{action}/{id}",
+                new { controller = "Home", action = "Paste" }
+            );
 
 			routes.MapRoute(
 				"RandomAction",
