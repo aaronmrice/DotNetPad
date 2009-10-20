@@ -5,6 +5,8 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+	<p>C# Pad is a <a href="http://www.codepad.org/">codepad</a> clone for C#. Paste your code in and share it.</p>
+    
     
     <% using (Html.BeginForm(new { Controller = "Home", Action = "Submit" }))
 	   { %>

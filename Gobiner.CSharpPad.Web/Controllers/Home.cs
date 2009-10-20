@@ -24,9 +24,14 @@ namespace Gobiner.CSharpPad.Web.Controllers
             return View();
         }
 
+		public ActionResult About()
+		{
+			return View();
+		}
+
 		[ValidateInput(false)]
 		[AcceptVerbs(HttpVerbs.Post)]
-		public ActionResult Index([Bind] Paste paste)
+		public ActionResult Submit([Bind] Paste paste)
 		{
 			var evaller = new Eval(Server.MapPath("~/App_Data/"));
 			evaller.CompileAndEval(paste.Code);
@@ -35,11 +40,11 @@ namespace Gobiner.CSharpPad.Web.Controllers
 
 			dataSource.Add(paste);
 			dataSource.AddMany(paste.Errors);
-			
-			return Redirect("/" + paste.Slug);
+
+			return Redirect("/Paste/" + paste.Slug);
 		}
 
-		public ActionResult Show(string id)
+		public ActionResult Paste(string id)
 		{
 			var paste = dataSource.Single<Paste>(x => x.Slug == id);
 			if (paste == null)
@@ -48,6 +53,11 @@ namespace Gobiner.CSharpPad.Web.Controllers
 			paste.Errors = dataSource.Find<CompilationError>(x => x.PasteID == paste.ID).ToArray();
 
 			return View(paste);
+		}
+
+		public ActionResult Recent()
+		{
+			return View();
 		}
     }
 }

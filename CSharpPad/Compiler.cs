@@ -45,7 +45,7 @@ namespace Gobiner.CSharpPad
 			var providerOptions = new Dictionary<string, string>();
 			providerOptions.Add("CompilerVersion", "v3.5");
 			var provider = new CSharpCodeProvider(providerOptions);
-			var compileParams = new CompilerParameters(new string[] { "System.dll", "System.Core.dll" });
+			var compileParams = new CompilerParameters(new string[] { "System.dll", "System.Core.dll", "System.Data.dll", "System.Data.DataSetExtensions.dll", "System.Xml.dll", "System.Xml.Linq.dll" });
 			compileParams.MainClass = mainClass;
 			compileParams.GenerateExecutable = true;
 			compileParams.GenerateInMemory = false;
@@ -60,7 +60,7 @@ namespace Gobiner.CSharpPad
 			var providerOptions = new Dictionary<string, string>();
 			providerOptions.Add("CompilerVersion", "v3.5");
 			var provider = new CSharpCodeProvider(providerOptions);
-			var compileParams = new CompilerParameters(new string[] { "System.dll", "System.Core.dll" });
+			var compileParams = new CompilerParameters(new string[] { "System.dll", "System.Core.dll", "System.Data.dll", "System.Data.DataSetExtensions.dll", "System.Xml.dll", "System.Xml.Linq.dll" });
 			compileParams.GenerateExecutable = false;
 			compileParams.GenerateInMemory = true;
 

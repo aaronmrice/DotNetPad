@@ -19,13 +19,13 @@ namespace Gobiner.CSharpPad.Web
 			routes.MapRoute(
 				"ViewPaste",                                              // Route name
 				"{action}/{id}",                           // URL with parameters
-				new { controller = "Home", action = "Index"}  // Parameter defaults
+				new { controller = "Home", action = "Paste"}  // Parameter defaults
 			);
 
 			routes.MapRoute(
 				"RandomAction",
-				"{id}",
-				new { controller = "Home", action = "Show" }
+				"{action}",
+				new { controller = "Home", action = "Index" }
 			);
 
 			routes.MapRoute(

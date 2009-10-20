@@ -87,8 +87,11 @@
   <ItemGroup>
     <Content Include="Content\csharppad.css" />
     <Content Include="Master.Master" />
+    <Content Include="Views\Home\About.aspx" />
+    <Content Include="Views\Home\Recent.aspx" />
+    <Content Include="Views\Partial\CodeDisplay.ascx" />
     <Content Include="Views\Shared\PasteNotFound.aspx" />
-    <Content Include="Views\Shared\Show.aspx" />
+    <Content Include="Views\Shared\Paste.aspx" />
     <Content Include="Views\Shared\Index.aspx" />
   </ItemGroup>
   <ItemGroup>

@@ -19,6 +19,18 @@
 	        
 			</asp:ContentPlaceHolder>
 		</div>
+		<div id="secondary">
+			<asp:ContentPlaceHolder ID="Secondary" runat="server">
+				<ul class="nav">
+					<li><a href="/">New Paste</a></li>
+					<li><a href="/About/">About C# Pad</a></li>
+					<li><a href="/Recent/">View Recent Pastes</a></li>
+				</ul>
+			</asp:ContentPlaceHolder>
+		</div>
+		<div id="footer">
+			<center><p>No need for legalese, right?</p></center>
+		</div>
     </div>
 </body>
 </html>
