@@ -86,6 +86,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\csharppad.css" />
+    <Content Include="Content\csharppad.js" />
+    <Content Include="Content\prettify\lang-css.js" />
+    <Content Include="Content\prettify\lang-hs.js" />
+    <Content Include="Content\prettify\lang-lisp.js" />
+    <Content Include="Content\prettify\lang-lua.js" />
+    <Content Include="Content\prettify\lang-ml.js" />
+    <Content Include="Content\prettify\lang-proto.js" />
+    <Content Include="Content\prettify\lang-sql.js" />
+    <Content Include="Content\prettify\lang-vb.js" />
+    <Content Include="Content\prettify\lang-wiki.js" />
+    <Content Include="Content\prettify\prettify.css" />
+    <Content Include="Content\prettify\prettify.js" />
     <Content Include="Master.Master" />
     <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Home\Recent.aspx" />

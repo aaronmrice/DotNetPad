@@ -28,7 +28,7 @@
 						for (int i = 0; i < Code.Length; i++)
                         {
                     %>
-                    <tr><td><pre><%= Server.HtmlEncode(Code[i])%></pre></td></tr>
+                    <tr><td><pre class="prettyprint"><%= Server.HtmlEncode(Code[i])%></pre></td></tr>
                     <%
                         }
                     %>
