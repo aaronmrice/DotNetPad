@@ -62,7 +62,8 @@ namespace Gobiner.CSharpPad.Web.Controllers
 
 		public ActionResult Recent()
 		{
-			return View();
+			var pastes = dataSource.All<Paste>().OrderByDescending(x => x.Created).Take(10);
+			return View(pastes);
 		}
     }
 }
