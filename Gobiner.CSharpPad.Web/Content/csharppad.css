@@ -65,11 +65,10 @@ body
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #EEE;
-	position: relative;
-	overflow: hidden;
+	
 }
 
-#primary, #secondary { position: relative; }
+#primary, #secondary { }
 #primary { float: left; width: 769px; margin: 0; padding-left: 10px; border-right: solid 1px black; }
 #secondary { float: left; width: 165px; padding-left: 15px; margin: 0; }
 
@@ -85,17 +84,16 @@ body
 	font-family: Monospace;
 	background-color: #FFF;
 }
-.code pre, .output pre { padding: 0; height: 13px; }
-.code td, .output td
-{
-	padding-left: 4px;
-}
+.code pre, .output pre { padding: 0; height: 13px; min-width: 100%; }
+.code td, .output td { padding-left: 4px; }
+.code td.highlight { background-color: #FDD; }
 .linenumbers
 {
 	padding-right: 4px;
 	width: 20px;
 }
 .linenumbers td { text-align: right; }
+.linenumbers td a { text-decoration: none; color: Black; }
 
 pre
 {
@@ -108,7 +106,7 @@ pre.code, pre.output { background-color: #FFF; }
 pre.errors { background-color: #EFF; }
 
 div.output { max-height: 30em; }
-div.code, div.output, div.errors { overflow: auto; padding: 5px; }
+div.code, div.output, div.errors { padding: 5px; overflow-y: auto;  }
 
 form { padding: 5px; }
 

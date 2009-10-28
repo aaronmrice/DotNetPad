@@ -12,7 +12,7 @@
     <script type="text/javascript" src="/Content/csharppad.js"></script>
     <link rel="Stylesheet" href="/Content/csharppad.css" type="text/css" />
     <link rel="Stylesheet" href="/Content/prettify/prettify.css" type="text/css" />    
-    
+    <link rel="icon" href="/favicon.ico">
 </head>
 <body>
 	<div id="wrapper">

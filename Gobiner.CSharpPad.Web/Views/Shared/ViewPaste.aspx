@@ -14,7 +14,7 @@
 							for (int i = 1; i <= Code.Length; i++)
                             {
                         %>
-                        <tr><td><%= i%></td></tr>
+                        <tr><td><a href="#<%= i %>"><%= i %></a></td></tr>
                         <%    
                             }
                         %>
@@ -28,7 +28,7 @@
 						for (int i = 0; i < Code.Length; i++)
                         {
                     %>
-                    <tr><td><pre class="prettyprint"><%= Server.HtmlEncode(Code[i])%></pre></td></tr>
+                    <tr><td id="<%= i+1 %>"><pre class="prettyprint"><%= Server.HtmlEncode(Code[i])%></pre></td></tr>
                     <%
                         }
                     %>
