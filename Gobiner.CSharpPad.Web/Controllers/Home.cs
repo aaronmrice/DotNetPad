@@ -37,6 +37,8 @@ namespace Gobiner.CSharpPad.Web.Controllers
 			evaller.CompileAndEval(paste.Code);
 			paste.AddCompilerErrors(evaller.Errors);
 			paste.Output = string.Join(Environment.NewLine, evaller.Output ?? new string[] {});
+			paste.IsPrivate = Request.Form["IsPrivate"] == "on"; // aspnetmvc doesn't bind 'on' to True apparently
+
 
 			dataSource.Add(paste);
 			dataSource.AddMany(paste.Errors);
@@ -62,7 +64,7 @@ namespace Gobiner.CSharpPad.Web.Controllers
 
 		public ActionResult Recent()
 		{
-			var pastes = dataSource.All<Paste>().OrderByDescending(x => x.Created).Take(10);
+			var pastes = dataSource.All<Paste>().Where(x => !x.IsPrivate).OrderByDescending(x => x.Created).Take(10);
 			return View(pastes);
 		}
     }

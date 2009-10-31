@@ -58,7 +58,7 @@ namespace Gobiner.CSharpPad
 				safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, fullpath));
 				safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, Assembly.GetAssembly(typeof(global::Gobiner.CSharpPad.ConsoleCapturer)).Location));
 				safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, Assembly.GetExecutingAssembly().Location));
-				safePerms.AddPermission(new UIPermission(PermissionState.Unrestricted));
+				safePerms.AddPermission(new UIPermission(PermissionState.Unrestricted)); // required to run an .exe
 
 				var consoleCaptureLibrary = Assembly.GetExecutingAssembly();
 

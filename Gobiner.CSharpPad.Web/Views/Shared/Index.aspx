@@ -29,8 +29,9 @@ public class Default
 		<button type="submit" value="Submit">
 			<span>Submit</span>
 		</button>
-    
-    
+	
+		<input type="checkbox" name="IsPrivate" id="IsPrivate" />
+		<label for="checkbox">Private paste (won't appear in list of recent pastes)</label>
     
     <% } %>
 

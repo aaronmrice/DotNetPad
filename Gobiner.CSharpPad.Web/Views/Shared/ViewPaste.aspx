@@ -5,10 +5,11 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<% var paste = ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model); %>
     <div class="code">
-        <table>
-            <tr><td>
-                <% string[] Code = ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Code.Split(new string[] { Environment.NewLine}, StringSplitOptions.None); %>
+        <table class="outer">
+            <tr><td style="width: 30px;">
+                <% string[] Code = paste.Code.Split(new string[] { Environment.NewLine}, StringSplitOptions.None); %>
                     <table class="linenumbers">
                         <%
 							for (int i = 1; i <= Code.Length; i++)
@@ -23,7 +24,7 @@
             <td style="background:black; padding: 0 0 0 2px;">
             </td>
             <td>
-                <table>
+                <table class="inner">
                     <%
 						for (int i = 0; i < Code.Length; i++)
                         {
@@ -38,12 +39,12 @@
     </div>
 <hr />
 
-<% if (((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Output.Length > 0)
+<% if (paste.Output.Length > 0)
    { %>
 <div class="output">
         <table>
             <tr><td>
-                <% string[] Output = ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Output.Split(new string[] { Environment.NewLine }, StringSplitOptions.None); %>
+                <% string[] Output = paste.Output.Split(new string[] { Environment.NewLine }, StringSplitOptions.None); %>
                     <table class="linenumbers">
                         <%
 							for (int i = 1; i <= Output.Length; i++)
@@ -72,11 +73,11 @@
        </table></div>
 <% } %>
 
-<% if (((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Errors.Count() > 0)
+<% if (paste.Errors.Count() > 0)
    { %>
 <div class="errors">
 <pre class="errors">
-<% foreach (var line in ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Errors)
+<% foreach (var line in paste.Errors)
    { %>
 <%= line.ErrorText%>
 <% } %></pre></div>
@@ -84,7 +85,7 @@
 <hr />
 
 <a href="/EditPaste/
-<%= ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Slug %>
+<%= paste.Slug %>
 ">Fork this code</a>
 <hr />
 </asp:Content>

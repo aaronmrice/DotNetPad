@@ -17,13 +17,14 @@ namespace Gobiner.CSharpPad.Web.Models
 	public class Paste
 	{
 		[SubSonicPrimaryKey]
-		public Guid ID { get; set; }
-		public string Code { get; set; }
-		public string Password { get; set; }
-		public string Slug { get; set; }
-		public CompilationError[] Errors { get; set; }
-		public string Output { get; set; }
-		public DateTime Created { get; set; }
+		public virtual Guid ID { get; set; }
+		public virtual string Code { get; set; }
+		public virtual string Password { get; set; }
+		public virtual string Slug { get; set; }
+		public virtual CompilationError[] Errors { get; set; }
+		public virtual string Output { get; set; }
+		public virtual DateTime Created { get; set; }
+		public virtual bool IsPrivate { get; set; }
 
 		public Paste()
 		{
@@ -33,6 +34,7 @@ namespace Gobiner.CSharpPad.Web.Models
 			Password = string.Empty;
 			Output = string.Empty;
 			Created = DateTime.Now;
+			IsPrivate = false;
 		}
 
 		public void AddCompilerErrors(CompilerError[] errors)

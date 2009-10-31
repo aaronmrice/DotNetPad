@@ -22,6 +22,9 @@ namespace Gobiner.CSharpPad
 		public string FileName { get; private set; }
 		public bool FoundMainClass { get; private set; }
 
+		private string[] GacAssembliesToCompileAgainst = { "System.dll", "System.Core.dll", "System.Data.dll", "System.Data.DataSetExtensions.dll", 
+															 "System.Xml.dll", "System.Xml.Linq.dll", "System.Data.Entity.dll", "System.Windows.Forms.dll" };
+
 		public Compiler() { }
 
 		public void Compile(string filename)
@@ -37,7 +40,7 @@ namespace Gobiner.CSharpPad
 			}
 			if (mainClass == null)
 			{
-				Errors = new CompilerError[] { new CompilerError(filename, 0, 0, "", "Could not find a public static void Main(string[]) method") };
+				Errors = new CompilerError[] { new CompilerError(filename, 0, 0, "", "Could not find a static void Main(string[]) method") };
 				return;
 			}
 
@@ -45,7 +48,7 @@ namespace Gobiner.CSharpPad
 			var providerOptions = new Dictionary<string, string>();
 			providerOptions.Add("CompilerVersion", "v3.5");
 			var provider = new CSharpCodeProvider(providerOptions);
-			var compileParams = new CompilerParameters(new string[] { "System.dll", "System.Core.dll", "System.Data.dll", "System.Data.DataSetExtensions.dll", "System.Xml.dll", "System.Xml.Linq.dll" });
+			var compileParams = new CompilerParameters(GacAssembliesToCompileAgainst);
 			compileParams.MainClass = mainClass;
 			compileParams.GenerateExecutable = true;
 			compileParams.GenerateInMemory = false;
@@ -60,7 +63,7 @@ namespace Gobiner.CSharpPad
 			var providerOptions = new Dictionary<string, string>();
 			providerOptions.Add("CompilerVersion", "v3.5");
 			var provider = new CSharpCodeProvider(providerOptions);
-			var compileParams = new CompilerParameters(new string[] { "System.dll", "System.Core.dll", "System.Data.dll", "System.Data.DataSetExtensions.dll", "System.Xml.dll", "System.Xml.Linq.dll" });
+			var compileParams = new CompilerParameters(GacAssembliesToCompileAgainst);
 			compileParams.GenerateExecutable = false;
 			compileParams.GenerateInMemory = true;
 
@@ -75,7 +78,7 @@ namespace Gobiner.CSharpPad
 			string mainClass = null;
 			foreach (var type in allTypes)
 			{
-				var possibleMethods = type.GetMethods().Where(x => x.Name == "Main" && x.IsStatic && x.IsPublic);
+				var possibleMethods = type.GetMethods().Where(x => x.Name == "Main" && x.IsStatic);
 				foreach (var mainMethod in possibleMethods)
 				{
 					var parameters = mainMethod.GetParameters();

@@ -90,7 +90,7 @@ body
 .linenumbers
 {
 	padding-right: 4px;
-	width: 20px;
+	width: 30px;
 }
 .linenumbers td { text-align: right; }
 .linenumbers td a { text-decoration: none; color: Black; }
@@ -119,3 +119,6 @@ textarea.code
 	margin-right: auto;
 	margin-left: auto;
 }
+
+.code table.outer { width: 100%; }
+.code table.inner { width: 100%; }
