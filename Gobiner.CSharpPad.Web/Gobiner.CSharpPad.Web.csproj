@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="Elmah, Version=1.1.11517.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="RouteDebug, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="SubSonic.Core, Version=3.0.0.3, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core">
@@ -99,7 +100,7 @@
     <Content Include="Content\prettify\prettify.js" />
     <Content Include="Master.Master" />
     <Content Include="Views\Home\About.aspx" />
-    <Content Include="Views\Home\Recent.aspx" />
+    <Content Include="Views\Home\List.aspx" />
     <Content Include="Views\Partial\CodeDisplay.ascx" />
     <Content Include="Views\Shared\EditPaste.aspx" />
     <Content Include="Views\Shared\PasteNotFound.aspx" />

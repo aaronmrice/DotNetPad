@@ -37,7 +37,12 @@ namespace Gobiner.CSharpPad
 
 		public string[] GetCapturedLines()
 		{
-			return CapturedText.ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+			var @string = CapturedText.ToString();
+			if(@string.EndsWith(Environment.NewLine))
+			{
+				@string = @string.Substring(0, @string.Length - Environment.NewLine.Length);
+			}
+			return @string.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 		}
 	}
 }
