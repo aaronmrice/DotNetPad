@@ -38,7 +38,15 @@ namespace Gobiner.CSharpPad.Web.Controllers
 			paste.AddCompilerErrors(evaller.Errors);
 			paste.Output = string.Join(Environment.NewLine, evaller.Output ?? new string[] {});
 			paste.IsPrivate = Request.Form["IsPrivate"] == "on"; // aspnetmvc doesn't bind 'on' to True apparently
-
+			try
+			{
+				paste.Paster = new Guid(Request.Cookies["paster"].Value);
+			}
+			catch // no Guid.TryParse()  :(
+			{
+				paste.Paster = Guid.NewGuid();
+				Response.Cookies.Add(new HttpCookie("paster", paste.Paster.ToString()));
+			}
 
 			dataSource.Add(paste);
 			dataSource.AddMany(paste.Errors);
@@ -64,8 +72,22 @@ namespace Gobiner.CSharpPad.Web.Controllers
 
 		public ActionResult Recent()
 		{
-			var pastes = dataSource.All<Paste>().Where(x => !x.IsPrivate).OrderByDescending(x => x.Created).Take(10);
+			var pastes = dataSource.All<Paste>().Where(x => !x.IsPrivate).OrderByDescending(x => x.Created).Take(12);
 			return View("List",pastes);
+		}
+
+		public ActionResult Mine()
+		{
+			try
+			{
+				var myGuid = new Guid(Request.Cookies["paster"].Value);
+				var pastes = dataSource.All<Paste>().Where(x => x.Paster == myGuid).OrderByDescending(x => x.Created).Take(20);
+				return View("List", pastes);
+			}
+			catch (NullReferenceException e)
+			{
+				return View();
+			}
 		}
 
 		public ActionResult FailBuzz()
@@ -73,13 +95,13 @@ namespace Gobiner.CSharpPad.Web.Controllers
 			var pastes = dataSource.All<Paste>().Where(x => x.Output.ToUpper().Contains("FIZZ")
 														&& x.Output.ToUpper().Contains("BUZZ")
 														&& x.Output.ToUpper() != correctFizzBuzzOutput.ToUpper())
-																.OrderByDescending(x => x.Created).Take(10);
+																.OrderByDescending(x => x.Created).Take(12);
 			return View("List", pastes);
 		}
 
 		public ActionResult FizzBuzz()
 		{
-			var pastes = dataSource.All<Paste>().Where(x => !x.IsPrivate && x.Output.ToUpper() == correctFizzBuzzOutput.ToUpper()).OrderByDescending(x => x.Created).Take(10);
+			var pastes = dataSource.All<Paste>().Where(x => !x.IsPrivate && x.Output.ToUpper() == correctFizzBuzzOutput.ToUpper()).OrderByDescending(x => x.Created).Take(12);
 			return View("List", pastes);
 		}
 

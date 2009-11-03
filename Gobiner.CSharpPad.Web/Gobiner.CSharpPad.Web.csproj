@@ -33,7 +33,6 @@
   <ItemGroup>
     <Reference Include="Elmah, Version=1.1.11517.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="RouteDebug, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="SubSonic.Core, Version=3.0.0.3, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core">
@@ -101,6 +100,7 @@
     <Content Include="Master.Master" />
     <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Home\List.aspx" />
+    <Content Include="Views\Home\Mine.aspx" />
     <Content Include="Views\Partial\CodeDisplay.ascx" />
     <Content Include="Views\Shared\EditPaste.aspx" />
     <Content Include="Views\Shared\PasteNotFound.aspx" />
@@ -111,6 +111,10 @@
     <ProjectReference Include="..\CSharpPad\Gobiner.CSharpPad.csproj">
       <Project>{5C19FEAA-AA5D-4AE3-9DEE-E4D3CA3C9B7B}</Project>
       <Name>Gobiner.CSharpPad</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SubSonic.Core\SubSonic.Core.csproj">
+      <Project>{53FF90B2-2D33-4EC0-91B6-A30FDF1B3374}</Project>
+      <Name>SubSonic.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

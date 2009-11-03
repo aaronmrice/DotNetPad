@@ -25,6 +25,7 @@ namespace Gobiner.CSharpPad.Web.Models
 		public virtual string Output { get; set; }
 		public virtual DateTime Created { get; set; }
 		public virtual bool IsPrivate { get; set; }
+		public virtual Guid? Paster { get; set; }
 
 		public Paste()
 		{

@@ -32,7 +32,8 @@
 					<li><a href="/About/">About C# Pad</a></li>
 					<li><a href="/Recent/">Recent Pastes</a></li>
 					<li><a href="/FizzBuzz/">FizzBuzz Implementations</a></li>
-					<li><a href="/Recent/">FizzBuzz Failures</a></li>
+					<li><a href="/FailBuzz/">FizzBuzz Failures</a></li>
+					<li><a href="/Mine/">My Recent Pastes</a></li>
 				</ul>
 			</asp:ContentPlaceHolder>
 		</div>
