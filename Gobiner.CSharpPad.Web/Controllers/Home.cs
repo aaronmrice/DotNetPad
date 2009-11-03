@@ -45,7 +45,7 @@ namespace Gobiner.CSharpPad.Web.Controllers
 			catch // no Guid.TryParse()  :(
 			{
 				paste.Paster = Guid.NewGuid();
-				Response.Cookies.Add(new HttpCookie("paster", paste.Paster.ToString()));
+				Response.Cookies.Add(new HttpCookie("paster", paste.Paster.ToString()) { Expires = DateTime.Today.AddYears(1) });
 			}
 
 			dataSource.Add(paste);
