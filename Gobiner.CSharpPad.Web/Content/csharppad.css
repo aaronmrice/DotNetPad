@@ -84,12 +84,13 @@ body
 	font-family: Monospace;
 	background-color: #FFF;
 }
-.code pre, .output pre { padding: 0; height: 13px; min-width: 100%; }
+.code pre, .output pre { padding: 0; min-width: 100%; }
 .code td, .output td { padding-left: 4px; }
 .code td.highlight { background-color: #FDD; }
-.linenumbers
+table.linenumbers
 {
 	padding-right: 4px;
+	border-right: solid 2px black;
 	width: 30px;
 }
 .linenumbers td { text-align: right; }
@@ -122,3 +123,6 @@ textarea.code
 
 .code table.outer { width: 100%; }
 .code table.inner { width: 100%; }
+
+#secondary li { margin: .4em 0 0 0; }
+#secondary li a:visited { color: Blue; }

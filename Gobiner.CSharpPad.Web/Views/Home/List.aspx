@@ -11,16 +11,12 @@
 				Code = Code.SkipWhile(x => x.StartsWith("using "));
 				Code = Code.Take(10); %>
 
-			<table>
-				<%
-					foreach(var line in Code)
-					{
-				%>
-				<tr><td><pre class="prettyprint"><%= Server.HtmlEncode(line)%></pre></td></tr>
-				<%
-					}
-				%>
-			</table>
+<pre class="prettyprint">
+<% foreach(var line in Code) { %>
+<%= Server.HtmlEncode(line.Replace("\t", "    "))%>
+<% } %>
+</pre>
+
 		</div>
 		<p>Pasted <%= paste.Created.PrettyPrintTimeAgo() %>.</p>
 		<p><%= Html.ActionLink("View this paste", "ViewPaste", new { Id = paste.ID } ) %></p>

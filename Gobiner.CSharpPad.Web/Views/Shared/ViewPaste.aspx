@@ -9,10 +9,10 @@
     <div class="code">
         <table class="outer">
             <tr><td style="width: 30px;">
-                <% string[] Code = paste.Code.Split(new string[] { Environment.NewLine}, StringSplitOptions.None); %>
+                <% int linesOfCode = paste.Code.Split(new string[] { Environment.NewLine}, StringSplitOptions.None).Length; %>
                     <table class="linenumbers">
                         <%
-							for (int i = 1; i <= Code.Length; i++)
+							for (int i = 1; i <= linesOfCode; i++)
                             {
                         %>
                         <tr><td><a href="#<%= i %>"><%= i %></a></td></tr>
@@ -21,19 +21,10 @@
                         %>
                     </table>
             </td>
-            <td style="background:black; padding: 0 0 0 2px;">
-            </td>
             <td>
-                <table class="inner">
-                    <%
-						for (int i = 0; i < Code.Length; i++)
-                        {
-                    %>
-                    <tr><td id="<%= i+1 %>"><pre class="prettyprint"><%= Server.HtmlEncode(Code[i])%></pre></td></tr>
-                    <%
-                        }
-                    %>
-                </table>
+<pre class="prettyprint">
+<%= Server.HtmlEncode(paste.Code.Replace("\t", "    ")) %>
+</pre>
            </td></tr>
        </table>
     </div>
@@ -44,10 +35,10 @@
 <div class="output">
         <table>
             <tr><td>
-                <% string[] Output = paste.Output.Split(new string[] { Environment.NewLine }, StringSplitOptions.None); %>
+                <% int linesOfOutput = paste.Output.Split(new string[] { Environment.NewLine }, StringSplitOptions.None).Length; %>
                     <table class="linenumbers">
                         <%
-							for (int i = 1; i <= Output.Length; i++)
+							for (int i = 1; i <= linesOfOutput; i++)
                             {
                         %>
                         <tr><td><%= i%></td></tr>
@@ -56,19 +47,10 @@
                         %>
                     </table>
             </td>
-            <td style="background:black; padding: 0 0 0 2px;">
-            </td>
             <td>
-                <table>
-                    <%
-						for (int i = 0; i < Output.Length; i++)
-                        {
-                    %>
-                    <tr><td><pre><%= Server.HtmlEncode(Output[i])%></pre></td></tr>
-                    <%
-                        }
-                    %>
-                </table>
+<pre>
+<%= paste.Output %>
+</pre>
            </td></tr>
        </table></div>
 <% } %>
