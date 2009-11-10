@@ -82,6 +82,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CompilationError.cs" />
+    <Compile Include="Models\Languages.cs" />
     <Compile Include="Models\Paste.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -41,7 +41,7 @@ namespace Gobiner.CSharpPad
 
 			var currentAssembly = Assembly.GetAssembly(typeof(global::Gobiner.CSharpPad.CSharpCompiler)).Location;
 			
-			var compiler = (CSharpCompiler)compilerDomain.CreateInstanceFromAndUnwrap(
+			var compiler = (ICompiler)compilerDomain.CreateInstanceFromAndUnwrap(
 				Assembly.GetAssembly(typeof(global::Gobiner.CSharpPad.CSharpCompiler)).Location,
 				typeof(global::Gobiner.CSharpPad.CSharpCompiler).FullName);
 			compiler.Code = code;

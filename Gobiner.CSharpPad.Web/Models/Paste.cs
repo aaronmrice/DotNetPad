@@ -26,16 +26,18 @@ namespace Gobiner.CSharpPad.Web.Models
 		public virtual DateTime Created { get; set; }
 		public virtual bool IsPrivate { get; set; }
 		public virtual Guid? Paster { get; set; }
+		public virtual Language Language { get; set; }
 
 		public Paste()
 		{
 			ID = Guid.NewGuid();
-			Slug = Convert.ToBase64String(ID.ToByteArray()).Replace("/","_").Replace("+","-").Substring(0,22);
+			Slug = Convert.ToBase64String(ID.ToByteArray()).Replace("/", "_").Replace("+", "-").Substring(0, 22);
 			Code = string.Empty;
 			Password = string.Empty;
 			Output = string.Empty;
 			Created = DateTime.Now;
 			IsPrivate = false;
+			Language = Models.Language.CSharp;
 		}
 
 		public void AddCompilerErrors(CompilerError[] errors)
