@@ -15,7 +15,7 @@
 							for (int i = 1; i <= linesOfCode; i++)
                             {
                         %>
-                        <tr><td><a href="#<%= i %>"><%= i %></a></td></tr>
+                        <tr><td><%= i %></td></tr>
                         <%    
                             }
                         %>

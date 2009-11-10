@@ -86,7 +86,7 @@ body
 }
 .code pre, .output pre { padding: 0; min-width: 100%; }
 .code td, .output td { padding-left: 4px; }
-.code td.highlight { background-color: #FDD; }
+.code .highlight, .output .highlight { background-color: #FDD; }
 table.linenumbers
 {
 	padding-right: 4px;

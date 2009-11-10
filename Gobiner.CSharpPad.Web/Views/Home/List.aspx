@@ -19,7 +19,7 @@
 
 		</div>
 		<p>Pasted <%= paste.Created.PrettyPrintTimeAgo() %>.</p>
-		<p><%= Html.ActionLink("View this paste", "ViewPaste", new { Id = paste.ID } ) %></p>
+		<p><%= Html.ActionLink("View this paste", "ViewPaste", new { Id = paste.Slug } ) %></p>
 		<hr />
 	
 	<% } %>

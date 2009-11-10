@@ -30,7 +30,7 @@ namespace Gobiner.CSharpPad.Web.Models
 		public Paste()
 		{
 			ID = Guid.NewGuid();
-			Slug = HttpUtility.UrlEncode(ID.ToString());
+			Slug = Convert.ToBase64String(ID.ToByteArray()).Replace("/","_").Replace("+","-").Substring(0,22);
 			Code = string.Empty;
 			Password = string.Empty;
 			Output = string.Empty;

@@ -39,17 +39,17 @@ namespace Gobiner.CSharpPad
 			var filename = "Gobiner.CSharpPad.Eval.Evil"+rand.Next()+".exe";
 			var fullpath = fullPath + filename;
 
-			var currentAssembly = Assembly.GetAssembly(typeof(global::Gobiner.CSharpPad.Compiler)).Location;
+			var currentAssembly = Assembly.GetAssembly(typeof(global::Gobiner.CSharpPad.CSharpCompiler)).Location;
 			
-			var compiler = (Compiler)compilerDomain.CreateInstanceFromAndUnwrap(
-				Assembly.GetAssembly(typeof(global::Gobiner.CSharpPad.Compiler)).Location,
-				typeof(global::Gobiner.CSharpPad.Compiler).FullName);
+			var compiler = (CSharpCompiler)compilerDomain.CreateInstanceFromAndUnwrap(
+				Assembly.GetAssembly(typeof(global::Gobiner.CSharpPad.CSharpCompiler)).Location,
+				typeof(global::Gobiner.CSharpPad.CSharpCompiler).FullName);
 			compiler.Code = code;
 			compiler.Compile(fullpath);
 			Errors = compiler.Errors;
 			AppDomain.Unload(compilerDomain);
 
-			if (Errors.Count() == 0)
+			if (Errors != null && Errors.Length == 0)
 			{
 				var safePerms = new PermissionSet(PermissionState.None);
 				safePerms.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));

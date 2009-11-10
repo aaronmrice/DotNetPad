@@ -13,7 +13,7 @@ namespace Gobiner.CSharpPad
 	{
 		private TextWriter OldConsole;
 		private StringBuilder CapturedText = new StringBuilder();
-
+        [SecurityCritical]
 		public ConsoleCapturer()
 		{
 			new PermissionSet(PermissionState.Unrestricted).Assert();
@@ -21,14 +21,16 @@ namespace Gobiner.CSharpPad
 			CodeAccessPermission.RevertAssert();
 		}
 
-		public void StartCapture()
+        [SecurityCritical]
+        public void StartCapture()
 		{
 			new PermissionSet(PermissionState.Unrestricted).Assert();
 			Console.SetOut(new StringWriter(CapturedText));
 			CodeAccessPermission.RevertAssert();
 		}
 
-		public void StopCapture()
+        [SecurityCritical]
+        public void StopCapture()
 		{
 			new PermissionSet(PermissionState.Unrestricted).Assert();
 			Console.SetOut(OldConsole);
