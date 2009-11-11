@@ -1,11 +1,11 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" Inherits="System.Web.Mvc.ViewPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	C# Pad
+	.NET Pad
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-	<p>C# Pad is a <a href="http://www.codepad.org/">codepad</a> clone for C#. Paste your code in and share it.</p>
+	<p>.NET Pad is a <a href="http://www.codepad.org/">codepad</a> clone for .NET languages. Paste your code in and share it!</p>
     
     
     <% using (Html.BeginForm(new { Controller = "Home", Action = "Submit" }))

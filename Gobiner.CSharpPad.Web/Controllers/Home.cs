@@ -50,8 +50,14 @@ namespace Gobiner.CSharpPad.Web.Controllers
 
 			dataSource.Add(paste);
 			dataSource.AddMany(paste.Errors);
-
-			return Redirect("/ViewPaste/" + paste.Slug);
+			if (paste.Errors.Length > 0)
+			{
+				return Redirect("/ViewPaste/" + paste.Slug + "#" + paste.Errors.Select(x=> x.Line - 1).Distinct().Select(x => "c" + x + ",").Aggregate((x, y) => x + y));
+			}
+			else
+			{
+				return Redirect("/ViewPaste/" + paste.Slug);
+			}
 		}
 
         public ActionResult EditPaste(string id)

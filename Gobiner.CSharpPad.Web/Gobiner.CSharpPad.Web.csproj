@@ -101,8 +101,8 @@
     <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\csharppad.css" />
-    <Content Include="Content\csharppad.js" />
+    <Content Include="Content\dotnetpad.css" />
+    <Content Include="Content\dotnetpad.js" />
     <Content Include="Content\prettify\lang-css.js" />
     <Content Include="Content\prettify\lang-hs.js" />
     <Content Include="Content\prettify\lang-lisp.js" />

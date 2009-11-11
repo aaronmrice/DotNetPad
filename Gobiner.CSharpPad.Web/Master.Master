@@ -9,16 +9,16 @@
     <script type="text/javascript" src="/Content/prettify/prettify.js"></script>
     <script type="text/javascript" src="/Content/prettify/lang-.js"></script>
     <script type="text/javascript" src="/Content/prettify/lang-vb.js"></script>
-    <script type="text/javascript" src="/Content/csharppad.js"></script>
-    <link rel="Stylesheet" href="/Content/csharppad.css" type="text/css" />
+    <script type="text/javascript" src="/Content/dotnetpad.js"></script>
+    <link rel="Stylesheet" href="/Content/dotnetpad.css" type="text/css" />
     <link rel="Stylesheet" href="/Content/prettify/prettify.css" type="text/css" />    
     <link rel="icon" href="/favicon.ico">
 </head>
 <body>
 	<div id="wrapper">
 		<div id="header">
-			<p id="brand"><a href="/">C# Pad</a></p>
-			<p style="float:right"><a href="http://bitbucket.org/gobiner/csharppad/issues/">Send me your bugs &amp; suggestions!</a></p>
+			<p id="brand"><a href="/">.NET Pad</a></p>
+			<p style="float:right"><a href="http://bitbucket.org/gobiner/.net-pad/issues/?status=new&status=open">Send me your bugs &amp; suggestions!</a></p>
 		</div>
 		<div id="primary">
 			<asp:ContentPlaceHolder ID="MainContent" runat="server">
@@ -29,7 +29,7 @@
 			<asp:ContentPlaceHolder ID="Secondary" runat="server">
 				<ul class="nav">
 					<li><a href="/">New Paste</a></li>
-					<li><a href="/About/">About C# Pad</a></li>
+					<li><a href="/About/">About .NET Pad</a></li>
 					<li><a href="/Recent/">Recent Pastes</a></li>
 					<li><a href="/FizzBuzz/">FizzBuzz Implementations</a></li>
 					<li><a href="/FailBuzz/">FizzBuzz Failures</a></li>
