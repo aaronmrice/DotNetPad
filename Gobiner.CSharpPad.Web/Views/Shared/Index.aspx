@@ -25,7 +25,15 @@ public class Default
 ", new { @class="code" } )%>
 		
 		<br />
-		
+		<label>
+			<input type="radio" name="Language" value="CSharp" checked="true" />
+			<span>C#</span>
+		</label>
+		<label>
+			<input type="radio" name="Language" value="VisualBasic" />
+			<span>Visual Basic</span>
+		</label>
+		<br />
 		<button type="submit" value="Submit">
 			<span>Submit</span>
 		</button>

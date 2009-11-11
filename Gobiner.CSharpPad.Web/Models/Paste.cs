@@ -37,7 +37,7 @@ namespace Gobiner.CSharpPad.Web.Models
 			Output = string.Empty;
 			Created = DateTime.Now;
 			IsPrivate = false;
-			Language = Models.Language.CSharp;
+			Language = Language.CSharp;
 		}
 
 		public void AddCompilerErrors(CompilerError[] errors)

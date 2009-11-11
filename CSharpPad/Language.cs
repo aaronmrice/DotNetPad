@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Gobiner.CSharpPad.Web.Models
+namespace Gobiner.CSharpPad
 {
     public enum Language
     {

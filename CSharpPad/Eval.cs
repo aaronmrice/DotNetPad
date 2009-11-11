@@ -28,12 +28,12 @@ namespace Gobiner.CSharpPad
 			fullPath = folder;
 		}
 
-		public void CompileAndEval(string[] code)
+		public void CompileAndEval(string[] code, Language language)
 		{
-			CompileAndEval(code.Aggregate((x, y) => x + Environment.NewLine + y));
+			CompileAndEval(code.Aggregate((x, y) => x + Environment.NewLine + y), language);
 		}
 
-		public void CompileAndEval(string code)
+		public void CompileAndEval(string code, Language language)
 		{
 			var compilerDomain = AppDomain.CreateDomain("Gobiner.CSharpPad" + new Random().Next());
 			var filename = "Gobiner.CSharpPad.Eval.Evil"+rand.Next()+".exe";
@@ -42,8 +42,8 @@ namespace Gobiner.CSharpPad
 			var currentAssembly = Assembly.GetAssembly(typeof(global::Gobiner.CSharpPad.CSharpCompiler)).Location;
 			
 			var compiler = (ICompiler)compilerDomain.CreateInstanceFromAndUnwrap(
-				Assembly.GetAssembly(typeof(global::Gobiner.CSharpPad.CSharpCompiler)).Location,
-				typeof(global::Gobiner.CSharpPad.CSharpCompiler).FullName);
+				GetCompiler(language).GetType().Assembly.Location,
+				GetCompiler(language).GetType().FullName);
 			compiler.Code = code;
 			compiler.Compile(fullpath);
 			Errors = compiler.Errors;
@@ -136,6 +136,16 @@ namespace Gobiner.CSharpPad
 
 			// and create the StrongName
 			return new StrongName(keyBlob, assemblyName.Name, assemblyName.Version);
+		}
+
+		private ICompiler GetCompiler(Language language)
+		{
+			switch ( language)
+			{
+				case Language.CSharp: return new CSharpCompiler();
+				case Language.VisualBasic: return new VisualBasicCompiler();
+				default: return null;
+			}
 		}
 	}
 }

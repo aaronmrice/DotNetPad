@@ -34,7 +34,7 @@ namespace Gobiner.CSharpPad.Web.Controllers
 		public ActionResult Submit([Bind] Paste paste)
 		{
             var evaller = new Eval(Server.MapPath("~/App_Data/"));
-			evaller.CompileAndEval(paste.Code);
+			evaller.CompileAndEval(paste.Code, paste.Language);
 			paste.AddCompilerErrors(evaller.Errors);
 			paste.Output = string.Join(Environment.NewLine, evaller.Output ?? new string[] {});
 			paste.IsPrivate = Request.Form["IsPrivate"] == "on"; // aspnetmvc doesn't bind 'on' to True apparently

@@ -7,7 +7,7 @@ using Microsoft.VisualBasic;
 
 namespace Gobiner.CSharpPad
 {
-    public class VisualBasicCompiler : ICompiler
+    public class VisualBasicCompiler : MarshalByRefObject, ICompiler
     {
         public string Code { get; set; }
         public CompilerError[] Errors { get; private set; }
@@ -65,7 +65,7 @@ namespace Gobiner.CSharpPad
                 foreach (var mainMethod in possibleMethods)
                 {
                     var parameters = mainMethod.GetParameters();
-                    if (parameters.Count() == 1 && parameters[0].ParameterType.FullName == "System.String[]")
+                    if (parameters.Count() == 0)
                     {
                         mainClass = type.FullName;
                         break;
