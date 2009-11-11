@@ -9,13 +9,15 @@ using Gobiner.CSharpPad.Web.Models;
 
 namespace Gobiner.CSharpPad.Web.Controllers
 {
-    public class HomeController : Controller
+	[ValidateInput(false)]
+	public class HomeController : Controller
     {
 		SimpleRepository dataSource;
 
 		public HomeController()
 		{
 			dataSource = new SimpleRepository("SqlLite", SimpleRepositoryOptions.RunMigrations);
+			ValidateRequest = false;
 		}
 
 		[AcceptVerbs(HttpVerbs.Get)]

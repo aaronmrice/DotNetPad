@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" Inherits="System.Web.Mvc.ViewPage" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" Inherits="System.Web.Mvc.ViewPage" ValidateRequest="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	.NET Pad
@@ -58,11 +58,9 @@
 <% if (paste.Errors.Count() > 0)
    { %>
 <div class="errors">
-<pre class="errors">
-<% foreach (var line in paste.Errors)
+<pre class="errors"><% foreach (var line in paste.Errors)
    { %>
-<%= line.ErrorText%>
-<% } %></pre></div>
+Line <%= line.Line %> : <%= line.ErrorText%><% } %></pre></div>
 <% } %>
 <hr />
 
