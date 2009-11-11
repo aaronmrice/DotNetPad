@@ -20,6 +20,10 @@
 			<input type="radio" name="Language" value="VisualBasic" />
 			<span>Visual Basic</span>
 		</label>
+		<label>
+			<input type="radio" name="Language" value="FSharp" />
+			<span>F#</span>
+		</label>
 		
 		<br />
 		

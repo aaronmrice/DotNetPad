@@ -9,5 +9,6 @@ namespace Gobiner.CSharpPad
     {
         CSharp,
         VisualBasic,
+		FSharp,
     }
 }

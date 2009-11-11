@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Data.SQLite - Manage
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Data.SQLite.Linq", "System.Data.SQLite.Linq\System.Data.SQLite.Linq.csproj", "{E6BF9F74-58E2-413B-A7CE-EA653ECB728D}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.vbproj", "{832C38D9-22A6-4713-8536-16715F361F26}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,26 +127,6 @@ Global
 		{E6BF9F74-58E2-413B-A7CE-EA653ECB728D}.StockRelease|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E6BF9F74-58E2-413B-A7CE-EA653ECB728D}.StockRelease|Mixed Platforms.Build.0 = Release|Any CPU
 		{E6BF9F74-58E2-413B-A7CE-EA653ECB728D}.StockRelease|x86.ActiveCfg = Release|Any CPU
-		{832C38D9-22A6-4713-8536-16715F361F26}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.Debug|x86.ActiveCfg = Debug|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.Debug|x86.Build.0 = Debug|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.Release|Any CPU.ActiveCfg = Release|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.Release|Mixed Platforms.Build.0 = Release|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.Release|x86.ActiveCfg = Release|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.Release|x86.Build.0 = Release|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.StockDebug|Any CPU.ActiveCfg = Debug|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.StockDebug|Mixed Platforms.ActiveCfg = Debug|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.StockDebug|Mixed Platforms.Build.0 = Debug|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.StockDebug|x86.ActiveCfg = Debug|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.StockDebug|x86.Build.0 = Debug|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.StockRelease|Any CPU.ActiveCfg = Release|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.StockRelease|Mixed Platforms.ActiveCfg = Release|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.StockRelease|Mixed Platforms.Build.0 = Release|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.StockRelease|x86.ActiveCfg = Release|x86
-		{832C38D9-22A6-4713-8536-16715F361F26}.StockRelease|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

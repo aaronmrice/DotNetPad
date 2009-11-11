@@ -58,6 +58,12 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CppCodeProvider, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="FSharp.Compiler.CodeDom, Version=1.9.7.8, Culture=neutral, PublicKeyToken=a19089b1c74d0809, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Windows\assembly\GAC_MSIL\FSharp.Compiler.CodeDom\1.9.7.8__a19089b1c74d0809\FSharp.Compiler.CodeDom.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharp.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -76,6 +82,7 @@
     <Compile Include="CSharpCompiler.cs" />
     <Compile Include="ConsoleCapture.cs" />
     <Compile Include="Eval.cs" />
+    <Compile Include="FSharpCompiler.cs" />
     <Compile Include="ICompiler.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

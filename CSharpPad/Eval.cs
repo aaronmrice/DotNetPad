@@ -144,6 +144,7 @@ namespace Gobiner.CSharpPad
 			{
 				case Language.CSharp: return new CSharpCompiler();
 				case Language.VisualBasic: return new VisualBasicCompiler();
+				case Language.FSharp: return new FSharpCompiler();
 				default: return null;
 			}
 		}
