@@ -49,7 +49,7 @@
             </td>
             <td>
 <pre>
-<%= paste.Output %>
+<%=  Server.HtmlEncode(paste.Output) %>
 </pre>
            </td></tr>
        </table></div>
@@ -60,7 +60,7 @@
 <div class="errors">
 <pre class="errors"><% foreach (var line in paste.Errors)
    { %>
-Line <%= line.Line %> : <%= line.ErrorText%><% } %></pre></div>
+Line <%= line.Line %> : <%= Server.HtmlEncode(line.ErrorText) %><% } %></pre></div>
 <% } %>
 <hr />
 
