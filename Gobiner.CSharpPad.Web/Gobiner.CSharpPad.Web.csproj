@@ -92,6 +92,7 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Views\Shared\PasteBroked.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

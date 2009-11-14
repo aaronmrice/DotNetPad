@@ -35,30 +35,38 @@ namespace Gobiner.CSharpPad.Web.Controllers
 		[AcceptVerbs(HttpVerbs.Post)]
 		public ActionResult Submit([Bind] Paste paste)
 		{
-            var evaller = new Eval(Server.MapPath("~/App_Data/"));
-			evaller.CompileAndEval(paste.Code, paste.Language);
-			paste.AddCompilerErrors(evaller.Errors);
-			paste.Output = string.Join(Environment.NewLine, evaller.Output ?? new string[] {});
-			paste.IsPrivate = Request.Form["IsPrivate"] == "on"; // aspnetmvc doesn't bind 'on' to True apparently
 			try
 			{
-				paste.Paster = new Guid(Request.Cookies["paster"].Value);
-			}
-			catch // no Guid.TryParse()  :(
-			{
-				paste.Paster = Guid.NewGuid();
-				Response.Cookies.Add(new HttpCookie("paster", paste.Paster.ToString()) { Expires = DateTime.Today.AddYears(1) });
-			}
+				var evaller = new Eval(Server.MapPath("~/App_Data/"));
+				evaller.CompileAndEval(paste.Code, paste.Language);
+				paste.AddCompilerErrors(evaller.Errors);
+				paste.Output = string.Join(Environment.NewLine, evaller.Output ?? new string[] { });
+				paste.IsPrivate = Request.Form["IsPrivate"] == "on"; // aspnetmvc doesn't bind 'on' to True apparently
+				try
+				{
+					paste.Paster = new Guid(Request.Cookies["paster"].Value);
+				}
+				catch // no Guid.TryParse()  :(
+				{
+					paste.Paster = Guid.NewGuid();
+					Response.Cookies.Add(new HttpCookie("paster", paste.Paster.ToString()) { Expires = DateTime.Today.AddYears(1) });
+				}
 
-			dataSource.Add(paste);
-			dataSource.AddMany(paste.Errors);
-			if (paste.Errors.Length > 0)
-			{
-				return Redirect("/ViewPaste/" + paste.Slug + "#" + paste.Errors.Select(x=> x.Line - 1).Distinct().Select(x => "c" + x + ",").Aggregate((x, y) => x + y));
+				dataSource.Add(paste);
+				dataSource.AddMany(paste.Errors);
+				if (paste.Errors.Length > 0)
+				{
+					return Redirect("/ViewPaste/" + paste.Slug + "#" + paste.Errors.Select(x => x.Line - 1).Distinct().Select(x => "c" + x + ",").Aggregate((x, y) => x + y));
+				}
+				else
+				{
+					return Redirect("/ViewPaste/" + paste.Slug);
+				}
 			}
-			else
+			catch (Exception e)
 			{
-				return Redirect("/ViewPaste/" + paste.Slug);
+				Elmah.ErrorSignal.FromCurrentContext().Raise(e);
+				return View("PasteBroked");
 			}
 		}
 
