@@ -28,7 +28,7 @@ namespace Gobiner.CSharpPad
             string mainClass = FindMainClass();
             if (mainClass == null && Errors.Length == 0)
             {
-                Errors = new CompilerError[] { new CompilerError(filename, 0, 0, "", "Could not find a static void Main(string[]) method") };
+                Errors = new CompilerError[] { new CompilerError(filename, 0, 0, "", "Could not find a Main method") };
                 return;
             }
 

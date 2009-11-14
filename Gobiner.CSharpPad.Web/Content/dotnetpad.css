@@ -52,12 +52,12 @@ body
 	background-color: #999;
 }
 
-#header { height: 1.75em; margin-bottom: .5em; }
+#header { height: 1.75em; margin-bottom: .5em; margin-top: .5em; padding-top: .3em; }
 #header a { font-style: normal; text-decoration: none; }
 #header a, #header a:visited { color: #00F; }
 #brand { margin-left: 15px; }
 
-#brand { float:left; font-size: 1.5em; }
+#brand { float:left; font-size: 1.5em; font-family: Consolas, Courier New, Monospace; }
 
 #wrapper
 { 
@@ -67,6 +67,8 @@ body
 	background-color: #EEE;
 	
 }
+
+a { text-decoration: none }
 
 #primary, #secondary { }
 #primary { float: left; width: 769px; margin: 0; padding-left: 10px; border-right: solid 1px black; }
@@ -81,7 +83,8 @@ body
 .code, .output
 {
 	padding: 5px;
-	font-family: Monospace;
+	font-family: Consolas, Courier New, Monospace;
+	font-size: smaller;
 	background-color: #FFF;
 }
 .code pre, .output pre { padding: 0; min-width: 100%; }
@@ -93,13 +96,12 @@ table.linenumbers
 	border-right: solid 2px black;
 	width: 30px;
 }
-.linenumbers td { text-align: right; }
-.linenumbers td a { text-decoration: none; color: Black; }
+.linenumbers td { text-align: right; color: Blue }
 
 pre
 {
 	padding: 5px;
-	font-family: Monospace;
+	font-family: Consolas, Courier New, Monospace;
 	display: block;
 }
 

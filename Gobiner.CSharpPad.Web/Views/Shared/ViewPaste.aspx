@@ -9,7 +9,7 @@
     <div class="code">
         <table class="outer">
             <tr><td style="width: 30px;">
-                <% int linesOfCode = paste.Code.Split(new string[] { Environment.NewLine}, StringSplitOptions.None).Length; %>
+                <% int linesOfCode = paste.Code.Split(new string[] { "\n" }, StringSplitOptions.None).Length; %>
                     <table class="linenumbers">
                         <%
 							for (int i = 1; i <= linesOfCode; i++)
@@ -23,7 +23,7 @@
             </td>
             <td>
 <pre class="prettyprint">
-<%= Server.HtmlEncode(paste.Code.Replace("\t", "    ")) %>
+<%= Server.HtmlEncode(paste.Code.Replace("\t", "    ").Replace("\r","")) %>
 </pre>
            </td></tr>
        </table>
@@ -35,7 +35,7 @@
 <div class="output">
         <table>
             <tr><td>
-                <% int linesOfOutput = paste.Output.Split(new string[] { Environment.NewLine }, StringSplitOptions.None).Length; %>
+                <% int linesOfOutput = paste.Output.Split(new string[] { "\n" }, StringSplitOptions.None).Length; %>
                     <table class="linenumbers">
                         <%
 							for (int i = 1; i <= linesOfOutput; i++)
