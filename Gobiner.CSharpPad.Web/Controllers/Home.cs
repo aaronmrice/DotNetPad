@@ -33,6 +33,18 @@ namespace Gobiner.CSharpPad.Web.Controllers
 
 		[ValidateInput(false)]
 		[AcceptVerbs(HttpVerbs.Post)]
+		public ActionResult Skybot([Bind] Paste paste)
+		{
+			var evaller = new Eval(Server.MapPath("~/App_Data/"));
+			evaller.CompileAndEval(paste.Code, paste.Language);
+			paste.AddCompilerErrors(evaller.Errors);
+			paste.Output = string.Join(Environment.NewLine, evaller.Output ?? new string[] { });
+
+			return Json(paste);
+		}
+
+		[ValidateInput(false)]
+		[AcceptVerbs(HttpVerbs.Post)]
 		public ActionResult Submit([Bind] Paste paste)
 		{
 			try
