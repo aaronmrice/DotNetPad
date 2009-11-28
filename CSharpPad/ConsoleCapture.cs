@@ -25,7 +25,7 @@ namespace Gobiner.CSharpPad
         public void StartCapture()
 		{
 			new PermissionSet(PermissionState.Unrestricted).Assert();
-			Console.SetOut(new StringWriter(CapturedText));
+			Console.SetOut(new LimitedStringWriter(10000, CapturedText));
 			CodeAccessPermission.RevertAssert();
 		}
 
@@ -46,5 +46,47 @@ namespace Gobiner.CSharpPad
 			}
 			return @string.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 		}
+
+		public void Clear()
+		{
+			CapturedText.Clear();
+		}
+
+		private class LimitedStringWriter : StringWriter
+		{
+			private long limit;
+			public long Limit { get { return limit; } }
+
+			public LimitedStringWriter(long limit) : base() { this.limit = limit; }
+			public LimitedStringWriter(long limit, IFormatProvider formatProvider) : base(formatProvider) { this.limit = limit; }
+			public LimitedStringWriter(long limit, StringBuilder sb) : base(sb) { this.limit = limit; }
+			public LimitedStringWriter(long limit, StringBuilder sb, IFormatProvider formatProvider) : base(sb, formatProvider) { this.limit = limit; }
+
+
+			[System.Runtime.TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
+			public override void Write(char value)
+			{
+				if (this.GetStringBuilder().Length < limit)
+				{
+					base.Write(value);
+				}
+			}
+			[System.Runtime.TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
+			public override void Write(string value)
+			{
+				if (this.GetStringBuilder().Length < limit)
+				{
+					base.Write(value);
+				}
+			}
+			public override void Write(char[] buffer, int index, int count)
+			{
+				if (this.GetStringBuilder().Length < limit)
+				{
+					base.Write(buffer, index, count);
+				}
+			}
+		}
+
 	}
 }

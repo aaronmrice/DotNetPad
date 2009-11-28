@@ -39,7 +39,7 @@ namespace Gobiner.CSharpPad.Web.Controllers
 			evaller.CompileAndEval(paste.Code, paste.Language);
 			paste.AddCompilerErrors(evaller.Errors);
 			paste.Output = string.Join(Environment.NewLine, evaller.Output ?? new string[] { });
-
+			paste.Output = paste.Output.Substring(0, Math.Min(paste.Output.Length, 500));
 			return Json(paste);
 		}
 

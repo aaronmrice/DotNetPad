@@ -101,8 +101,11 @@ namespace Gobiner.CSharpPad
 				{
 					Output = Output.Concat(uncaughtException.ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.None)).ToArray();
 				}
+				consoleCapture.Clear();
 
 				AppDomain.Unload(safeDomain);
+				consoleCapture = null;
+				GC.Collect();
 				
 			}
 			File.Delete(fullpath);
