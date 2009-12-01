@@ -25,7 +25,7 @@ namespace Gobiner.CSharpPad
         public void StartCapture()
 		{
 			new PermissionSet(PermissionState.Unrestricted).Assert();
-			Console.SetOut(new LimitedStringWriter(10000, CapturedText));
+			Console.SetOut(new LimitedStringWriter(100000, CapturedText));
 			CodeAccessPermission.RevertAssert();
 		}
 
