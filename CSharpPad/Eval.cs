@@ -42,7 +42,7 @@ namespace Gobiner.CSharpPad
 		{
 			var compilerDomain = AppDomain.CreateDomain("Gobiner.CSharpPad" + new Random().Next());
 			var filename = "Gobiner.CSharpPad.Eval.Evil"+rand.Next()+".exe";
-			var fullpath = fullPath + filename;
+            var fullpath = Path.Combine( fullPath, filename );
 
 			var currentAssembly = Assembly.GetAssembly(typeof(global::Gobiner.CSharpPad.Compilers.CSharpCompiler)).Location;
 			

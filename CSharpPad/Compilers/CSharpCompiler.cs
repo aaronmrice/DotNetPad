@@ -52,11 +52,20 @@ namespace Gobiner.CSharpPad.Compilers
 			compileParams.OutputAssembly = filename;
             
 			CompilerResults r = provider.CompileAssemblyFromSource(compileParams, new string[] { this.Code });
-			ILLookup = new ILDisassembler().GetDisassembly(r.CompiledAssembly);
-			if (ILFormatter != null)
-			{
-				FormattedILDisassembly = ILFormatter.Format(ILLookup);
-			}
+            if ( r.Errors.HasErrors )
+            {
+                ILLookup = new Dictionary<Type, IDictionary<MethodInfo, IEnumerable<Mono.Reflection.Instruction>>>();
+                FormattedILDisassembly = new string[0];
+            }
+            else
+            {
+                ILLookup = new ILDisassembler().GetDisassembly( r.CompiledAssembly );
+                if ( ILFormatter != null )
+                {
+                    FormattedILDisassembly = ILFormatter.Format( ILLookup );
+                }
+            }
+
 		}
 
 		private string FindMainClass()
@@ -81,11 +90,12 @@ namespace Gobiner.CSharpPad.Compilers
 				foreach (var mainMethod in possibleMethods)
 				{
 					var parameters = mainMethod.GetParameters();
-					if (parameters.Count() == 1 && parameters[0].ParameterType.FullName == "System.String[]")
-					{
-						mainClass = type.FullName;
-						break;
-					}
+                    if ( parameters.Length == 0 ||
+                        (parameters.Length == 1 && parameters[0].ParameterType == typeof( string[] )) )
+                    {
+                        mainClass = type.FullName;
+                        break;
+                    }
 				}
 			}
 			return mainClass;
