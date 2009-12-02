@@ -99,6 +99,14 @@ namespace Gobiner.CSharpPad.Web.Controllers
 
 			paste.Errors = dataSource.Find<CompilationError>(x => x.PasteID == paste.ID).ToArray();
 			paste.ILDisassemblyText = dataSource.Find<ILDisassembly>(x => x.PasteID == paste.ID).ToArray();
+			if (paste.ILDisassemblyText.Length == 0)
+			{
+				var evaller = new Eval(Server.MapPath("~/App_Data/"));
+				evaller.CompileAndEval(paste.Code, paste.Language);
+				paste.AddCompilerErrors(evaller.Errors);
+				paste.AddILDisassemblyText(evaller.FormattedILDisassembly);
+				dataSource.AddMany(paste.ILDisassemblyText);
+			}
 
 			return View(paste);
 		}
