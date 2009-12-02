@@ -10,6 +10,7 @@ using Gobiner.CSharpPad;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using Gobiner.CSharpPad.Compilers;
 
 namespace Gobiner.CSharpPad
 {
@@ -18,9 +19,13 @@ namespace Gobiner.CSharpPad
 		private static Random rand = new Random();
 		private Exception uncaughtException = null;
 		private Thread threadForGuest = null;
+		
 
 		public System.CodeDom.Compiler.CompilerError[] Errors { get; private set; }
 		public string[] Output { get; private set; }
+		public string[] FormattedILDisassembly { get; private set; }
+		public IILFormatter ILFormatter { get; set; }
+
 		private string fullPath { get; set; }
 
 		public Eval(string folder)
@@ -39,7 +44,7 @@ namespace Gobiner.CSharpPad
 			var filename = "Gobiner.CSharpPad.Eval.Evil"+rand.Next()+".exe";
 			var fullpath = fullPath + filename;
 
-			var currentAssembly = Assembly.GetAssembly(typeof(global::Gobiner.CSharpPad.CSharpCompiler)).Location;
+			var currentAssembly = Assembly.GetAssembly(typeof(global::Gobiner.CSharpPad.Compilers.CSharpCompiler)).Location;
 			
 			var compiler = (ICompiler)compilerDomain.CreateInstanceFromAndUnwrap(
 				GetCompiler(language).GetType().Assembly.Location,
@@ -47,6 +52,7 @@ namespace Gobiner.CSharpPad
 			compiler.Code = code;
 			compiler.Compile(fullpath);
 			Errors = compiler.Errors;
+			FormattedILDisassembly = compiler.FormattedILDisassembly;
 			AppDomain.Unload(compilerDomain);
 
 			if (Errors != null && Errors.Length == 0)

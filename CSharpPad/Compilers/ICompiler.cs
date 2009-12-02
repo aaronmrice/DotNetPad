@@ -1,5 +1,7 @@
 ﻿using System;
-namespace Gobiner.CSharpPad
+using System.Collections.Generic;
+using Mono.Reflection;
+namespace Gobiner.CSharpPad.Compilers
 {
     interface ICompiler
     {
@@ -8,5 +10,8 @@ namespace Gobiner.CSharpPad
         System.CodeDom.Compiler.CompilerError[] Errors { get; }
         string FileName { get; }
         bool ProducedExecutable { get; }
+		IILFormatter ILFormatter { get; set; }
+		string[] FormattedILDisassembly { get; set; }
+
     }
 }

@@ -6,8 +6,8 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h2>Good Job!</h2>
 	<p>
+		<strong>Good Job!</strong><br />
 		You pasted in some code that broke .NET pad. It's ok, though. This error and your paste has been logged, so maybe it'll get fixed.
 		If you really care, create an issue on bitbucket to let me know.
 	</p>

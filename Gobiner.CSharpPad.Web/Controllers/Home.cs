@@ -52,6 +52,7 @@ namespace Gobiner.CSharpPad.Web.Controllers
 				var evaller = new Eval(Server.MapPath("~/App_Data/"));
 				evaller.CompileAndEval(paste.Code, paste.Language);
 				paste.AddCompilerErrors(evaller.Errors);
+				paste.AddILDisassemblyText(evaller.FormattedILDisassembly);
 				paste.Output = string.Join(Environment.NewLine, evaller.Output ?? new string[] { });
 				paste.IsPrivate = Request.Form["IsPrivate"] == "on"; // aspnetmvc doesn't bind 'on' to True apparently
 				try
@@ -63,9 +64,9 @@ namespace Gobiner.CSharpPad.Web.Controllers
 					paste.Paster = Guid.NewGuid();
 					Response.Cookies.Add(new HttpCookie("paster", paste.Paster.ToString()) { Expires = DateTime.Today.AddYears(1) });
 				}
-
 				dataSource.Add(paste);
 				dataSource.AddMany(paste.Errors);
+				dataSource.AddMany(paste.ILDisassemblyText);
 				if (paste.Errors.Length > 0)
 				{
 					return Redirect("/ViewPaste/" + paste.Slug + "#" + paste.Errors.Select(x => x.Line - 1).Distinct().Select(x => "c" + x + ",").Aggregate((x, y) => x + y));
@@ -82,6 +83,9 @@ namespace Gobiner.CSharpPad.Web.Controllers
 			}
 		}
 
+
+
+
         public ActionResult EditPaste(string id)
         {
             return ViewPaste(id);
@@ -94,6 +98,7 @@ namespace Gobiner.CSharpPad.Web.Controllers
 				return View("PasteNotFound");
 
 			paste.Errors = dataSource.Find<CompilationError>(x => x.PasteID == paste.ID).ToArray();
+			paste.ILDisassemblyText = dataSource.Find<ILDisassembly>(x => x.PasteID == paste.ID).ToArray();
 
 			return View(paste);
 		}

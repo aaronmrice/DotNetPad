@@ -30,6 +30,19 @@
     </div>
 <hr />
 
+
+<% if (paste.ILDisassemblyText != null && paste.ILDisassemblyText.Length > 0)
+   { %>
+<div class="disassembly">
+<pre><% foreach (var line in paste.ILDisassemblyText) 
+  {%>
+<%= line.Text %>
+<% } %></pre>
+</div>
+<hr />
+<% } %>
+
+
 <% if (paste.Output.Length > 0)
    { %>
 <div class="output">

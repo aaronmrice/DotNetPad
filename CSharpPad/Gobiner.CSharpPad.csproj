@@ -79,14 +79,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CSharpCompiler.cs" />
+    <Compile Include="Compilers\CSharpCompiler.cs" />
     <Compile Include="ConsoleCapture.cs" />
     <Compile Include="Eval.cs" />
-    <Compile Include="FSharpCompiler.cs" />
-    <Compile Include="ICompiler.cs" />
+    <Compile Include="Compilers\FSharpCompiler.cs" />
+    <Compile Include="Compilers\ICompiler.cs" />
+    <Compile Include="IILFormatter.cs" />
+    <Compile Include="ILDisassembler.cs" />
     <Compile Include="Language.cs" />
+    <Compile Include="MethodBodyRocks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VisualBasicCompiler.cs" />
+    <Compile Include="Compilers\VisualBasicCompiler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Gobiner.snk" />

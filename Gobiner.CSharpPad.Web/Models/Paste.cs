@@ -27,6 +27,7 @@ namespace Gobiner.CSharpPad.Web.Models
 		public virtual bool IsPrivate { get; set; }
 		public virtual Guid? Paster { get; set; }
 		public virtual Language Language { get; set; }
+		public virtual ILDisassembly[] ILDisassemblyText { get; set; }
 
 		public Paste()
 		{
@@ -43,6 +44,12 @@ namespace Gobiner.CSharpPad.Web.Models
 		public void AddCompilerErrors(CompilerError[] errors)
 		{
 			this.Errors = errors.Select(x => new CompilationError(x) { PasteID = this.ID }).ToArray();
+		}
+
+		public void AddILDisassemblyText(string[] text)
+		{
+			var order = 0;
+			this.ILDisassemblyText = text.Select(x => new ILDisassembly() { ID = Guid.NewGuid(), Order = order++, Text = x, PasteID = this.ID }).ToArray();
 		}
 	}
 }
