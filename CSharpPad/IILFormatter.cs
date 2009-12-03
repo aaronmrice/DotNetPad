@@ -7,6 +7,6 @@ namespace Gobiner.CSharpPad
 {
 	public interface IILFormatter
 	{
-		string[] Format(IDictionary<Type, IDictionary<System.Reflection.MethodInfo, IEnumerable<Mono.Reflection.Instruction>>> ILLookup);
+		string[] Format(IDictionary<Type, TypeMethodInfo> ILLookup);
 	}
 }

@@ -16,7 +16,7 @@ namespace Gobiner.CSharpPad.Compilers
 		public IILFormatter ILFormatter { get; set; }
 		public string[] FormattedILDisassembly { get; set; }
 		
-		private IDictionary<Type, IDictionary<System.Reflection.MethodInfo, IEnumerable<Mono.Reflection.Instruction>>> ILLookup { get; set; }
+		private IDictionary<Type, TypeMethodInfo> ILLookup { get; set; }
         private string[] GacAssembliesToCompileAgainst = { "System.dll", "System.Core.dll", "System.Data.dll", "System.Data.DataSetExtensions.dll", 
 															 "System.Xml.dll", "System.Xml.Linq.dll", "System.Data.Entity.dll", "System.Windows.Forms.dll" };
         private IDictionary<string, string> providerOptions = new Dictionary<string, string>() { { "CompilerVersion", "v4.0" } };
@@ -85,7 +85,7 @@ namespace Gobiner.CSharpPad.Compilers
 
 		private class DefaultILFormatter : MarshalByRefObject, IILFormatter
 		{
-			public string[] Format(IDictionary<Type, IDictionary<System.Reflection.MethodInfo, IEnumerable<Mono.Reflection.Instruction>>> ILLookup)
+			public string[] Format(IDictionary<Type, TypeMethodInfo> ILLookup)
 			{
 				if (ILLookup == null) return new string[0];
 
@@ -94,11 +94,11 @@ namespace Gobiner.CSharpPad.Compilers
 				{
 					ret.Add("Type: " + type.Name);
 					ret.Add("{");
-					foreach (var method in ILLookup[type].Keys)
+					foreach (var method in ILLookup[type].Methods.Keys)
 					{
 						ret.Add("\tMethod: " + method.Name);
 						ret.Add("\t{");
-						foreach (var instr in ILLookup[type][method])
+						foreach (var instr in ILLookup[type].Methods[method])
 						{
 							ret.Add("\t\t" + instr.ToString());
 						}
