@@ -34,6 +34,15 @@
 <% if (paste.ILDisassemblyText != null && paste.ILDisassemblyText.Length > 0)
    { %>
 <div class="disassembly">
+<a id="dissasembly-toggle" href="#">Toggle Disassembly</a>
+<script type="text/javascript">
+	$("#dissasembly-toggle").click(function () {
+		$(".disassembly pre").toggle();
+	});
+	$(document).ready(function() {
+		$(".disassembly pre").toggle();
+	});	
+</script>
 <pre><% foreach (var line in paste.ILDisassemblyText) 
   {%>
 <%= line.Text %>
