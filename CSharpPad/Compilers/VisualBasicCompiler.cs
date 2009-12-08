@@ -82,32 +82,5 @@ namespace Gobiner.CSharpPad.Compilers
             }
             return mainClass;
         }
-
-		private class DefaultILFormatter : MarshalByRefObject, IILFormatter
-		{
-			public string[] Format(IDictionary<Type, TypeMethodInfo> ILLookup)
-			{
-				if (ILLookup == null) return new string[0];
-
-				var ret = new List<string>();
-				foreach (var type in ILLookup.Keys)
-				{
-					ret.Add("Type: " + type.Name);
-					ret.Add("{");
-					foreach (var method in ILLookup[type].Methods.Keys)
-					{
-						ret.Add("\tMethod: " + method.Name);
-						ret.Add("\t{");
-						foreach (var instr in ILLookup[type].Methods[method])
-						{
-							ret.Add("\t\t" + instr.ToString());
-						}
-						ret.Add("\t}");
-					}
-					ret.Add("}");
-				}
-				return ret.ToArray();
-			}
-		}
     }
 }

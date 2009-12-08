@@ -32,6 +32,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Text;
 
 namespace Mono.Reflection
 {
@@ -117,13 +118,46 @@ namespace Mono.Reflection
 
 		public override string ToString()
 		{
-			return "IL_" + offset.ToString("D4") + "\t" + opcode.Name + "\t" + operand; 
+			return "IL_" + offset.ToString("D4") + "\t" + opcode.Name + "\t" + InspectOperand(operand);
+		}
+
+		private string InspectOperand(object operand)
+		{
+			if (operand is string)
+			{
+				return EscapeStringLiteral(operand.ToString());
+			}
+			else
+			{
+				return (operand ?? "").ToString();
+			}
+		}
+
+		private string EscapeStringLiteral(string @string)
+		{
+		    StringBuilder escape = new StringBuilder();
+			escape.Append("\"");
+			foreach(var @char in @string)
+			{
+				switch (@char)
+				{
+					case '"':
+						escape.Append("\\\""); break;
+					case '\t':
+						escape.Append("\\t"); break;
+					case '\\':
+						escape.Append("\\\\"); break;
+					default:
+						escape.Append(@char); break;
+				}
+		    }
+			escape.Append("\"");
+		    return escape.ToString();
 		}
 	}
 
 	class MethodBodyReader
 	{
-
 		static OpCode[] one_byte_opcodes;
 		static OpCode[] two_bytes_opcodes;
 

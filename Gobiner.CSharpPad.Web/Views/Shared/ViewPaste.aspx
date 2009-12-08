@@ -45,7 +45,7 @@
 </script>
 <pre><% foreach (var line in paste.ILDisassemblyText) 
   {%>
-<%= line.Text %>
+<%= line.Text.Replace("\t","    ") %>
 <% } %></pre>
 </div>
 <hr />

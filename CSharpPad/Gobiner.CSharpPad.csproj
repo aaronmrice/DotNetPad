@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="Compilers\CSharpCompiler.cs" />
     <Compile Include="ConsoleCapture.cs" />
+    <Compile Include="DefaultILFormatter.cs" />
     <Compile Include="Eval.cs" />
     <Compile Include="Compilers\FSharpCompiler.cs" />
     <Compile Include="Compilers\ICompiler.cs" />

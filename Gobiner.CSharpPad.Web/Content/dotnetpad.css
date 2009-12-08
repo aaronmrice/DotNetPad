@@ -87,7 +87,7 @@ a { text-decoration: none }
 	font-size: smaller;
 	background-color: #FFF;
 }
-.code pre, .output pre { padding: 0; min-width: 100%; }
+.code pre, .output pre, .disassembly pre { padding: 0; min-width: 100%; }
 .code td, .output td { padding-left: 4px; }
 .code .highlight, .output .highlight { background-color: #FDD; }
 table.linenumbers
@@ -105,11 +105,11 @@ pre
 	display: block;
 }
 
-pre.code, pre.output { background-color: #FFF; }
+pre.code, pre.output, .disassembly pre { background-color: #FFF; }
 pre.errors { background-color: #EFF; }
 
 div.output { max-height: 30em; }
-div.code, div.output, div.errors { padding: 5px; overflow-y: auto;  }
+div.code, div.output, div.errors, div.disassembly { padding: 5px; overflow-y: auto;  }
 
 form { padding: 5px; }
 
