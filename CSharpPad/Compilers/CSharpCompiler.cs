@@ -87,7 +87,7 @@ namespace Gobiner.CSharpPad.Compilers
 			string mainClass = null;
 			foreach (var type in allTypes)
 			{
-				var possibleMethods = type.GetMethods().Where(x => x.Name == "Main" && x.IsStatic);
+				var possibleMethods = type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
 				foreach (var mainMethod in possibleMethods)
 				{
 					var parameters = mainMethod.GetParameters();

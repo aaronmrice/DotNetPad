@@ -15,7 +15,7 @@ namespace Gobiner.CSharpPad
 
 	public class ILDisassembler
 	{
-		public IDictionary<Type, TypeMethodInfo> GetDisassembly( Assembly assembly )
+		public IDictionary<Type, TypeMethodInfo> GetDisassembly(Assembly assembly)
 		{
 			var ret = new Dictionary<Type, TypeMethodInfo>();
 			{
@@ -23,10 +23,10 @@ namespace Gobiner.CSharpPad
 				{
 					var methods = new Dictionary<MethodInfo, IEnumerable<Instruction>>();
 					foreach (var method in type
-					                         .GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
-					                            .Concat(type.GetProperties().Select(x=> x.GetGetMethod(true)))
-					                            .Concat(type.GetProperties().Select(x=> x.GetSetMethod(true)))
-					                         .Where(x => x.DeclaringType == type))
+												.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
+												.Concat(type.GetProperties().Select(x => x.GetGetMethod(true)))
+												.Concat(type.GetProperties().Select(x => x.GetSetMethod(true)))
+												.Where(x => x != null && x.DeclaringType == type))
 					{
 						try
 						{
@@ -37,9 +37,9 @@ namespace Gobiner.CSharpPad
 					}
 
 					var properties = new List<PropertyInfo>();
-					foreach ( var property in type.GetProperties().Where( x => x.DeclaringType == type ) )
+					foreach (var property in type.GetProperties().Where(x => x.DeclaringType == type))
 					{
-						properties.Add( property );
+						properties.Add(property);
 					}
 
 					ret[type] = new TypeMethodInfo { Methods = methods, Properties = properties };

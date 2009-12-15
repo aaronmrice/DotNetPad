@@ -28,12 +28,12 @@ namespace Gobiner.CSharpPad
 				{
 					var getMethod = property.GetGetMethod(true);
 					var setMethod = property.GetSetMethod(true);
-					if (methodsLocal.ContainsKey(getMethod))
+					if (getMethod != null && methodsLocal.ContainsKey(getMethod))
 					{
 						getMethods[property] = methodsLocal[getMethod];
 						methodsLocal.Remove(getMethod);
 					}
-					if (methodsLocal.ContainsKey(setMethod))
+					if (setMethod != null && methodsLocal.ContainsKey(setMethod))
 					{
 						setMethods[property] = methodsLocal[setMethod];
 						methodsLocal.Remove(setMethod);

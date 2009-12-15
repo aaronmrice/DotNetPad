@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
+using System.Linq;
 
 namespace Mono.Reflection
 {
