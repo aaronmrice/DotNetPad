@@ -25,6 +25,7 @@ namespace Gobiner.CSharpPad.Compilers
         {
             Errors = new CompilerError[] { };
 			ILFormatter = new DefaultILFormatter();
+            FormattedILDisassembly = new string[] { };
 		}
 
         public void Compile(string filename)

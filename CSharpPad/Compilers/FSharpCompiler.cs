@@ -23,6 +23,7 @@ namespace Gobiner.CSharpPad.Compilers
 		public FSharpCompiler()
 		{
 			ILFormatter = new DefaultILFormatter();
+            FormattedILDisassembly = new string[] { };
 		}
 
 		public void Compile(string filename)
