@@ -39,9 +39,9 @@ namespace Gobiner.CSharpPad.Compilers
 			{
 				ProducedExecutable = false;
 			}
-			ILLookup = new ILDisassembler().GetDisassembly(r.CompiledAssembly);
-			if (ILFormatter != null)
+			if (ILFormatter != null && ProducedExecutable)
 			{
+				ILLookup = new ILDisassembler().GetDisassembly(r.CompiledAssembly);
 				FormattedILDisassembly = ILFormatter.Format(ILLookup);
 			}
 		}
