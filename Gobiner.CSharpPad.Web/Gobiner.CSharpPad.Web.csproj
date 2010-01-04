@@ -91,6 +91,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\jquery.textarea.js" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Views\Shared\PasteBroked.aspx" />

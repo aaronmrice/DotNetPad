@@ -38,6 +38,8 @@ $(document).ready(function () {
 		innerHtml = innerHtml.replace(/[^\n]*\n/, "");
 		$this.html(innerHtml);
 	});
+
+    $("textarea").tabby();
 });
 
 function HighlightCodeLine(lineNumber) {

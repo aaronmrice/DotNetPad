@@ -10,6 +10,7 @@
     <script type="text/javascript" src="/Content/prettify/lang-.js"></script>
     <script type="text/javascript" src="/Content/prettify/lang-vb.js"></script>
     <script type="text/javascript" src="/Content/dotnetpad.js"></script>
+    <script type="text/javascript" src="/Content/jquery.textarea.js"></script>
     <link rel="Stylesheet" href="/Content/dotnetpad.css" type="text/css" />
     <link rel="Stylesheet" href="/Content/prettify/prettify.css" type="text/css" />    
     <link rel="icon" href="/favicon.ico">
