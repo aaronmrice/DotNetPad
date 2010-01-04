@@ -80,7 +80,7 @@ a { text-decoration: none }
 #footer p { font-size: .5em; }
 
 
-.code, .output
+.code, .output, .disassembly
 {
 	padding: 5px;
 	font-family: Consolas, Courier New, Monospace;
@@ -88,8 +88,8 @@ a { text-decoration: none }
 	background-color: #FFF;
 }
 .code pre, .output pre, .disassembly pre { padding: 0; min-width: 100%; }
-.code td, .output td { padding-left: 4px; }
-.code .highlight, .output .highlight { background-color: #FDD; }
+.code td, .output td, .disassembly td { padding-left: 4px; }
+.code .highlight, .output .highlight, .disassembly .highlight { background-color: #FDD; }
 table.linenumbers
 {
 	padding-right: 4px;
@@ -105,7 +105,7 @@ pre
 	display: block;
 }
 
-pre.code, pre.output, .disassembly pre { background-color: #FFF; }
+pre.code, pre.output, pre.disassembly { background-color: #FFF; }
 pre.errors { background-color: #EFF; }
 
 div.output { max-height: 30em; }

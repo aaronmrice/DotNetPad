@@ -37,16 +37,26 @@
 <a id="dissasembly-toggle" href="#">Toggle Disassembly</a>
 <script type="text/javascript">
 	$("#dissasembly-toggle").click(function () {
-		$(".disassembly pre").toggle();
+	    $(".disassembly .outer").toggle();
 	});
 	$(document).ready(function() {
-		$(".disassembly pre").toggle();
+	    $(".disassembly .outer").toggle();
 	});	
 </script>
-<pre><% foreach (var line in paste.ILDisassemblyText) 
-  {%>
-<%= line.Text.Replace("\t","    ") %>
-<% } %></pre>
+
+<table class="outer">
+    <tr><td style="width: 30px;">
+        <table class="linenumbers">
+            <% for (int i = 1; i <= paste.ILDisassemblyText.Count(); i++)
+               { %>
+            <tr><td><%= i%></td></tr>
+            <% } %>
+        </table>
+    </td><td>
+        <pre><%= string.Join("\r", paste.ILDisassemblyText.Select(ILD=>ILD.Text.Replace("\t","    "))) %></pre>
+    </td></tr>
+</table>
+
 </div>
 <hr />
 <% } %>
