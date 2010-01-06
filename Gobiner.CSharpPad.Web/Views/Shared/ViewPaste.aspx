@@ -22,20 +22,9 @@
                     </table>
             </td>
             <td>
-                <pre class="prettyprint"><%
-                     if (paste.Errors.Length == 0)
-                         Response.Write(Server.HtmlEncode(paste.Code.Replace("\t", "    ").Replace("\r", "")));
-                     else
-                     {
-                         string[] codeLines = paste.Code.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-                         for (int i = 0; i < codeLines.Length; i++)
-                         {
-                             if (paste.Errors.Any(E => E.Line - 1 == i))
-                                 Response.Write("<span class=\"highlight\">" + Server.HtmlEncode(codeLines[i]) + "</span>\n");
-                             else
-                                 Response.Write(Server.HtmlEncode(codeLines[i]) + "\n");
-                         }
-                     } %></pre>
+<pre class="prettyprint">
+<%= Server.HtmlEncode(paste.Code.Replace("\t", "    ").Replace("\r","")) %>
+</pre>
            </td></tr>
        </table>
     </div>
