@@ -43,6 +43,10 @@
   <ItemGroup>
     <Reference Include="Elmah, Version=1.1.11517.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="RouteDebug, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="SubSonic.Core, Version=3.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\SubSonic.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core">
@@ -50,6 +54,14 @@
     </Reference>
     <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.65.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Data.SQLite.DLL</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=2.0.38.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
@@ -136,18 +148,6 @@
     <ProjectReference Include="..\CSharpPad\Gobiner.CSharpPad.csproj">
       <Project>{5C19FEAA-AA5D-4AE3-9DEE-E4D3CA3C9B7B}</Project>
       <Name>Gobiner.CSharpPad</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SubSonic.Core\SubSonic.Core.csproj">
-      <Project>{53FF90B2-2D33-4EC0-91B6-A30FDF1B3374}</Project>
-      <Name>SubSonic.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\System.Data.SQLite.Linq\System.Data.SQLite.Linq.csproj">
-      <Project>{E6BF9F74-58E2-413B-A7CE-EA653ECB728D}</Project>
-      <Name>System.Data.SQLite.Linq</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\System.Data.SQLite\System.Data.SQLite - ManagedOnly.csproj">
-      <Project>{AC139952-261A-4463-B6FA-AEBC25283A66}</Project>
-      <Name>System.Data.SQLite - ManagedOnly</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
