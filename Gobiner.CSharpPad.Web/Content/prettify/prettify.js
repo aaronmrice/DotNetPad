@@ -110,7 +110,7 @@ window['_pr_isIE6'] = function () {
       "as base by checked decimal delegate descending event " +
       "fixed foreach from group implicit in interface internal into is lock " +
       "object out override orderby params partial readonly ref sbyte sealed " +
-      "stackalloc string select uint ulong unchecked unsafe ushort var dynamic ";
+      "stackalloc string select uint ulong unchecked unsafe ushort using var dynamic ";
   var JSCRIPT_KEYWORDS = COMMON_KEYWORDS +
       "debugger eval export function get null set undefined var with " +
       "Infinity NaN ";
@@ -964,7 +964,7 @@ window['_pr_isIE6'] = function () {
     fallthroughStylePatterns.push(
         // TODO(mikesamuel): recognize non-latin letters and numerals in idents
         [PR_LITERAL,     /^@[a-z_$][a-z_$@0-9]*/i, null, '@'],
-        [PR_TYPE,        /^@?[A-Z]+[a-z][A-Za-z_$@0-9]*/, null],
+        [PR_TYPE,        /^@?[A-Za-z_][A-Za-z_$@0-9]*/, null],
         [PR_PLAIN,       /^[a-z_$][a-z_$@0-9]*/i, null],
         [PR_LITERAL,
          new RegExp(
