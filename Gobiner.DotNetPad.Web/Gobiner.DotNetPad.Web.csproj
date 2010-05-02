@@ -10,8 +10,8 @@
     <ProjectTypeGuids>{F85E285D-A4E0-4152-9332-AB1D724D3325};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gobiner.CSharpPad.Web</RootNamespace>
-    <AssemblyName>Gobiner.CSharpPad.Web</AssemblyName>
+    <RootNamespace>Gobiner.DotNetPad.Web</RootNamespace>
+    <AssemblyName>Gobiner.DotNetPad.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <FileUpgradeFlags>
@@ -69,7 +69,9 @@
     <Reference Include="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -143,6 +145,10 @@
     <ProjectReference Include="..\DotNetPad\Gobiner.DotNetPad.csproj">
       <Project>{5C19FEAA-AA5D-4AE3-9DEE-E4D3CA3C9B7B}</Project>
       <Name>Gobiner.CSharpPad</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gobiner.DotNetPad.Runner\Gobiner.DotNetPad.Runner.csproj">
+      <Project>{C4B2F026-3052-41C2-B81D-2943B22A0034}</Project>
+      <Name>Gobiner.DotNetPad.Runner</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

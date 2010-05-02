@@ -18,15 +18,13 @@ namespace Gobiner.DotNetPad.Runner
 			var fullpath = args[0];
 
 			var safePerms = new PermissionSet(PermissionState.None);
-			//safePerms.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
-			//safePerms.AddPermission(new SecurityPermission(SecurityPermissionFlag.SerializationFormatter));
-			//safePerms.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
-			//safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, fullpath));
-			//safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, Assembly.GetAssembly(typeof(global::Gobiner.DotNetPad.ConsoleCapturer)).Location));
-			//safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, Assembly.GetExecutingAssembly().Location));
-			//safePerms.AddPermission(new UIPermission(PermissionState.Unrestricted)); // required to run an .exe
-			safePerms.AddPermission(new SecurityPermission(PermissionState.Unrestricted));
-			safePerms.AddPermission(new FileIOPermission(PermissionState.Unrestricted));
+			safePerms.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
+			safePerms.AddPermission(new SecurityPermission(SecurityPermissionFlag.SerializationFormatter));
+			safePerms.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
+			safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, fullpath));
+			safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, Assembly.GetAssembly(typeof(global::Gobiner.DotNetPad.ConsoleCapturer)).Location));
+			safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, Assembly.GetExecutingAssembly().Location));
+			safePerms.AddPermission(new UIPermission(PermissionState.Unrestricted)); // required to run an .exe
 
 			
 			var safeDomain = AppDomain.CreateDomain(
@@ -36,17 +34,19 @@ namespace Gobiner.DotNetPad.Runner
 				safePerms,
 				GetStrongName(typeof(global::Gobiner.DotNetPad.ConsoleCapturer).Assembly),
 				GetStrongName(Assembly.GetExecutingAssembly()));
-			var asmbl = safeDomain.Load(new AssemblyName("Gobiner.ConsoleCapture, Version=1.0.0.0, Culture=neutral, PublicKeyToken=765b1619f6c014ac"));
+
 			ConsoleCapturer consoleCapture = null;
+
 			try
 			{
 				consoleCapture = (ConsoleCapturer)safeDomain.CreateInstanceFromAndUnwrap(
-					typeof(global::Gobiner.DotNetPad.ConsoleCapturer).Assembly.FullName,
+					typeof(global::Gobiner.DotNetPad.ConsoleCapturer).Assembly.Location,
 					typeof(global::Gobiner.DotNetPad.ConsoleCapturer).FullName);
 			}
-			catch (SecurityException e)
+			catch (Exception e)
 			{
 				var noop = e;
+				throw;
 			}
 			Exception uncaughtException = null;
 
@@ -69,7 +69,14 @@ namespace Gobiner.DotNetPad.Runner
 			{
 				threadForGuest.Abort();
 			}
+			Console.WriteLine(consoleCapture.GetCapturedLines().Take(1000));
+			if (uncaughtException != null)
+			{
+				Console.WriteLine(uncaughtException.ToString());
+			}
+			Thread.Sleep(5000);
 		}
+
 
 		/// <summary>
 		/// Create a StrongName that matches a specific assembly
