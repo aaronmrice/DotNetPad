@@ -133,6 +133,10 @@
       <Project>{5C19FEAA-AA5D-4AE3-9DEE-E4D3CA3C9B7B}</Project>
       <Name>Gobiner.CSharpPad</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gobiner.ConsoleCapture\Gobiner.ConsoleCapture.csproj">
+      <Project>{B5B09E19-1E43-4FC9-B6C7-3DFF8A472716}</Project>
+      <Name>Gobiner.ConsoleCapture</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Gobiner.DotNetPad.Runner\Gobiner.DotNetPad.Runner.csproj">
       <Project>{C4B2F026-3052-41C2-B81D-2943B22A0034}</Project>
       <Name>Gobiner.DotNetPad.Runner</Name>
