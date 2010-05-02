@@ -61,9 +61,8 @@ namespace Gobiner.CSharpPad
 				startInfo.Arguments = fullpath;
 				startInfo.CreateNoWindow = true;
 				startInfo.ErrorDialog = false;
-				startInfo.FileName = @"C:\Users\Aaron\Desktop\dotnetpad\Gobiner.DotNetPad.Web\bin\Gobiner.DotNetPad.Runner.exe";
+				startInfo.FileName = Path.Combine(fullPath.Replace("App_Data",""), "bin", "Gobiner.DotNetPad.Runner.exe");
 				startInfo.RedirectStandardOutput = true;
-				startInfo.WorkingDirectory = @"C:\Users\Aaron\Desktop\dotnetpad\Gobiner.DotNetPad.Web\App_Data";
 				startInfo.UseShellExecute = false;
 
 				var output = new List<string>();
@@ -71,7 +70,7 @@ namespace Gobiner.CSharpPad
 				process.StartInfo = startInfo;
 				process.OutputDataReceived += (object sender, DataReceivedEventArgs e) => output.Add(e.Data);
 				process.Start();
-				var finished = process.WaitForExit(3500);
+				var finished = process.WaitForExit(5500);
 				if(finished)
 				{
 					output.AddRange(process.StandardOutput.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None));
