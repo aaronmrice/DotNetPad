@@ -57,7 +57,7 @@ namespace Gobiner.DotNetPad.Runner
 					}
 				}), 1024 * 1024 * 8);
 			threadForGuest.Start();
-			var finished = threadForGuest.Join(3000);
+			var finished = threadForGuest.Join(5000);
 			if (!finished)
 			{
 				threadForGuest.Abort();
