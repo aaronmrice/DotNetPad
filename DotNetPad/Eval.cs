@@ -81,7 +81,7 @@ namespace Gobiner.CSharpPad
 					var noop = Process.GetCurrentProcess().StartInfo.UserName;
 					process.Kill();
 				}
-				if(output.Count > 0) output.RemoveAt(output.Count - 1); // always seems to have an extra newline
+				if (output.Count > 0) output.RemoveAt(output.Count - 1); // always seems to have an extra newline
 				Output = output.ToArray();
 			}
 			GC.Collect();

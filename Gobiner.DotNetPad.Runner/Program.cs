@@ -67,7 +67,6 @@ namespace Gobiner.DotNetPad.Runner
 			{
 				Console.WriteLine(uncaughtException.ToString());
 			}
-			Thread.Sleep(10000000);
 		}
 
 
