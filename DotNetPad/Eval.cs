@@ -78,10 +78,10 @@ namespace Gobiner.CSharpPad
 				}
 				else
 				{
-					output.AddRange(process.StandardOutput.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None));
+					var noop = Process.GetCurrentProcess().StartInfo.UserName;
 					process.Kill();
 				}
-				output.RemoveAt(output.Count - 1); // always seems to have an extra newline
+				if(output.Count > 0) output.RemoveAt(output.Count - 1); // always seems to have an extra newline
 				Output = output.ToArray();
 			}
 			GC.Collect();

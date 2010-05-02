@@ -37,17 +37,10 @@ namespace Gobiner.DotNetPad.Runner
 
 			ConsoleCapturer consoleCapture = null;
 
-			try
-			{
-				consoleCapture = (ConsoleCapturer)safeDomain.CreateInstanceFromAndUnwrap(
-					typeof(global::Gobiner.DotNetPad.ConsoleCapturer).Assembly.Location,
-					typeof(global::Gobiner.DotNetPad.ConsoleCapturer).FullName);
-			}
-			catch (Exception e)
-			{
-				var noop = e;
-				throw;
-			}
+			consoleCapture = (ConsoleCapturer)safeDomain.CreateInstanceFromAndUnwrap(
+				typeof(global::Gobiner.DotNetPad.ConsoleCapturer).Assembly.Location,
+				typeof(global::Gobiner.DotNetPad.ConsoleCapturer).FullName);
+			
 			Exception uncaughtException = null;
 
 			consoleCapture.StartCapture();
@@ -74,6 +67,7 @@ namespace Gobiner.DotNetPad.Runner
 			{
 				Console.WriteLine(uncaughtException.ToString());
 			}
+			Thread.Sleep(10000000);
 		}
 
 
