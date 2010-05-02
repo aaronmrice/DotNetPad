@@ -7,5 +7,6 @@ glob:Gobiner.ConsoleCapture/bin/*
 glob:Gobiner.CSharpPad.WebService/App_Data/*.exe
 glob:Gobiner.CSharpPad.Web/bin/Gobiner.CSharpPad.*
 glob:SubSonic.Core/bin/*
-glob:bin/*
 glob:*.exe
+glob:DotNetPad/bin/*
+glob:Gobiner.DotNetPad.Runner/bin/*
