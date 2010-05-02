@@ -69,12 +69,11 @@ namespace Gobiner.DotNetPad.Runner
 			{
 				threadForGuest.Abort();
 			}
-			Console.WriteLine(consoleCapture.GetCapturedLines().Take(1000));
+			Console.WriteLine(consoleCapture.GetCapturedLines().Take(1000).Aggregate((x,y) => x + Environment.NewLine + y));
 			if (uncaughtException != null)
 			{
 				Console.WriteLine(uncaughtException.ToString());
 			}
-			Thread.Sleep(5000);
 		}
 
 

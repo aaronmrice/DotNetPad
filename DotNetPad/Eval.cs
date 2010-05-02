@@ -63,17 +63,34 @@ namespace Gobiner.CSharpPad
 				startInfo.ErrorDialog = false;
 				startInfo.FileName = @"C:\Users\Aaron\Desktop\dotnetpad\Gobiner.DotNetPad.Web\bin\Gobiner.DotNetPad.Runner.exe";
 				startInfo.RedirectStandardOutput = true;
-				startInfo.StandardOutputEncoding = Encoding.Unicode;
 				startInfo.WorkingDirectory = @"C:\Users\Aaron\Desktop\dotnetpad\Gobiner.DotNetPad.Web\App_Data";
 				startInfo.UseShellExecute = false;
 
-				var process = Process.Start(startInfo);
+				var output = new List<string>();
+				var process = new Process();
+				process.StartInfo = startInfo;
+				process.OutputDataReceived += (object sender, DataReceivedEventArgs e) => output.Add(e.Data);
+				process.Start();
 				var finished = process.WaitForExit(3500);
-				Output = process.StandardOutput.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
-				process.Kill();
+				if(finished)
+				{
+					output.AddRange(process.StandardOutput.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None));
+				}
+				else
+				{
+					output.AddRange(process.StandardOutput.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None));
+					process.Kill();
+				}
+				output.RemoveAt(output.Count - 1); // always seems to have an extra newline
+				Output = output.ToArray();
 			}
 			GC.Collect();
 			File.Delete(fullpath);
+		}
+
+		void process_OutputDataReceived(object sender, DataReceivedEventArgs e)
+		{
+			throw new NotImplementedException();
 		}
 
 		private ICompiler GetCompiler(Language language)
