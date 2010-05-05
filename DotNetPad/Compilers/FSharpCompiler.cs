@@ -16,6 +16,7 @@ namespace Gobiner.CSharpPad.Compilers
 		public IILFormatter ILFormatter { get; set; }
 		public string[] FormattedILDisassembly { get; set; }
 
+		private string assemblyPath = "";
 		private IDictionary<Type, TypeMethodInfo> ILLookup { get; set; }
 		private string[] GacAssembliesToCompileAgainst = { "System.dll", "System.Core.dll", "System.Data.dll", "System.Data.DataSetExtensions.dll", 
 															 "FSharp.Core.dll", "System.Xml.dll", "System.Xml.Linq.dll", "System.Data.Entity.dll", 
@@ -29,21 +30,25 @@ namespace Gobiner.CSharpPad.Compilers
 		public void Compile(string filename)
 		{
 			var provider = new FSharpCodeProvider();
-			var compileParams = new CompilerParameters(GacAssembliesToCompileAgainst);
+			var compileParams = new CompilerParameters();//GacAssembliesToCompileAgainst);
 			compileParams.GenerateExecutable = true;
 			compileParams.GenerateInMemory = false;
 			compileParams.OutputAssembly = filename;
 
-			CompilerResults r = provider.CompileAssemblyFromSource(compileParams, new string[] { this.Code });
+			CompilerResults r = provider.CompileAssemblyFromSource(compileParams, this.Code);
 			Errors = r.Errors.Cast<CompilerError>().ToArray();
-			if (Errors.Length > 0)
+			if (r.Errors.HasErrors)
 			{
-				ProducedExecutable = false;
+				ILLookup = new Dictionary<Type, TypeMethodInfo>();
+				FormattedILDisassembly = new string[0];
 			}
-			if (ILFormatter != null && ProducedExecutable)
+			else
 			{
 				ILLookup = new ILDisassembler().GetDisassembly(r.CompiledAssembly);
-				FormattedILDisassembly = ILFormatter.Format(ILLookup);
+				if (ILFormatter != null)
+				{
+					FormattedILDisassembly = ILFormatter.Format(ILLookup);
+				}
 			}
 		}
 	}
