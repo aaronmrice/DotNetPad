@@ -84,7 +84,7 @@ namespace Gobiner.CSharpPad
 				Output = output.ToArray();
 			}
 			GC.Collect();
-			File.Delete(fullpath);
+			//File.Delete(fullpath);
 		}
 
 		void process_OutputDataReceived(object sender, DataReceivedEventArgs e)
