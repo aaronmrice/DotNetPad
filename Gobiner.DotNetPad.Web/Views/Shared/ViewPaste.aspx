@@ -53,7 +53,7 @@
             <% } %>
         </table>
     </td><td>
-        <pre><%= string.Join("\r", paste.ILDisassemblyText.Select(ILD=>ILD.Text.Replace("\t","    "))) %></pre>
+        <pre><%= Server.HtmlEncode(string.Join("\r", paste.ILDisassemblyText.Select(ILD=>ILD.Text.Replace("\t","    ")))) %></pre>
     </td></tr>
 </table>
 
