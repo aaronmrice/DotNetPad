@@ -21,7 +21,6 @@
 			<p style="float:right"><a href="http://bitbucket.org/gobiner/.net-pad/issues/?status=new&status=open">Send me your bugs &amp; suggestions!</a></p>
 		</div>
 		<div id="primary">
-			<%= System.Environment.GetEnvironmentVariable("FSHARP_BIN") %>
 			<asp:ContentPlaceHolder ID="MainContent" runat="server">
 	        
 			</asp:ContentPlaceHolder>
