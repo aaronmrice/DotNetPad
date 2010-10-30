@@ -11,17 +11,17 @@
 		<%= Html.TextArea("Code", ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Code, new { Rows = 15, @class = "code" }) %>
 		
 		<br />
-		
+				
 		<label>
-			<input type="radio" name="Language" value="CSharp" checked="true" />
+			<input type="radio" name="Language" value="CSharp" <%= ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Language == Gobiner.CSharpPad.Language.CSharp ? "checked='true'" : "" %> />
 			<span>C#</span>
 		</label>
 		<label>
-			<input type="radio" name="Language" value="VisualBasic" />
+			<input type="radio" name="Language" value="VisualBasic" <%= ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Language == Gobiner.CSharpPad.Language.VisualBasic ? "checked='true'" : "" %> />
 			<span>Visual Basic</span>
 		</label>
 		<label>
-			<input type="radio" name="Language" value="FSharp" />
+			<input type="radio" name="Language" value="FSharp" <%= ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Language == Gobiner.CSharpPad.Language.FSharp ? "checked='true'" : "" %> />
 			<span>F#</span>
 		</label>
 		
