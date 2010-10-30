@@ -62,6 +62,7 @@ namespace Gobiner.DotNetPad.Runner
 			{
 				threadForGuest.Abort();
 			}
+			Console.OutputEncoding = Encoding.UTF8;
 			Console.WriteLine(consoleCapture.GetCapturedLines().Take(1000).Aggregate((x,y) => x + Environment.NewLine + y));
 			if (uncaughtException != null)
 			{

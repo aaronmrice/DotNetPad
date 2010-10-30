@@ -64,11 +64,12 @@ namespace Gobiner.CSharpPad
 				startInfo.FileName = Path.Combine(fullPath.Replace("App_Data",""), "bin", "Gobiner.DotNetPad.Runner.exe");
 				startInfo.RedirectStandardOutput = true;
 				startInfo.UseShellExecute = false;
+				startInfo.StandardOutputEncoding = Encoding.UTF8;
 
 				var output = new List<string>();
 				var process = new Process();
+				
 				process.StartInfo = startInfo;
-				process.OutputDataReceived += (object sender, DataReceivedEventArgs e) => output.Add(e.Data);
 				process.Start();
 				var finished = process.WaitForExit(5500);
 				if(finished)
@@ -84,12 +85,7 @@ namespace Gobiner.CSharpPad
 				Output = output.ToArray();
 			}
 			GC.Collect();
-			//File.Delete(fullpath);
-		}
-
-		void process_OutputDataReceived(object sender, DataReceivedEventArgs e)
-		{
-			throw new NotImplementedException();
+			File.Delete(fullpath);
 		}
 
 		private ICompiler GetCompiler(Language language)
