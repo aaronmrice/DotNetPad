@@ -24,7 +24,6 @@ namespace Gobiner.CSharpPad
 		public System.CodeDom.Compiler.CompilerError[] Errors { get; private set; }
 		public string[] Output { get; private set; }
 		public string[] FormattedILDisassembly { get; private set; }
-		public IILFormatter ILFormatter { get; set; }
 
 		private string fullPath { get; set; }
 
@@ -52,35 +51,25 @@ namespace Gobiner.CSharpPad
 			compiler.Code = code;
 			compiler.Compile(fullpath);
 			Errors = compiler.Errors;
-			FormattedILDisassembly = compiler.FormattedILDisassembly;
+			if (compiler.ProducedExecutable)
+			{
+				FormattedILDisassembly = RunProcessAndCaptureOutput(
+											Path.Combine(fullPath.Replace("App_Data", ""), "bin", "ildasm.exe"),
+											"/text /unicode /nobar \"" + fullpath + "\"")
+										 .Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+			}
+			else
+			{
+				FormattedILDisassembly = null;
+			}
 			AppDomain.Unload(compilerDomain);
 
 			if (Errors != null && Errors.Length == 0)
 			{
-				var startInfo = new ProcessStartInfo();
-				startInfo.Arguments = fullpath;
-				startInfo.CreateNoWindow = true;
-				startInfo.ErrorDialog = false;
-				startInfo.FileName = Path.Combine(fullPath.Replace("App_Data",""), "bin", "Gobiner.DotNetPad.Runner.exe");
-				startInfo.RedirectStandardOutput = true;
-				startInfo.UseShellExecute = false;
-				startInfo.StandardOutputEncoding = Encoding.UTF8;
-
+				var stdout = RunProcessAndCaptureOutput(Path.Combine(fullPath.Replace("App_Data", ""), "bin", "Gobiner.DotNetPad.Runner.exe"), fullpath);
 				var output = new List<string>();
-				var process = new Process();
+				output.AddRange(stdout.Split(new string[] { Environment.NewLine }, StringSplitOptions.None));
 				
-				process.StartInfo = startInfo;
-				process.Start();
-				var finished = process.WaitForExit(5500);
-				if(finished)
-				{
-					output.AddRange(process.StandardOutput.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None));
-				}
-				else
-				{
-					var noop = Process.GetCurrentProcess().StartInfo.UserName;
-					process.Kill();
-				}
 				if (output.Count > 0) output.RemoveAt(output.Count - 1); // always seems to have an extra newline
 				Output = output.ToArray();
 			}
@@ -97,6 +86,30 @@ namespace Gobiner.CSharpPad
 				case Language.FSharp: return new FSharpCompiler();
 				default: return null;
 			}
+		}
+
+		private string RunProcessAndCaptureOutput(string path, string arguments)
+		{
+			var startInfo = new ProcessStartInfo();
+			startInfo.Arguments = arguments;
+			startInfo.CreateNoWindow = true;
+			startInfo.ErrorDialog = false;
+			startInfo.FileName = path;
+			startInfo.RedirectStandardOutput = true;
+			startInfo.UseShellExecute = false;
+			startInfo.StandardOutputEncoding = Encoding.UTF8;
+
+			var output = new List<string>();
+			var process = new Process();
+
+			process.StartInfo = startInfo;
+			process.Start();
+			var finished = process.WaitForExit(5500);
+			if (!finished)
+			{
+				process.Kill();
+			}
+			return process.StandardOutput.ReadToEnd();
 		}
 	}
 }

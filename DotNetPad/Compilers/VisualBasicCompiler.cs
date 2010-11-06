@@ -13,10 +13,7 @@ namespace Gobiner.CSharpPad.Compilers
         public CompilerError[] Errors { get; private set; }
         public string FileName { get; private set; }
         public bool ProducedExecutable { get; private set; }
-		public IILFormatter ILFormatter { get; set; }
-		public string[] FormattedILDisassembly { get; set; }
 		
-		private IDictionary<Type, TypeMethodInfo> ILLookup { get; set; }
         private string[] GacAssembliesToCompileAgainst = { "System.dll", "System.Core.dll", "System.Data.dll", "System.Data.DataSetExtensions.dll", 
 															 "System.Xml.dll", "System.Xml.Linq.dll", "System.Data.Entity.dll", "System.Windows.Forms.dll" };
         private IDictionary<string, string> providerOptions = new Dictionary<string, string>() { { "CompilerVersion", "v4.0" } };
@@ -24,8 +21,6 @@ namespace Gobiner.CSharpPad.Compilers
         public VisualBasicCompiler()
         {
             Errors = new CompilerError[] { };
-			ILFormatter = new DefaultILFormatter();
-            FormattedILDisassembly = new string[] { };
 		}
 
         public void Compile(string filename)
@@ -45,11 +40,8 @@ namespace Gobiner.CSharpPad.Compilers
             compileParams.OutputAssembly = filename;
 
             CompilerResults r = provider.CompileAssemblyFromSource(compileParams, new string[] { this.Code });
-			ILLookup = new ILDisassembler().GetDisassembly(r.CompiledAssembly);
-			if (ILFormatter != null)
-			{
-				FormattedILDisassembly = ILFormatter.Format(ILLookup);
-			}
+			Errors = r.Errors.Cast<CompilerError>().ToArray();
+			ProducedExecutable = Errors.Length == 0;
         }
 
         private string FindMainClass()

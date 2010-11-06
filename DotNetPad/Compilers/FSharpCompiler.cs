@@ -13,8 +13,6 @@ namespace Gobiner.CSharpPad.Compilers
 		public CompilerError[] Errors { get; private set; }
 		public string FileName { get; private set; }
 		public bool ProducedExecutable { get; private set; }
-		public IILFormatter ILFormatter { get; set; }
-		public string[] FormattedILDisassembly { get; set; }
 
 		private string assemblyPath = "";
 		private IDictionary<Type, TypeMethodInfo> ILLookup { get; set; }
@@ -23,8 +21,6 @@ namespace Gobiner.CSharpPad.Compilers
 															 "System.Windows.Forms.dll", "System.Numerics.dll" };
 		public FSharpCompiler()
 		{
-			ILFormatter = new DefaultILFormatter();
-            FormattedILDisassembly = new string[] { };
 		}
 
 		public void Compile(string filename)
@@ -38,19 +34,7 @@ namespace Gobiner.CSharpPad.Compilers
 
 			CompilerResults r = provider.CompileAssemblyFromSource(compileParams, this.Code);
 			Errors = r.Errors.Cast<CompilerError>().ToArray();
-			if (r.Errors.HasErrors)
-			{
-				ILLookup = new Dictionary<Type, TypeMethodInfo>();
-				FormattedILDisassembly = new string[0];
-			}
-			else
-			{
-				ILLookup = new ILDisassembler().GetDisassembly(r.CompiledAssembly);
-				if (ILFormatter != null)
-				{
-					FormattedILDisassembly = ILFormatter.Format(ILLookup);
-				}
-			}
+			ProducedExecutable = Errors.Length == 0;
 		}
 	}
 }

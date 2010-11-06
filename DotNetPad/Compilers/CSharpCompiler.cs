@@ -22,20 +22,15 @@ namespace Gobiner.CSharpPad.Compilers
 		public CompilerError[] Errors { get; private set; }
 		public string FileName { get; private set; }
 		public bool ProducedExecutable { get; private set; }
-		public IILFormatter ILFormatter { get; set; }
-		public string[] FormattedILDisassembly { get; set; }
 
-		private IDictionary<Type, TypeMethodInfo> ILLookup { get; set; }
 		private IDictionary<string, string> providerOptions = new Dictionary<string, string>() { { "CompilerVersion", "v4.0" } };
 		private string[] GacAssembliesToCompileAgainst = { "System.dll", "System.Core.dll", "System.Data.dll", "System.Data.DataSetExtensions.dll", "Microsoft.CSharp.dll",
-		                                                   "System.Xml.dll", "System.Xml.Linq.dll", "System.Data.Entity.dll", "System.Windows.Forms.dll", "FSharp.Core.dll", };
+		                                                   "System.Xml.dll", "System.Xml.Linq.dll", "System.Data.Entity.dll", "System.Windows.Forms.dll", };
 														   //@"C:\Users\Aaron\Desktop\.net-pad\Gobiner.DotNetPad.Web\bin\AsyncCtpLibrary.dll", };
 
 		public CSharpCompiler()
 		{
 			Errors = new CompilerError[] { };
-			ILFormatter = new DefaultILFormatter();
-			FormattedILDisassembly = new string[] { };
 		}
 
 		public void Compile(string filename)
@@ -44,6 +39,7 @@ namespace Gobiner.CSharpPad.Compilers
 			if (mainClass == null && Errors.Length == 0)
 			{
 				Errors = new CompilerError[] { new CompilerError(filename, 0, 0, "", "Could not find a static void Main(string[]) method") };
+				ProducedExecutable = false;
 				return;
 			}
 
@@ -55,19 +51,8 @@ namespace Gobiner.CSharpPad.Compilers
 			compileParams.OutputAssembly = filename;
 
 			CompilerResults r = provider.CompileAssemblyFromSource(compileParams, new string[] { this.Code });
-			if (r.Errors.HasErrors)
-			{
-				ILLookup = new Dictionary<Type, TypeMethodInfo>();
-				FormattedILDisassembly = new string[0];
-			}
-			else
-			{
-				ILLookup = new ILDisassembler().GetDisassembly(r.CompiledAssembly);
-				if (ILFormatter != null)
-				{
-					FormattedILDisassembly = ILFormatter.Format(ILLookup);
-				}
-			}
+			Errors = r.Errors.Cast<CompilerError>().ToArray();
+			ProducedExecutable = Errors.Length == 0;
 		}
 
 		private string FindMainClass()
@@ -95,12 +80,11 @@ namespace Gobiner.CSharpPad.Compilers
 					if (parameters.Length == 0 ||
 					   (parameters.Length == 1 && parameters[0].ParameterType == typeof(string[])))
 					{
-						mainClass = type.FullName;
-						break;
+						return type.FullName;
 					}
 				}
 			}
-			return mainClass;
+			return null;
 		}
 	}
 }
