@@ -29,8 +29,9 @@ namespace Gobiner.CSharpPad.Compilers
 
 		public void Compile(string filename)
 		{
+
 			var provider = new FSharpCodeProvider();
-			var compileParams = new CompilerParameters();//GacAssembliesToCompileAgainst);
+			var compileParams = new CompilerParameters(new string[] { @"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" });
 			compileParams.GenerateExecutable = true;
 			compileParams.GenerateInMemory = false;
 			compileParams.OutputAssembly = filename;
