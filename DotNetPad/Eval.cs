@@ -60,7 +60,7 @@ namespace Gobiner.CSharpPad
 			}
 			else
 			{
-				FormattedILDisassembly = null;
+				FormattedILDisassembly = new string[] {};
 			}
 			AppDomain.Unload(compilerDomain);
 

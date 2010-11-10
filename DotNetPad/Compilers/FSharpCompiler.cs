@@ -15,7 +15,6 @@ namespace Gobiner.CSharpPad.Compilers
 		public bool ProducedExecutable { get; private set; }
 
 		private string assemblyPath = "";
-		private IDictionary<Type, TypeMethodInfo> ILLookup { get; set; }
 		private string[] GacAssembliesToCompileAgainst = { "System.dll", "System.Core.dll", "System.Data.dll", "System.Data.DataSetExtensions.dll", 
 															 "FSharp.Core.dll", "System.Xml.dll", "System.Xml.Linq.dll", "System.Data.Entity.dll", 
 															 "System.Windows.Forms.dll", "System.Numerics.dll" };
@@ -27,7 +26,7 @@ namespace Gobiner.CSharpPad.Compilers
 		{
 
 			var provider = new FSharpCodeProvider();
-			var compileParams = new CompilerParameters(new string[] { @"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" });
+			var compileParams = new CompilerParameters();
 			compileParams.GenerateExecutable = true;
 			compileParams.GenerateInMemory = false;
 			compileParams.OutputAssembly = filename;
