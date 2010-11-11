@@ -27,7 +27,7 @@ public class Default
 		<br />
 		
 		<label>
-			<input type="radio" name="Language" value="CSharp" checked="true" />
+			<input type="radio" name="Language" value="CSharp" checked="checked" />
 			<span>C#</span>
 		</label>
 		<label>
@@ -44,7 +44,7 @@ public class Default
 		</button>
 	
 		<input type="checkbox" name="IsPrivate" id="IsPrivate" />
-		<label for="checkbox">Private paste (won't appear in list of recent pastes)</label>
+		<label for="IsPrivate">Private paste (won't appear in list of recent pastes)</label>
     
     <% } %>
 

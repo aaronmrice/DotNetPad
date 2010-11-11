@@ -77,7 +77,7 @@ a { text-decoration: none }
 #primary p { margin: 4px 0 4px 10px; }
 
 #footer { clear: both; padding-top: 10px; }
-#footer p { font-size: .5em; }
+#footer p { font-size: .5em; margin: 0px auto; width: 20em; text-align: center; }
 
 
 .code, .output, .disassembly

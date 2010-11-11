@@ -13,15 +13,15 @@
 		<br />
 				
 		<label>
-			<input type="radio" name="Language" value="CSharp" <%= ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Language == Gobiner.CSharpPad.Language.CSharp ? "checked='true'" : "" %> />
+			<input type="radio" name="Language" value="CSharp" <%= ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Language == Gobiner.CSharpPad.Language.CSharp ? "checked='checked'" : "" %> />
 			<span>C#</span>
 		</label>
 		<label>
-			<input type="radio" name="Language" value="VisualBasic" <%= ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Language == Gobiner.CSharpPad.Language.VisualBasic ? "checked='true'" : "" %> />
+			<input type="radio" name="Language" value="VisualBasic" <%= ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Language == Gobiner.CSharpPad.Language.VisualBasic ? "checked='checked'" : "" %> />
 			<span>Visual Basic</span>
 		</label>
 		<label>
-			<input type="radio" name="Language" value="FSharp" <%= ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Language == Gobiner.CSharpPad.Language.FSharp ? "checked='true'" : "" %> />
+			<input type="radio" name="Language" value="FSharp" <%= ((Gobiner.CSharpPad.Web.Models.Paste)ViewData.Model).Language == Gobiner.CSharpPad.Language.FSharp ? "checked='checked'" : "" %> />
 			<span>F#</span>
 		</label>
 		
@@ -32,7 +32,7 @@
 		</button>
 		
 		<input type="checkbox" name="IsPrivate" id="IsPrivate" />
-		<label for="checkbox">Private paste (won't appear in list of recent pastes)</label>
+		<label for="IsPrivate">Private paste (won't appear in list of recent pastes)</label>
 <% } %>
 
 </asp:Content>
