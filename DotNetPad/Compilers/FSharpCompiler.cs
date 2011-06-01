@@ -14,10 +14,18 @@ namespace Gobiner.CSharpPad.Compilers
 		public string FileName { get; private set; }
 		public bool ProducedExecutable { get; private set; }
 
-		private string assemblyPath = "";
-		private string[] GacAssembliesToCompileAgainst = { "System.dll", "System.Core.dll", "System.Data.dll", "System.Data.DataSetExtensions.dll", 
-															 "FSharp.Core.dll", "System.Xml.dll", "System.Xml.Linq.dll", "System.Data.Entity.dll", 
-															 "System.Windows.Forms.dll", "System.Numerics.dll" };
+		private string[] GacAssembliesToCompileAgainst = {
+            @"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll", 
+            @"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll", 
+            @"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll", 
+            @"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll", 
+            @"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.DataSetExtensions.dll", 
+            @"C:\Program Files (x86)\Reference Assemblies\Microsoft\FSharp\2.0\Runtime\v4.0\FSharp.Core.dll", 
+            @"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll", 
+            @"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.Linq.dll", 
+            @"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.Entity.dll", 
+			@"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll",
+            @"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Numerics.dll" };
 		public FSharpCompiler()
 		{
 		}
@@ -26,7 +34,7 @@ namespace Gobiner.CSharpPad.Compilers
 		{
 
 			var provider = new FSharpCodeProvider();
-			var compileParams = new CompilerParameters();
+			var compileParams = new CompilerParameters(GacAssembliesToCompileAgainst);
 			compileParams.GenerateExecutable = true;
 			compileParams.GenerateInMemory = false;
 			compileParams.OutputAssembly = filename;
