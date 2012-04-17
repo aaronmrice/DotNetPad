@@ -9,3 +9,5 @@ glob:Gobiner.CSharpPad.Web/bin/Gobiner.CSharpPad.*
 glob:SubSonic.Core/bin/*
 glob:DotNetPad/bin/*
 glob:Gobiner.DotNetPad.Runner/bin/*
+glob:Gobiner.DotNetPad.Web/App_Data/elmah.db3
+glob:Gobiner.DotNetPad.Web/App_Data/pastedb.db3
