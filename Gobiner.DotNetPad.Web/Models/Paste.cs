@@ -37,7 +37,6 @@ namespace Gobiner.CSharpPad.Web.Models
 		}
 		Guid _paster;
 		public virtual Language Language { get; set; }
-		[SubSonicIgnore]
 		public virtual bool IsPrivate { get; set; }
 		public virtual ILDisassembly[] ILDisassemblyText { get; set; }
 
