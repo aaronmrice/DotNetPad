@@ -15,7 +15,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	font-style: inherit;
 	font-size: 100%;
 	font-family: inherit;
-	vertical-align: baseline;
+	vertical-align: top;
 }
 /* remember to define focus styles! */
 :focus {
@@ -25,6 +25,11 @@ body {
 	line-height: 1;
 	color: black;
 	background: white;
+	
+	font-family: Consolas, sans-serif;
+	font-size: 9pt;
+
+	overflow-y: scroll;
 }
 ol, ul {
 	list-style: none;
@@ -46,11 +51,6 @@ blockquote, q {
 	quotes: "" "";
 }
 
-html,
-body
-{
-	background-color: #999;
-}
 
 #header { height: 1.75em; margin-bottom: .5em; margin-top: .5em; padding-top: .3em; }
 #header a { font-style: normal; text-decoration: none; }
@@ -62,17 +62,34 @@ body
 #wrapper
 { 
 	width: 960px;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 10px auto;
 	background-color: #EEE;
-	
+
+	-moz-box-shadow: rgba(0,0,0,0.6) 0 1px 15px 0;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.6) 0 1px 15px 0;
+	-o-box-shadow: rgba(0,0,0,0.6) 0 1px 15px 0;
+	box-shadow: rgba(0, 0, 0, 0.6) 0 1px 15px 0;
+
+	border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 a { text-decoration: none }
 
-#primary, #secondary { }
-#primary { float: left; width: 769px; margin: 0; padding-left: 10px; border-right: solid 1px black; }
-#secondary { float: left; width: 165px; padding-left: 15px; margin: 0; }
+#primary {
+	float: left;
+	width: 769px;
+	min-height: 1px;
+	margin: 0;
+	padding-left: 10px;
+	border-right: solid 1px black;
+}
+
+#secondary {
+	float: left;
+	width: 165px;
+	padding-left: 15px;
+	margin: 0;
+}
 
 #primary p { margin: 4px 0 4px 10px; }
 
@@ -84,7 +101,6 @@ a { text-decoration: none }
 {
 	padding: 5px;
 	font-family: Consolas, Courier New, Monospace;
-	font-size: smaller;
 	background-color: #FFF;
 }
 .code pre, .output pre, .disassembly pre { padding: 0; min-width: 100%; }
@@ -95,14 +111,16 @@ table.linenumbers
 	padding-right: 4px;
 	border-right: solid 2px black;
 	width: 30px;
+	font-size: 10pt;
+	cursor: pointer;
 }
 .linenumbers td { text-align: right; color: Blue }
 
 pre
 {
 	padding: 5px;
-	font-family: Consolas, Courier New, Monospace;
 	display: block;
+	font-size: 10pt;
 }
 
 pre.code, pre.output, pre.disassembly { background-color: #FFF; }
@@ -118,9 +136,13 @@ hr { width: 98%; margin: 4px 0 4px 0; }
 textarea.code
 {
 	width: 95%;
-	height: 500px;
+	height: 280px;
 	margin-right: auto;
 	margin-left: auto;
+	margin-bottom: 10px;
+
+	font-size: 10pt;
+	border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 .code table.outer { width: 100%; }
@@ -128,3 +150,15 @@ textarea.code
 
 #secondary li { margin: .4em 0 0 0; }
 #secondary li a:visited { color: Blue; }
+
+input[type="radio"] {
+	margin-right: -4px;
+	margin-top: -1px;
+	display: inline-block;
+}
+
+label[for="IsPrivate"] {
+	margin-top: 6px;
+	margin-left: -6px;
+	display: inline-block;
+}
