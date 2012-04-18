@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.CodeDom.Compiler;
+using System.Linq;
 using Microsoft.FSharp.Compiler.CodeDom;
 
 namespace Gobiner.CSharpPad.Compilers

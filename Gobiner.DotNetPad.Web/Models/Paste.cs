@@ -24,10 +24,125 @@ namespace Gobiner.CSharpPad.Web.Models
 		public virtual CompilationError[] Errors { get; set; }
 		public virtual string Output { get; set; }
 		public virtual DateTime Created { get; set; }
-		public virtual bool IsPrivate { get; set; }
-		public virtual Guid? Paster { get; set; }
+		public virtual Guid Paster
+		{
+			get
+			{
+				return _paster;
+			}
+			set
+			{
+				_paster = value;
+			}
+		}
+		Guid _paster;
 		public virtual Language Language { get; set; }
+		[SubSonicIgnore]
+		public virtual bool IsPrivate { get; set; }
 		public virtual ILDisassembly[] ILDisassemblyText { get; set; }
+
+		#region
+		public static string CorrectFizzBuzzOutput = @"1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+16
+17
+Fizz
+19
+Buzz
+Fizz
+22
+23
+Fizz
+Buzz
+26
+Fizz
+28
+29
+FizzBuzz
+31
+32
+Fizz
+34
+Buzz
+Fizz
+37
+38
+Fizz
+Buzz
+41
+Fizz
+43
+44
+FizzBuzz
+46
+47
+Fizz
+49
+Buzz
+Fizz
+52
+53
+Fizz
+Buzz
+56
+Fizz
+58
+59
+FizzBuzz
+61
+62
+Fizz
+64
+Buzz
+Fizz
+67
+68
+Fizz
+Buzz
+71
+Fizz
+73
+74
+FizzBuzz
+76
+77
+Fizz
+79
+Buzz
+Fizz
+82
+83
+Fizz
+Buzz
+86
+Fizz
+88
+89
+FizzBuzz
+91
+92
+Fizz
+94
+Buzz
+Fizz
+97
+98
+Fizz
+Buzz";
+		#endregion
 
 		public Paste()
 		{
@@ -37,8 +152,9 @@ namespace Gobiner.CSharpPad.Web.Models
 			Password = string.Empty;
 			Output = string.Empty;
 			Created = DateTime.Now;
-			IsPrivate = false;
+			Paster = Guid.Empty;
 			Language = Language.CSharp;
+			IsPrivate = false;
 		}
 
 		public void AddCompilerErrors(CompilerError[] errors)
@@ -50,6 +166,19 @@ namespace Gobiner.CSharpPad.Web.Models
 		{
 			var order = 0;
 			this.ILDisassemblyText = text.Select(x => new ILDisassembly() { ID = Guid.NewGuid(), Order = order++, Text = x, PasteID = this.ID }).ToArray();
+		}
+
+		public void Compile(string pasterGuid, bool isPrivate, string path)
+		{
+			var evaller = new Eval(path);
+			evaller.CompileAndEval(this.Code, this.Language);
+
+			this.AddCompilerErrors(evaller.Errors);
+			this.AddILDisassemblyText(evaller.FormattedILDisassembly);
+			this.Output = string.Join(Environment.NewLine, evaller.Output ?? new string[] { });
+
+			this.Paster = !Guid.TryParse(pasterGuid, out this._paster) ? Guid.NewGuid() : this.Paster;
+			this.IsPrivate = isPrivate;
 		}
 	}
 }

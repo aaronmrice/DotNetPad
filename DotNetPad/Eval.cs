@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
-using System.Security;
-using System.Security.Permissions;
-using System.Security.Policy;
-using Gobiner.CSharpPad;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
 using System.Threading;
 using Gobiner.CSharpPad.Compilers;
 
@@ -109,6 +105,7 @@ namespace Gobiner.CSharpPad
 			{
 				process.Kill();
 			}
+
 			return process.StandardOutput.ReadToEnd();
 		}
 	}

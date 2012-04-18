@@ -1,18 +1,9 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.CodeDom;
-using System.CodeDom.Compiler;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Reflection;
-using System.Reflection.Emit;
-using System.IO;
 using Microsoft.CSharp;
-using System.Runtime.InteropServices;
-using Mono.Reflection;
 
 namespace Gobiner.CSharpPad.Compilers
 {
