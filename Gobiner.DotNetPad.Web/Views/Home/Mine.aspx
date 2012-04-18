@@ -15,11 +15,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class Default
+public class DotNetPad
 {
 	public static void Main(string[] args)
 	{
-		
+		Console.WriteLine(""Hello World!"");
 	}	
 }
 ", new { @class="code" } )%>
