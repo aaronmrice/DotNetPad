@@ -14,8 +14,6 @@ namespace Gobiner.CSharpPad.Web.Models
 		public virtual string ErrorText { get; set; }
 		public virtual string FileName { get; set; }
 		public virtual int Line { get; set; }
-
-		[SubSonicIgnore]
 		public virtual bool IsWarning { get; set; }
 
 		public CompilationError()
