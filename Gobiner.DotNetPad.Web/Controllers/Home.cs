@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Gobiner.CSharpPad.Web.Models;
 using SubSonic.Repository;
+using Gobiner.DotNetPad.Web;
 
 namespace Gobiner.CSharpPad.Web.Controllers
 {
@@ -94,14 +95,14 @@ namespace Gobiner.CSharpPad.Web.Controllers
 				dataSource.AddMany(paste.Errors);
 				dataSource.AddMany(paste.ILDisassemblyText);
 
-				if (paste.Errors.Length > 0)
-				{
-					return Redirect("/ViewPaste/" + paste.Slug + "#" + paste.Errors.Select(x => x.Line - 1).Distinct().Select(x => "c" + x + ",").Aggregate((x, y) => x + y));
-				}
-				else
-				{
-					return Redirect("/ViewPaste/" + paste.Slug);
-				}
+                if (paste.Errors.Length > 0)
+                {
+                    return SpamGuard.ContentScore(paste.Language, paste.Code) < 0 ? Redirect("/OhTheHumanity/" + paste.Slug) : Redirect("/ViewPaste/" + paste.Slug + "#" + paste.Errors.Select(x => x.Line - 1).Distinct().Select(x => "c" + x + ",").Aggregate((x, y) => x + y));
+                }
+                else
+                {
+                    return Redirect("/ViewPaste/" + paste.Slug);
+                }
 			}
 			catch (Exception e)
 			{
@@ -137,6 +138,25 @@ namespace Gobiner.CSharpPad.Web.Controllers
 		}
 
 
+        [AcceptVerbs(HttpVerbs.Get)]
+        public ActionResult OhTheHumanity(string id)
+        {
+            var paste = dataSource.Single<Paste>(x => x.Slug == id);
+            if (paste == null)
+            {
+                Response.StatusCode = 404;
+                return View("PasteNotFound");
+            }
+
+            return View(paste);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult OhTheHumanity()
+        {
+            return Redirect("/ViewPaste/" + Request.Form["slug"]);
+        }
+
 		public ActionResult About()
 		{
 			return View();
@@ -145,7 +165,7 @@ namespace Gobiner.CSharpPad.Web.Controllers
 		public ActionResult Recent()
 		{
 			var pastes = dataSource.All<Paste>()
-				.Where(x => !x.IsPrivate)
+				.Where(x => !x.IsPrivate && x.ContentScore >= 0)
 				.OrderByDescending(x => x.Created)
 				.Take(12);
 

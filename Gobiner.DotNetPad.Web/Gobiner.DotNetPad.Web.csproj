@@ -88,11 +88,14 @@
     <Compile Include="Models\ILDisassembly.cs" />
     <Compile Include="Models\Paste.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpamGuard.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\img\blorgons.png" />
     <Content Include="Content\jquery.textarea.js" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Views\Shared\OhTheHumanity.aspx" />
     <Content Include="Views\Shared\PasteBroked.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
