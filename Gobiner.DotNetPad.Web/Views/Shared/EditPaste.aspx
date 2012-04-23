@@ -32,6 +32,8 @@
 		</button>
 		
 		<input type="checkbox" name="IsPrivate" id="IsPrivate" />
+        <input type="text" name="Email" id="Email" />
+        <input type="text" name="Website" id="Website" />
 		<label for="IsPrivate">Private paste (won't appear in list of recent pastes)</label>
 <% } %>
 

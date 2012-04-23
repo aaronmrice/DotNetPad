@@ -61,7 +61,6 @@ namespace Gobiner.CSharpPad.Compilers
 				return null;
 
 			var allTypes = r.CompiledAssembly.GetTypes();
-			string mainClass = null;
 			foreach (var type in allTypes)
 			{
 				var possibleMethods = type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);

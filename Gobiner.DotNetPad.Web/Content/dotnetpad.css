@@ -26,8 +26,7 @@ body {
 	color: black;
 	background: white;
 	
-	font-family: Consolas, sans-serif;
-	font-size: 9pt;
+	font-size: 12pt;
 
 	overflow-y: scroll;
 }
@@ -50,6 +49,8 @@ q:before, q:after {
 blockquote, q {
 	quotes: "" "";
 }
+
+h2 { font-size: 1.2em; margin-bottom: 10px; }
 
 
 #header { height: 1.75em; margin-bottom: .5em; margin-top: .5em; padding-top: .3em; }
@@ -91,7 +92,7 @@ a { text-decoration: none }
 	margin: 0;
 }
 
-#primary p { margin: 4px 0 4px 10px; }
+#primary p, #primary h1, #primary h2, #primary h3, #primary h4; #primary h5, #primary h6 { margin: 4px 0 4px 10px; }
 
 #footer { clear: both; padding-top: 10px; }
 #footer p { font-size: .5em; margin: 0px auto; width: 20em; text-align: center; }
@@ -161,4 +162,9 @@ label[for="IsPrivate"] {
 	margin-top: 6px;
 	margin-left: -6px;
 	display: inline-block;
+}
+
+input#Email, input#Website 
+{
+    display:none;
 }

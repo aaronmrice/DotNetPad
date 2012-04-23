@@ -84,8 +84,12 @@ namespace Gobiner.CSharpPad.Web.Controllers
 
 		[ValidateInput(false)]
 		[AcceptVerbs(HttpVerbs.Post)]
-		public ActionResult Submit([Bind] Paste paste)
+		public ActionResult Submit([Bind] Paste paste, string Email, string Website)
 		{
+			if (!string.IsNullOrWhiteSpace(Email) || !string.IsNullOrWhiteSpace(Website))
+			{
+				return Redirect("/Honeypot");
+			}
 			try
 			{
 				paste.Compile(Request.Cookies["paster"] != null ? Request.Cookies["paster"].Value : string.Empty, Request.Form["IsPrivate"] == "on", Server.MapPath("~/App_Data/"));
@@ -111,7 +115,11 @@ namespace Gobiner.CSharpPad.Web.Controllers
 			}
 		}
 
-
+		[AcceptVerbs(HttpVerbs.Get)]
+		public ActionResult Honeypot()
+		{
+			return View();
+		}
 
 		[AcceptVerbs(HttpVerbs.Get)]
 		public ActionResult ViewPaste(string id)

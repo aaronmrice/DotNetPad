@@ -95,6 +95,7 @@
     <Content Include="Content\jquery.textarea.js" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Views\Home\Honeypot.aspx" />
     <Content Include="Views\Shared\OhTheHumanity.aspx" />
     <Content Include="Views\Shared\PasteBroked.aspx" />
     <Content Include="Web.config">
@@ -127,7 +128,6 @@
     <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Home\List.aspx" />
     <Content Include="Views\Home\Mine.aspx" />
-    <Content Include="Views\Partial\CodeDisplay.ascx" />
     <Content Include="Views\Shared\EditPaste.aspx" />
     <Content Include="Views\Shared\PasteNotFound.aspx" />
     <Content Include="Views\Shared\ViewPaste.aspx" />
