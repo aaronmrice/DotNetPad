@@ -15,6 +15,7 @@ namespace Gobiner.CSharpPad.Web.Controllers
 	public class HomeController : Controller
 	{
 		SimpleRepository dataSource;
+		static Dictionary<string, Paste> possibleSpam = new Dictionary<string, Paste>();
 
 		public HomeController()
 		{
@@ -95,13 +96,19 @@ namespace Gobiner.CSharpPad.Web.Controllers
 				paste.Compile(Request.Cookies["paster"] != null ? Request.Cookies["paster"].Value : string.Empty, Request.Form["IsPrivate"] == "on", Server.MapPath("~/App_Data/"));
 				Response.Cookies.Add(new HttpCookie("paster", paste.Paster.ToString()) { Expires = DateTime.Today.AddYears(1) });
 
+				if (paste.Errors.Any() && SpamGuard.ContentScore(paste.Language, paste.Code) < 0)
+				{
+					possibleSpam.Add(paste.Slug, paste);
+					return Redirect("/OhTheHumanity/" + paste.Slug);
+				}
+
 				dataSource.Add(paste);
 				dataSource.AddMany(paste.Errors);
 				dataSource.AddMany(paste.ILDisassemblyText);
 
-                if (paste.Errors.Length > 0)
+                if (paste.Errors.Any())
                 {
-                    return SpamGuard.ContentScore(paste.Language, paste.Code) < 0 ? Redirect("/OhTheHumanity/" + paste.Slug) : Redirect("/ViewPaste/" + paste.Slug + "#" + paste.Errors.Select(x => x.Line - 1).Distinct().Select(x => "c" + x + ",").Aggregate((x, y) => x + y));
+                    return Redirect("/ViewPaste/" + paste.Slug + "#" + paste.Errors.Select(x => x.Line - 1).Distinct().Select(x => "c" + x + ",").Aggregate((x, y) => x + y));
                 }
                 else
                 {
@@ -149,20 +156,38 @@ namespace Gobiner.CSharpPad.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult OhTheHumanity(string id)
         {
-            var paste = dataSource.Single<Paste>(x => x.Slug == id);
-            if (paste == null)
-            {
-                Response.StatusCode = 404;
-                return View("PasteNotFound");
-            }
-
-            return View(paste);
+			Paste paste;
+			if (possibleSpam.TryGetValue(id, out paste))
+			{
+				return View(paste);
+			}
+			else
+			{
+				Response.StatusCode = 404;
+				return View("PasteNotFound");
+			}
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult OhTheHumanity()
+        public ActionResult OhTheHumanity(string Email, string Website, string Slug)
         {
-            return Redirect("/ViewPaste/" + Request.Form["slug"]);
+			if (!string.IsNullOrWhiteSpace(Email) || !string.IsNullOrWhiteSpace(Website))
+			{
+				return Redirect("/Honeypot");
+			}
+			var paste = possibleSpam[Slug];
+			dataSource.Add(paste);
+			dataSource.AddMany(paste.Errors);
+			dataSource.AddMany(paste.ILDisassemblyText);
+
+			if (paste.Errors.Any())
+			{
+				return Redirect("/ViewPaste/" + paste.Slug + "#" + paste.Errors.Select(x => x.Line - 1).Distinct().Select(x => "c" + x + ",").Aggregate((x, y) => x + y));
+			}
+			else
+			{
+				return Redirect("/ViewPaste/" + paste.Slug);
+			}
         }
 
 		public ActionResult About()
