@@ -200,6 +200,7 @@ namespace Gobiner.CSharpPad.Web.Controllers
 			var pastes = dataSource.All<Paste>()
 				.Where(x => !x.IsPrivate && x.ContentScore >= 0)
 				.OrderByDescending(x => x.Created)
+				.DistinctBy(x => x.Code)
 				.Take(12);
 
 			return View("List", pastes);
