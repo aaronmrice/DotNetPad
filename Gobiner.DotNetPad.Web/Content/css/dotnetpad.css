@@ -26,7 +26,8 @@ body {
 	color: black;
 	background: white;
 	
-	font-size: 12pt;
+	font-size: 13px;
+	font-family: Arial, sans-serif;
 
 	overflow-y: scroll;
 }
@@ -58,10 +59,13 @@ h2 { font-size: 1.2em; margin-bottom: 10px; }
 #header a, #header a:visited { color: #00F; }
 #brand { margin-left: 15px; }
 
-#brand { float:left; font-size: 1.5em; font-family: Consolas, Courier New, Monospace; }
+#brand {
+	float: left;
+	font-size: 1.5em;
+	font-family: Consolas, Courier New, Monospace;
+}
 
-#wrapper
-{ 
+#wrapper { 
 	width: 960px;
 	margin: 10px auto;
 	background-color: #EEE;
@@ -98,59 +102,72 @@ a { text-decoration: none }
 #footer p { font-size: .5em; margin: 0px auto; width: 20em; text-align: center; }
 
 
-.code, .output, .disassembly
-{
+.code, .output, .disassembly {
 	padding: 5px;
-	font-family: Consolas, Courier New, Monospace;
+	font-family: Consolas, 'Courier New', Monospace;
 	background-color: #FFF;
+
+	border: 1px solid rgba(0, 0, 0, 0.4);
 }
 .code pre, .output pre, .disassembly pre { padding: 0; min-width: 100%; }
 .code td, .output td, .disassembly td { padding-left: 4px; }
 .code .highlight, .output .highlight, .disassembly .highlight { background-color: #FDD; }
-table.linenumbers
-{
+table.linenumbers {
 	padding-right: 4px;
 	border-right: solid 2px black;
 	width: 30px;
-	font-size: 10pt;
+	
+	font-size: 13px;
+	line-height: 18px;
+
 	cursor: pointer;
 }
-.linenumbers td { text-align: right; color: Blue }
+.linenumbers td {
+	text-align: right;
+	color: blue;
+}
 
-pre
-{
+pre {
 	padding: 5px;
 	display: block;
+
 	font-size: 10pt;
+	line-height: 18px;
 }
 
 pre.code, pre.output, pre.disassembly { background-color: #FFF; }
 pre.errors { background-color: #EFF; }
 
 div.output { max-height: 30em; }
-div.code, div.output, div.errors, div.disassembly { padding: 5px; overflow-y: auto;  }
+div.code, div.output, div.errors, div.disassembly {
+	padding: 5px;
+	margin-top: 5px;
+	margin-right: 10px;
+	overflow-y: auto;
+}
 
 form { padding: 5px; }
 
 hr { width: 98%; margin: 4px 0 4px 0; }
 
-textarea.code
-{
+textarea.code {
 	width: 95%;
 	height: 280px;
 	margin-right: auto;
 	margin-left: auto;
 	margin-bottom: 10px;
 
-	font-size: 10pt;
+	font-size: 13px;
+	line-height: 18px;
+
 	border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 .code table.outer { width: 100%; }
 .code table.inner { width: 100%; }
 
-#secondary li { margin: .4em 0 0 0; }
-#secondary li a:visited { color: Blue; }
+#secondary li { margin: 0.4em 0 0 0; }
+#secondary li a:visited { color: blue; }
 
 input[type="radio"] {
 	margin-right: -4px;
@@ -164,7 +181,16 @@ label[for="IsPrivate"] {
 	display: inline-block;
 }
 
-input#Email, input#Website 
-{
+input#Email, input#Website {
     display:none;
+}
+
+.middle-action-bar {
+	height: 20px;
+}
+
+.middle-action-bar li {
+	float: left;
+	margin-top: 5px;
+	margin-right: 20px;
 }

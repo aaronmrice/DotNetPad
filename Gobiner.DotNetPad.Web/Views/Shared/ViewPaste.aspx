@@ -28,19 +28,29 @@
            </td></tr>
        </table>
     </div>
-<hr />
+
+
+
+<ul class="middle-action-bar">
+<% if (paste.ILDisassemblyText != null && paste.ILDisassemblyText.Length > 0)
+   { %>
+    <li><a id="dissasembly-toggle" href="#">Toggle Disassembly</a></li>
+<% } %>
+    <li><a href="/EditPaste/<%= paste.Slug %>">Fork this code</a></li>
+</ul>
+
+
 
 
 <% if (paste.ILDisassemblyText != null && paste.ILDisassemblyText.Length > 0)
    { %>
 <div class="disassembly">
-<a id="dissasembly-toggle" href="#">Toggle Disassembly</a>
 <script type="text/javascript">
 	$("#dissasembly-toggle").click(function () {
-	    $(".disassembly .outer").toggle();
+	    $(".disassembly").toggle();
 	});
 	$(document).ready(function() {
-	    $(".disassembly .outer").toggle();
+	    $(".disassembly").toggle();
 	});	
 </script>
 
@@ -58,7 +68,6 @@
 </table>
 
 </div>
-<hr />
 <% } %>
 
 
@@ -94,10 +103,5 @@
    { %>
 Line <%= line.Line %> : <%= Server.HtmlEncode(line.ErrorText) %><% } %></pre></div>
 <% } %>
-<hr />
 
-<a href="/EditPaste/
-<%= paste.Slug %>
-">Fork this code</a>
-<hr />
 </asp:Content>

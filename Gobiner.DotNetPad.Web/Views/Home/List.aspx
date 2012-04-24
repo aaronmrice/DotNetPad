@@ -18,9 +18,7 @@
 </pre>
 
 		</div>
-		<p>Pasted <%= paste.Created.PrettyPrintTimeAgo() %>.</p>
-		<p><%= Html.ActionLink("View this paste", "ViewPaste", new { Id = paste.Slug } ) %></p>
-		<hr />
+		<p style="padding-bottom:10px"><%= Html.ActionLink("Pasted " + paste.Created.PrettyPrintTimeAgo(), "ViewPaste", new { Id = paste.Slug } ) %></p>
 	
 	<% } %>
 </asp:Content>
