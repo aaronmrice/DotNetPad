@@ -214,7 +214,7 @@ namespace Gobiner.CSharpPad.Web.Controllers
 				var pastes = dataSource.All<Paste>()
 					.Where(x => x.Paster == paster)
 					.OrderByDescending(x => x.Created)
-					.Take(20);
+					.Take(50);
 
 				return View("List", pastes);
 			}
@@ -231,18 +231,18 @@ namespace Gobiner.CSharpPad.Web.Controllers
 							&& x.Output.ToUpper().Contains("BUZZ")
 							&& x.Output.ToUpper() != Paste.CorrectFizzBuzzOutput.ToUpper())
 				.OrderByDescending(x => x.Created)
-				.Take(12);
+				.Take(15);
 
 			return View("List", failures);
 		}
 
 		public ActionResult FizzBuzz()
 		{
-			var successes = dataSource.All<Paste>()
-				.Where(x => !x.IsPrivate
-							&& x.Output.ToUpper() == Paste.CorrectFizzBuzzOutput.ToUpper())
-				.OrderByDescending(x => x.Created)
-				.Take(12);
+            var successes = dataSource.All<Paste>()
+                .Where(x => !x.IsPrivate
+                            && x.Output.ToUpper() == Paste.CorrectFizzBuzzOutput.ToUpper())
+                .OrderByDescending(x => x.Created)
+                .Take(15);
 
 			return View("List", successes);
 		}
