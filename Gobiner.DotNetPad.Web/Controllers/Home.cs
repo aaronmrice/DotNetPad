@@ -23,19 +23,19 @@ namespace Gobiner.CSharpPad.Web.Controllers
 			ValidateRequest = false;
 		}
 
-		[AcceptVerbs(HttpVerbs.Get)]
+		[AcceptVerbs(HttpVerbs.Get | HttpVerbs.Head)]
 		public ActionResult Index()
 		{
 			return View();
 		}
 
-		[AcceptVerbs(HttpVerbs.Get)]
+		[AcceptVerbs(HttpVerbs.Get | HttpVerbs.Head)]
 		public ActionResult EditPaste(string id)
 		{
 			return ViewPaste(id);
 		}
 
-		[AcceptVerbs(HttpVerbs.Get)]
+		[AcceptVerbs(HttpVerbs.Get | HttpVerbs.Head)]
 		public ActionResult Gist(string id)
 		{
 			try
@@ -122,13 +122,13 @@ namespace Gobiner.CSharpPad.Web.Controllers
 			}
 		}
 
-		[AcceptVerbs(HttpVerbs.Get)]
+		[AcceptVerbs(HttpVerbs.Get | HttpVerbs.Head)]
 		public ActionResult Honeypot()
 		{
 			return View();
 		}
 
-		[AcceptVerbs(HttpVerbs.Get)]
+		[AcceptVerbs(HttpVerbs.Get | HttpVerbs.Head)]
 		public ActionResult ViewPaste(string id)
 		{
 			var paste = dataSource.Single<Paste>(x => x.Slug == id);
@@ -153,7 +153,7 @@ namespace Gobiner.CSharpPad.Web.Controllers
 		}
 
 
-        [AcceptVerbs(HttpVerbs.Get)]
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Head)]
         public ActionResult OhTheHumanity(string id)
         {
 			Paste paste;
