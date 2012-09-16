@@ -23,21 +23,19 @@
 			<p id="brand"><a href="/">.NET Pad</a></p>
 			<p style="float:right; margin-right: 10px;"><a href="http://bitbucket.org/gobiner/.net-pad/issues/?status=new&amp;status=open">Send me your bugs &amp; suggestions!</a></p>
 		</div>
+        <div id="secondary">
+			<ul class="nav">
+				<li><a href="/">New Paste</a></li>
+				<li><a href="/About/">About .NET Pad</a></li>
+				<li><a href="/Recent/">Recent Pastes</a></li>
+				<li><a href="/FizzBuzz/">FizzBuzz Implementations</a></li>
+				<li><a href="/FailBuzz/">FizzBuzz Failures</a></li>
+				<li><a href="/Mine/">My Recent Pastes</a></li>
+			</ul>
+		</div>
 		<div id="primary">
 			<asp:ContentPlaceHolder ID="MainContent" runat="server">
 	        
-			</asp:ContentPlaceHolder>
-		</div>
-		<div id="secondary">
-			<asp:ContentPlaceHolder ID="Secondary" runat="server">
-				<ul class="nav">
-					<li><a href="/">New Paste</a></li>
-					<li><a href="/About/">About .NET Pad</a></li>
-					<li><a href="/Recent/">Recent Pastes</a></li>
-					<li><a href="/FizzBuzz/">FizzBuzz Implementations</a></li>
-					<li><a href="/FailBuzz/">FizzBuzz Failures</a></li>
-					<li><a href="/Mine/">My Recent Pastes</a></li>
-				</ul>
 			</asp:ContentPlaceHolder>
 		</div>
 		<div id="footer">

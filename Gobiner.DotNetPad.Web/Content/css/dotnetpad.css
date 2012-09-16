@@ -54,7 +54,7 @@ blockquote, q {
 h2 { font-size: 1.2em; margin-bottom: 10px; }
 
 
-#header { height: 1.75em; margin-bottom: .5em; margin-top: .5em; padding-top: .3em; }
+#header { height: 2.25em; margin-bottom: .5em; margin-top: .5em; padding-top: .3em; }
 #header a { font-style: normal; text-decoration: none; }
 #header a, #header a:visited { color: #00F; }
 #brand { margin-left: 15px; }
@@ -81,19 +81,23 @@ h2 { font-size: 1.2em; margin-bottom: 10px; }
 a { text-decoration: none }
 
 #primary {
-	float: left;
-	width: 769px;
+/*	float: left;
+	width: 769px;*/
 	min-height: 1px;
 	margin: 0;
-	padding-left: 10px;
-	border-right: solid 1px black;
+	padding: 10px;
 }
 
 #secondary {
-	float: left;
-	width: 165px;
 	padding-left: 15px;
 	margin: 0;
+}
+#secondary .nav {
+    height: 1.5em;
+}
+#secondary .nav li {
+    float: left;
+    margin-right: 2em;
 }
 
 #primary p, #primary h1, #primary h2, #primary h3, #primary h4; #primary h5, #primary h6 { margin: 4px 0 4px 10px; }
@@ -103,7 +107,7 @@ a { text-decoration: none }
 
 
 .code, .output, .disassembly {
-	padding: 5px;
+	padding: 0px;
 	font-family: Consolas, 'Courier New', Monospace;
 	background-color: #FFF;
 
@@ -151,7 +155,7 @@ form { padding: 5px; }
 hr { width: 98%; margin: 4px 0 4px 0; }
 
 textarea.code {
-	width: 95%;
+	width: 100%;
 	height: 280px;
 	margin-right: auto;
 	margin-left: auto;
