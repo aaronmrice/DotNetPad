@@ -24,7 +24,8 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 body {
 	line-height: 1;
 	color: black;
-	background: white;
+	/* thanks to http://subtlepatterns.com/subtle-grey/ for the background pic */
+	background: white url('/Content/img/grey.png');
 	
 	font-size: 13px;
 	font-family: Arial, sans-serif;

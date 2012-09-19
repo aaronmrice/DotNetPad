@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\img\blorgons.png" />
+    <Content Include="Content\img\grey.png" />
     <Content Include="Content\js\jquery.textarea.js" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
