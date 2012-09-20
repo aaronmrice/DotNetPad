@@ -8,7 +8,6 @@ namespace Gobiner.DotNetPad.Web
     public static class SpamGuard
     {
         static string[] SpammyWords = { "http" };
-        //static string[] SafeWords = { "console", "write", "line" };
 
         static string[] CSharpKeywords = { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "in (generic modifier)", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "out (generic modifier)", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while" };
         static string[] FSharpKeywords = { "abstract", "and", "as", "assert", "base", "begin", "class", "default", "delegate", "do", "done", "downcast", "downto", "elif", "else", "end", "exception", "extern", "false", "finally", "for", "fun", "function", "global", "if", "in", "inherit", "inline", "interface", "internal", "lazy", "let", "match", "member", "module", "mutable", "namespace", "new", "not", "null", "of", "open", "or", "override", "private", "public", "rec", "return", "static", "struct", "then", "to", "true", "try", "type", "upcast", "use", "val", "void", "when", "while", "with", "yield", "asr", "land", "lor", "lsl", "lsr", "lxor", "mod", "sig", "atomic", "break", "checked", "component", "const", "constraint", "constructor", "continue", "eager", "event", "external", "fixed", "functor", "include", "method", "mixin", "object", "parallel", "process", "protected", "pure", "sealed", "tailcall", "trait", "virtual", "volatile" };
@@ -23,13 +22,14 @@ namespace Gobiner.DotNetPad.Web
 
         public static decimal ContentScore(Language language, string content)
         {
+			if (!LanguageKeywords.ContainsKey(language)) return 0;
             decimal keyword_count = Regex.Replace(content, "[^a-z]", " ", RegexOptions.IgnoreCase).Split(' ')
                 .Select(w => w.ToLower())
                 .Count(w => LanguageKeywords[language].Contains(w));
 
-            decimal http_count = Regex.Matches(content, string.Join("|", SpammyWords), RegexOptions.IgnoreCase).Count + 1;
+            decimal spam_count = Regex.Matches(content, string.Join("|", SpammyWords), RegexOptions.IgnoreCase).Count + 1;
 
-            return keyword_count / http_count - 1;
+            return keyword_count / spam_count - 1;
         }
     }
 }
