@@ -27,7 +27,7 @@ namespace Gobiner.DotNetPad.Web
                 .Select(w => w.ToLower())
                 .Count(w => LanguageKeywords[language].Contains(w));
 
-            int spam_count = Regex.Matches(content, string.Join("|", SpammyWords), RegexOptions.IgnoreCase).Count + 1;
+            int spam_count = Regex.Matches(content, string.Join("|", SpammyWords), RegexOptions.IgnoreCase).Count;
 
             return keyword_count - spam_count;
         }
