@@ -7,9 +7,9 @@
 		.NET Pad is mostly the work of me, Gobiner, with help from many people like <a href="http://factormystic.net/">factormystic</a>, melonhead and Hybridfusion.
 	</p>
 	<p>
-		Check out the source on <a href="http://bitbucket.org/gobiner/.net-pad/src/">bitbucket</a>. Please post any suggestions or requests to the issue tracker there.
+		Check out the source on <a href="https://github.com/Gobiner/DotNetPad">github</a>. Please post any suggestions or requests to the issue tracker there.
 	</p>
 	<p>
-		If you find a security vulnerability, please email me at aaron.rice.17.@gmail.
+		If you find a security vulnerability, please email me at aaron.rice.17.@gmail.com
 	</p>
 </asp:Content>
