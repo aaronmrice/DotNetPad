@@ -68,6 +68,8 @@ namespace Gobiner.DotNetPad.Runner
 			{
 				Console.WriteLine(uncaughtException.ToString());
 			}
+
+            Environment.Exit(0);
 		}
 
 
