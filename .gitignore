@@ -1,3 +1,6 @@
 *.suo
+*.user
 bin/
 obj/
+/Gobiner.DotNetPad.Web/App_Data/*
+/packages/*
