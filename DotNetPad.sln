@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gobiner.DotNetPad", "DotNetPad\Gobiner.DotNetPad.csproj", "{5C19FEAA-AA5D-4AE3-9DEE-E4D3CA3C9B7B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gobiner.DotNetPad.Web", "Gobiner.DotNetPad.Web\Gobiner.DotNetPad.Web.csproj", "{8F671CA7-DB77-4E10-A4E2-4B4D8984C802}"
@@ -8,6 +10,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gobiner.DotNetPad.Runner", "Gobiner.DotNetPad.Runner\Gobiner.DotNetPad.Runner.csproj", "{C4B2F026-3052-41C2-B81D-2943B22A0034}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gobiner.ConsoleCapture", "Gobiner.ConsoleCapture\Gobiner.ConsoleCapture.csproj", "{B5B09E19-1E43-4FC9-B6C7-3DFF8A472716}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{72440D63-0044-46FF-A617-2639F4132BD0}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
