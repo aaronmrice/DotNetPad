@@ -1,0 +1,5 @@
+﻿$(function () {
+
+    elmahr.init();
+
+});
