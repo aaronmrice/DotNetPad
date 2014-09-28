@@ -4,3 +4,4 @@ bin/
 obj/
 /Gobiner.DotNetPad.Web/App_Data/*
 /packages/*
+Gobiner.DotNetPad.Web/localSettings.config

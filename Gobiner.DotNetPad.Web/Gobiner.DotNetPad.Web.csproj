@@ -148,14 +148,15 @@
     </Compile>
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CompilationError.cs" />
     <Compile Include="Models\ILDisassembly.cs" />
     <Compile Include="Models\Paste.cs" />
+    <Compile Include="Models\Recaptcha.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpamGuard.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\img\blorgons.png" />

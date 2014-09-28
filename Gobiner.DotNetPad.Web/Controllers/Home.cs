@@ -8,6 +8,7 @@ using System.Web.Script.Serialization;
 using Gobiner.CSharpPad.Web.Models;
 using SubSonic.Repository;
 using Gobiner.DotNetPad.Web;
+using Gobiner.DotNetPad.Web.Models.Recaptcha;
 
 namespace Gobiner.CSharpPad.Web.Controllers
 {
@@ -96,7 +97,7 @@ namespace Gobiner.CSharpPad.Web.Controllers
 				paste.Compile(Request.Cookies["paster"] != null ? Request.Cookies["paster"].Value : string.Empty, Request.Form["IsPrivate"] == "on", Server.MapPath("~/App_Data/"));
 				Response.Cookies.Add(new HttpCookie("paster", paste.Paster.ToString()) { Expires = DateTime.Today.AddYears(1) });
 
-				if (paste.Errors.Any() && SpamGuard.ContentScore(paste.Language, paste.Code) < 0)
+				if (paste.Errors.Any() && (paste.Code.Contains("https://") || paste.Code.Contains("http://")))
 				{
 					possibleSpam.Add(paste.Slug, paste);
 					return Redirect("/OhTheHumanity/" + paste.Slug);
@@ -169,12 +170,12 @@ namespace Gobiner.CSharpPad.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult OhTheHumanity(string Email, string Website, string Slug)
+        [ReCaptcha]
+        public ActionResult OhTheHumanity(string Slug, int? noop)
         {
-			if (!string.IsNullOrWhiteSpace(Email) || !string.IsNullOrWhiteSpace(Website))
-			{
-				return Redirect("/Honeypot");
-			}
+            if(!ModelState.IsValid)
+                return Redirect("/OhTheHumanity/" + Slug);
+
 			var paste = possibleSpam[Slug];
 			dataSource.Add(paste);
 			dataSource.AddMany(paste.Errors);
@@ -198,7 +199,7 @@ namespace Gobiner.CSharpPad.Web.Controllers
 		public ActionResult Recent()
 		{
 			var pastes = dataSource.All<Paste>()
-				.Where(x => !x.IsPrivate && x.ContentScore >= 0)
+				.Where(x => !x.IsPrivate)
 				.OrderByDescending(x => x.Created)
 				.DistinctBy(x => x.Code)
 				.Take(12);

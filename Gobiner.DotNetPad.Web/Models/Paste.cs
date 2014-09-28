@@ -41,8 +41,8 @@ namespace Gobiner.CSharpPad.Web.Models
 		public virtual ILDisassembly[] ILDisassemblyText { get; set; }
         public virtual decimal ContentScore { get; set; }
 
-		#region
-		public static string CorrectFizzBuzzOutput = @"1
+        #region CorrectFizzBuzzOutput
+        public static string CorrectFizzBuzzOutput = @"1
 2
 Fizz
 4
