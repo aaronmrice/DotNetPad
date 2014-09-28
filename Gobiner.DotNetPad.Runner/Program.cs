@@ -22,7 +22,7 @@ namespace Gobiner.DotNetPad.Runner
 			safePerms.AddPermission(new SecurityPermission(SecurityPermissionFlag.SerializationFormatter));
 			safePerms.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
 			safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, fullpath));
-			safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, Assembly.GetAssembly(typeof(global::Gobiner.DotNetPad.ConsoleCapturer)).Location));
+			safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, Assembly.GetAssembly(typeof(ConsoleCapturer)).Location));
 			safePerms.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery, Assembly.GetExecutingAssembly().Location));
 			safePerms.AddPermission(new UIPermission(PermissionState.Unrestricted)); // required to run an .exe
 
@@ -32,14 +32,13 @@ namespace Gobiner.DotNetPad.Runner
 				AppDomain.CurrentDomain.Evidence,
 				new AppDomainSetup() { DisallowCodeDownload = true, ApplicationBase = AppDomain.CurrentDomain.BaseDirectory }, 
 				safePerms,
-				GetStrongName(typeof(global::Gobiner.DotNetPad.ConsoleCapturer).Assembly),
 				GetStrongName(Assembly.GetExecutingAssembly()));
 
 			ConsoleCapturer consoleCapture = null;
 
 			consoleCapture = (ConsoleCapturer)safeDomain.CreateInstanceFromAndUnwrap(
-				typeof(global::Gobiner.DotNetPad.ConsoleCapturer).Assembly.Location,
-				typeof(global::Gobiner.DotNetPad.ConsoleCapturer).FullName);
+				typeof(ConsoleCapturer).Assembly.Location,
+				typeof(ConsoleCapturer).FullName);
 			
 			Exception uncaughtException = null;
 

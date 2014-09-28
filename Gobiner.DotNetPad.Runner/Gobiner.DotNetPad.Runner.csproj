@@ -51,18 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleCapture.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Gobiner.snk" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Gobiner.ConsoleCapture\Gobiner.ConsoleCapture.csproj">
-      <Project>{B5B09E19-1E43-4FC9-B6C7-3DFF8A472716}</Project>
-      <Name>Gobiner.ConsoleCapture</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
