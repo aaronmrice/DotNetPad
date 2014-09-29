@@ -20,7 +20,6 @@ namespace Gobiner.CSharpPad.Compilers
 		"System.Data.DataSetExtensions.dll", "Microsoft.CSharp.dll",
 		"System.Xml.dll", "System.Xml.Linq.dll", "System.Data.Entity.dll",
 		"System.Windows.Forms.dll", "System.Numerics.dll" };
-														   //@"C:\Users\Aaron\Desktop\.net-pad\Gobiner.DotNetPad.Web\bin\AsyncCtpLibrary.dll", };
 
 		public CSharpCompiler()
 		{
