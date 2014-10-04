@@ -22,7 +22,7 @@
 	<div id="wrapper">
 		<div id="header">
 			<p id="brand"><a href="/">.NET Pad</a></p>
-			<p style="float:right; margin-right: 10px;"><a href="http://bitbucket.org/gobiner/.net-pad/issues/?status=new&amp;status=open">Send me your bugs &amp; suggestions!</a></p>
+			<p style="float:right; margin-right: 10px;"><a href="https://github.com/Gobiner/DotNetPad/issues">Send me your bugs &amp; suggestions!</a></p>
 		</div>
         <div id="secondary">
 			<ul class="nav">
