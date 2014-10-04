@@ -142,14 +142,6 @@ namespace Gobiner.CSharpPad.Web.Controllers
 			paste.Errors = dataSource.Find<CompilationError>(x => x.PasteID == paste.ID).ToArray();
 			paste.ILDisassemblyText = dataSource.Find<ILDisassembly>(x => x.PasteID == paste.ID).ToArray();
 
-			//todo: some kind of isCompiled flag?
-			//todo: should we not also be saving the errors from this compilation too?
-			if (paste.ILDisassemblyText.Length == 0)
-			{
-				paste.Compile(paste.Paster.ToString(), paste.IsPrivate, Server.MapPath("~/App_Data/"));
-				dataSource.AddMany(paste.ILDisassemblyText);
-			}
-
 			return View(paste);
 		}
 
