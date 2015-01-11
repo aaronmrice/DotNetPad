@@ -220,9 +220,10 @@ namespace Gobiner.CSharpPad.Web.Controllers
 		public ActionResult FailBuzz()
 		{
 			var failures = dataSource.All<Paste>()
-				.Where(x => x.Output.ToUpper().Contains("FIZZ")
-							&& x.Output.ToUpper().Contains("BUZZ")
-							&& x.Output.ToUpper() != Paste.CorrectFizzBuzzOutput.ToUpper())
+				.Where(x => (x.Output.ToUpper().Contains("FIZZ") || x.Output.ToUpper().Contains("BUZZ"))
+							&& (x.Output.Contains("1\r\n") || x.Output.Contains("1\n"))
+							&& (x.Output.Contains("2\r\n") || x.Output.Contains("2\n"))
+							&& x.Output.Trim().ToUpper() != Paste.CorrectFizzBuzzOutput.Trim().ToUpper())
 				.OrderByDescending(x => x.Created)
 				.Take(15);
 
