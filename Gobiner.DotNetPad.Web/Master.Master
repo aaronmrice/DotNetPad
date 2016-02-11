@@ -10,7 +10,7 @@
     <script async src="/Content/prettify/lang-vb.js"></script>
     <script async src="/Content/js/dotnetpad.js"></script>
     <script async src="/Content/js/jquery.textarea.js"></script>
-    <script async src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+    <script async src="https://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
 
     <link rel="Stylesheet" href="/Content/css/dotnetpad.css" type="text/css" />
     <link rel="Stylesheet" href="/Content/prettify/prettify.css" type="text/css" />
