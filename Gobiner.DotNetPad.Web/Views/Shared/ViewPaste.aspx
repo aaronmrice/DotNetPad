@@ -45,14 +45,6 @@
 <% if (paste.ILDisassemblyText != null && paste.ILDisassemblyText.Length > 0)
    { %>
 <div class="disassembly">
-<script type="text/javascript">
-	$("#dissasembly-toggle").click(function () {
-	    $(".disassembly").toggle();
-	});
-	$(document).ready(function() {
-	    $(".disassembly").toggle();
-	});	
-</script>
 
 <table class="outer">
     <tr><td style="width: 30px;">
