@@ -40,6 +40,10 @@ $(document).ready(function () {
 	});
 
     $("textarea").tabby();
+    $("#dissasembly-toggle").click(function () {
+        $(".disassembly").toggle();
+    });
+    $(".disassembly").toggle();
 });
 
 function HighlightCodeLine(lineNumber) {
