@@ -193,6 +193,7 @@ namespace Gobiner.CSharpPad.Web.Controllers
 			var pastes = dataSource.All<Paste>()
 				.Where(x => !x.IsPrivate)
 				.OrderByDescending(x => x.Created)
+				.Take(50)
 				.DistinctBy(x => x.Code)
 				.Take(12);
 
